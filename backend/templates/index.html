@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelf Scanning System</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        button.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        button.scan-btn {
+            background-color: var(--text);
+            color: white;
+        }
+
+        .shelf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .shelf-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .shelf-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #64748b;
+        }
+
+        .item-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .count-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        label {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            width: 80px;
+            font-size: 1rem;
+        }
+
+        .status-badge {
+            margin-top: 15px;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .status-normal { background-color: #dcfce7; color: #166534; }
+        .status-low { background-color: #fef3c7; color: #92400e; }
+        .status-missing { background-color: #fee2e2; color: #991b1b; }
+        .status-unknown { background-color: #f1f5f9; color: #64748b; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Shelf Scanning System</h1>
+        <p>Monitor stock levels and detect anomalies without hardware.</p>
+    </header>
+
+    <div class="controls">
+        <button onclick="setEnv('Supermarket')" id="btn-Supermarket" class="active">Supermarket</button>
+        <button onclick="setEnv('Library')" id="btn-Library">Library</button>
+        <button onclick="setEnv('Museum')" id="btn-Museum">Museum</button>
+        <div style="width: 20px;"></div> <!-- Spacer -->
+        <button onclick="triggerRobotScan()" class="scan-btn">🤖 Run Robot Simulation</button>
+    </div>
+
+    <div id="shelf-grid" class="shelf-grid">
+        <!-- Shelves will be inserted here -->
+    </div>
+</div>
+
+<script>
+    let currentData = [];
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchStatus();
+    });
+
+    async function setEnv(envName) {
+        // Update UI buttons
+        document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+        const btn = document.getElementById(`btn-${envName}`);
+        if(btn) btn.classList.add('active');
+
+        // Call API
+        try {
+            const res = await fetch('/api/env', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({environment: envName})
+            });
+            const data = await res.json();
+            currentData = data.data; // The list of shelves
+            renderShelves();
+        } catch (e) {
+            console.error("Error setting env:", e);
+        }
+    }
+
+    async function fetchStatus() {
+        try {
+            const res = await fetch('/api/status');
+            currentData = await res.json();
+            renderShelves();
+        } catch (e) {
+            console.error("Error fetching status:", e);
+        }
+    }
+
+    async function triggerRobotScan() {
+        try {
+            const res = await fetch('/api/scan', {method: 'POST'});
+            currentData = await res.json();
+            renderShelves();
+        } catch (e) {
+            console.error("Error triggering scan:", e);
+        }
+    }
+
+    function calculateStatus(expected, detected) {
+        detected = parseInt(detected) || 0;
+        expected = parseInt(expected) || 0;
+
+        if (detected === 0) return 'MISSING';
+        if (detected < expected) return 'LOW STOCK';
+        if (detected === expected) return 'NORMAL';
+        if (detected > expected) return 'NORMAL'; // Or OVERSTOCK if needed, but user didn't specify
+        return 'UNKNOWN';
+    }
+
+    function updateLocalStatus(shelfId, inputEl) {
+        const detected = inputEl.value;
+        const shelfConfig = currentData.find(s => s.id === shelfId);
+        
+        if (!shelfConfig) return;
+
+        // Update local data model
+        const expected = shelfConfig.item.expected_count;
+        const newStatus = calculateStatus(expected, detected);
+        
+        // Update UI
+        const card = document.getElementById(`card-${shelfId}`);
+        const badge = card.querySelector('.status-badge');
+        
+        badge.className = 'status-badge'; // reset
+        badge.classList.add(`status-${newStatus.toLowerCase().replace(' ', '-')}`);
+        badge.textContent = newStatus;
+    }
+
+    function renderShelves() {
+        const grid = document.getElementById('shelf-grid');
+        grid.innerHTML = '';
+
+        currentData.forEach(shelf => {
+            const item = shelf.item;
+            const status = calculateStatus(item.expected_count, item.detected_count);
+            
+            const card = document.createElement('div');
+            card.className = 'shelf-card';
+            card.id = `card-${shelf.id}`;
+
+            card.innerHTML = `
+                <div class="shelf-header">
+                    <span>Shelf ${shelf.row}-${shelf.col}</span>
+                    <span>${shelf.id}</span>
+                </div>
+                <div class="item-name">${item.name}</div>
+                
+                <div class="count-row">
+                    <div class="input-group">
+                        <label>Expected</label>
+                        <strong>${item.expected_count}</strong>
+                    </div>
+                    <div class="input-group">
+                        <label>Detected (Simulate)</label>
+                        <input type="number" 
+                               value="${item.detected_count}" 
+                               min="0"
+                               oninput="updateLocalStatus('${shelf.id}', this)"
+                        >
+                    </div>
+                </div>
+
+                <div class="status-badge status-${status.toLowerCase().replace(' ', '-')}">
+                    ${status}
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+</script>
+
+</body>
+</html>
