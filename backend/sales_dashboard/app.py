@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
-import psycopg2
-import psycopg2.extras
+import psycopg
+from psycopg.rows import dict_row
 import os
 
 app = Flask(__name__)
@@ -20,7 +20,7 @@ DATABASE_URL = os.environ.get(
 )
 
 def get_db_connection():
-    conn = psycopg2.connect(DATABASE_URL)
+    conn = psycopg.connect(DATABASE_URL)
     return conn
 
 @app.route('/')
@@ -30,7 +30,7 @@ def index():
 @app.route('/api/sales', methods=['GET'])
 def get_sales():
     conn = get_db_connection()
-    cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cursor = conn.cursor(row_factory=dict_row)
     query = """
     SELECT s.id, p.name as product_name, p.category,
            c.name as customer_name, c.mobile_no,
@@ -45,12 +45,12 @@ def get_sales():
     sales = cursor.fetchall()
     cursor.close()
     conn.close()
-    return jsonify([dict(row) for row in sales])
+    return jsonify(sales)
 
 @app.route('/api/summary', methods=['GET'])
 def get_summary():
     conn = get_db_connection()
-    cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cursor = conn.cursor(row_factory=dict_row)
 
     # Monthly Revenue
     cursor.execute("""
@@ -90,7 +90,7 @@ def get_summary():
 @app.route('/api/chart/monthly', methods=['GET'])
 def get_monthly_chart():
     conn = get_db_connection()
-    cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cursor = conn.cursor(row_factory=dict_row)
     query = """
     SELECT TO_CHAR(sale_date, 'YYYY-MM') as month, SUM(total_price) as revenue
     FROM sales
@@ -106,7 +106,7 @@ def get_monthly_chart():
 @app.route('/api/chart/category', methods=['GET'])
 def get_category_chart():
     conn = get_db_connection()
-    cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cursor = conn.cursor(row_factory=dict_row)
     query = """
     SELECT p.category, SUM(s.total_price) as revenue
     FROM sales s
@@ -122,7 +122,7 @@ def get_category_chart():
 @app.route('/api/chart/customers', methods=['GET'])
 def get_customers_chart():
     conn = get_db_connection()
-    cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cursor = conn.cursor(row_factory=dict_row)
     query = """
     SELECT c.name, SUM(s.total_price) as revenue
     FROM sales s
@@ -140,7 +140,7 @@ def get_customers_chart():
 @app.route('/api/chart/country', methods=['GET'])
 def get_country_chart():
     conn = get_db_connection()
-    cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cursor = conn.cursor(row_factory=dict_row)
     query = """
     SELECT c.country, SUM(s.total_price) as revenue
     FROM sales s
