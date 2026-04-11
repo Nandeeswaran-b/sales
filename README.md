@@ -1,64 +1,84 @@
-# Sales Data Analysis & Dashboard
-FOR LOGIN 
-EMAIL-nandeeswaran033@gmail.com
-PASSWORD-nandees123@#
+# 📊 Sales Data Analysis & Dashboard
 
-A high-fidelity sales analytics platform built with Supabase, Flask, and Chart.js.
+A full-stack, production-grade sales analytics platform with real-time data visualization, secure authentication, and a premium glassmorphic UI.
 
-## 🚀 Getting Started
+🔗 **Live Demo**: [sales-henna-beta.vercel.app](https://sales-henna-beta.vercel.app)
 
-### 1. Supabase Setup (Database)
-1.  Go to [supabase.com](https://supabase.com) and create a new project.
-2.  Open the **SQL Editor** in your Supabase dashboard.
-3.  Copy and paste the contents of `setup.sql` (found in the root directory) and run it. This will:
-    *   Create `customers`, `products`, and `orders` tables.
-    *   Enable Row Level Security (RLS).
-    *   Setup public access policies for this demo.
-    *   Seed the database with sample data.
+## 🛠️ Tech Stack
 
-### 2. Frontend Configuration
-1.  Open `frontend/config.js`.
-2.  Replace the placeholders with your actual **Supabase URL** and **Anon Key** (found in Project Settings -> API).
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | HTML5, CSS3, Vanilla JavaScript, Chart.js |
+| **Backend** | Python, Flask, Gunicorn |
+| **Database** | PostgreSQL (Supabase) |
+| **Auth** | Supabase Authentication |
+| **Hosting** | Vercel (Frontend), Render (Backend) |
 
-### 3. Backend Configuration
-1.  Navigate to `backend/`.
-2.  Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-3.  Open `backend/routes.py`.
-4.  Replace `DB_CONNECTION_STRING` with your project's connection URI (found in Project Settings -> Database -> Connection string -> URI).
-    *   *Note: Use the port 5432 and don't forget your database password.*
-5.  Run the Flask server:
-    ```bash
-    python app.py
-    ```
+## ✨ Key Features
 
-### 4. Run the Dashboard
-Simply open `frontend/index.html` in your web browser!
+- **Real-time KPI Dashboard** — Revenue, Orders, Customers & AOV tracking
+- **4 Interactive Charts** — Monthly Revenue, Sales Trends, Category Breakdown, Cumulative Growth
+- **Secure Admin Login** — Protected by Supabase Auth with session management
+- **Customer Deep Dive** — Click any customer to view full profile with order history
+- **Advanced Search & Filters** — Search by name, phone, city + date range filtering
+- **Customer Management** — Add customers with purchase category, payment mode & plan
+- **CSV Export** — Download customer data for offline analysis
+- **Dark/Light Mode** — Premium glassmorphic UI with persistent theme preference
+- **Responsive Design** — Works seamlessly across all screen sizes
+- **INR Currency** — All amounts displayed in Indian Rupees (₹)
 
-## ✨ Features
-*   **KPI Summary**: Real-time stats on Revenue, Orders, and Customers.
-*   **Interactive Charts**: Monthly trends, category breakdowns, and growth tracking.
-*   **Customer Management**: Add new customers via modal with validation.
-*   **Real-time Clock**: Keeps track of local time in the header.
-*   **Dark/Light Mode**: Premium glassmorphic UI that persists your preference.
-*   **CSV Export**: Download customer data for offline analysis.
-*   **Advanced Analytics**: Complex growth rates powered by the Flask-Supabase bridge.
+## 🏗️ Architecture
 
-## 📁 Project Structure
 ```
 sales-dashboard/
 ├── backend/
-│   ├── app.py          # Flask Entry
-│   ├── routes.py       # Analytic Endpoints
-│   └── requirements.txt
+│   ├── app.py              # Flask application factory
+│   ├── routes.py           # API endpoints with PostgreSQL analytics
+│   └── requirements.txt    # Python dependencies
 ├── frontend/
-│   ├── index.html      # Main SPA
-│   ├── style.css       # Premium Styling
-│   ├── app.js          # Core Logic
-│   ├── charts.js       # Visualization Logic
-│   └── config.js       # Supabase Config
-├── setup.sql           # Database Setup Script
+│   ├── index.html          # Single Page Application
+│   ├── style.css           # Glassmorphic design system
+│   ├── app.js              # Core application logic & auth
+│   ├── charts.js           # Chart.js visualizations
+│   └── config.js           # Supabase client configuration
+├── setup.sql               # Database schema & seed data
 └── README.md
 ```
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.x
+- A [Supabase](https://supabase.com) account (free tier)
+
+### 1. Database Setup
+1. Create a new Supabase project
+2. Run `setup.sql` in the SQL Editor to create tables and seed data
+
+### 2. Frontend Setup
+1. Update `frontend/config.js` with your Supabase URL and Anon Key
+
+### 3. Backend Setup
+```bash
+cd backend
+pip install -r requirements.txt
+python app.py
+```
+
+### 4. Run
+Open `frontend/index.html` in your browser!
+
+## 📸 Screenshots
+
+- Premium glassmorphic dashboard with real-time analytics
+- Interactive charts powered by Chart.js
+- Secure admin authentication
+- Customer profile deep dive with order history
+
+## 👨‍💻 Author
+
+**Nandeeswaran B**
+
+---
+
+⭐ Star this repo if you found it helpful!
