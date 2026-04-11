@@ -5,9 +5,9 @@ import os
 
 api_blueprint = Blueprint('api', __name__)
 
-# REPLACE THIS with your actual Supabase Connection String
-# Find it in: Settings -> Database -> Connection string -> URI
-DB_CONNECTION_STRING = "postgresql://postgres:[YOUR_PASSWORD]@db.[YOUR_PROJECT_ID].supabase.co:5432/postgres"
+# Reads your Supabase Connection String from the Render Environment Variables
+# Key should be an environment variable named DATABASE_URL
+DB_CONNECTION_STRING = os.environ.get('DATABASE_URL', "postgresql://postgres:[YOUR_PASSWORD]@db.[YOUR_PROJECT_ID].supabase.co:5432/postgres")
 
 def get_db_connection():
     try:
