@@ -35,16 +35,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const kpiCustomers = document.getElementById('kpi-customers');
     const kpiAov = document.getElementById('kpi-aov');
     const dailyCountEl = document.getElementById('daily-customers-count');
+    
+    // Auth DOM Elements
+    const loginContainer = document.getElementById('login-container');
+    const appContent = document.getElementById('app-content');
+    const loginForm = document.getElementById('login-form');
+    const logoutBtn = document.getElementById('logout-btn');
 
     // --- Core Functions ---
 
-    function init() {
+    async function init() {
         applyTheme();
         updateClock();
         setInterval(updateClock, 1000);
+        setupEventListeners();
+
+        // Check authentication
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) {
+            console.error('Error fetching session:', error);
+            showLogin();
+            return;
+        }
+
+        if (session) {
+            handleLoginSuccess();
+        } else {
+            showLogin();
+        }
+    }
+
+    // --- Auth Logic ---
+    function showLogin() {
+        loginContainer.style.display = 'flex';
+        appContent.style.display = 'none';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function handleLoginSuccess() {
+        loginContainer.style.display = 'none';
+        appContent.style.display = 'block';
+        document.body.style.overflow = 'auto';
         window.initCharts();
         fetchData();
-        setupEventListeners();
     }
 
     // Theme logic
@@ -395,6 +428,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Events ---
 
     function setupEventListeners() {
+        // Auth listeners
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const btn = document.getElementById('login-btn');
+            
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Authenticating...';
+            btn.disabled = true;
+
+            try {
+                const { error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+                
+                showToast('Welcome back!', 'success');
+                handleLoginSuccess();
+                loginForm.reset();
+            } catch (err) {
+                showToast('Invalid credentials: ' + err.message, 'error');
+            } finally {
+                btn.innerHTML = 'Secure Sign In';
+                btn.disabled = false;
+            }
+        });
+
+        logoutBtn.addEventListener('click', async () => {
+            logoutBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+            await supabase.auth.signOut();
+            logoutBtn.innerHTML = '<i class="fa-solid fa-arrow-right-from-bracket"></i>';
+            showToast('Logged out successfully', 'success');
+            showLogin();
+        });
+
         themeToggle.addEventListener('click', toggleTheme);
         
         openModalBtn.addEventListener('click', () => {

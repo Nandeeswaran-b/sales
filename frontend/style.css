@@ -550,6 +550,7 @@ th, td {
 .clickable-row:hover {
     background: rgba(128, 128, 128, 0.15);
 }
+/* Order History table */
 .order-history-container {
     max-height: 200px;
     overflow-y: auto;
@@ -557,4 +558,36 @@ th, td {
     background: rgba(128, 128, 128, 0.05);
     border-radius: 0.5rem;
     padding: 0.5rem;
+}
+
+/* Authentication UI */
+.login-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 1rem;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.login-box .logo-area h1 {
+    font-size: 1.5rem;
 }
