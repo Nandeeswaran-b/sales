@@ -192,10 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const count = state.orders.length;
         const avg = count > 0 ? revenue / count : 0;
 
-        kpiRevenue.textContent = `$${revenue.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+        kpiRevenue.textContent = `₹${revenue.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
         kpiOrders.textContent = count.toLocaleString();
         kpiCustomers.textContent = state.customers.length.toLocaleString();
-        kpiAov.textContent = `$${avg.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+        kpiAov.textContent = `₹${avg.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
     }
 
     function updateTables() {
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td title="${c.purchase_category || 'N/A'}">${(c.purchase_category || 'N/A').substring(0, 15)}${(c.purchase_category || '').length > 15 ? '...' : ''}</td>
                 <td>${c.payment_mode || 'Cash'}</td>
                 <td><span class="status-badge ${c.payment_plan === 'EMI' ? 'status-pending' : 'status-completed'}">${c.payment_plan || 'Ready Cash'}</span></td>
-                <td>$${parseFloat(c.total_purchase_amount).toLocaleString()}</td>
+                <td>₹${parseFloat(c.total_purchase_amount).toLocaleString()}</td>
             </tr>
         `).join('');
 
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${new Date(o.order_date).toLocaleDateString()}</td>
                     <td>${custName}</td>
                     <td>${o.product_category}</td>
-                    <td>$${parseFloat(o.order_amount).toLocaleString()}</td>
+                    <td>₹${parseFloat(o.order_amount).toLocaleString()}</td>
                     <td><span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span></td>
                 </tr>
             `;
@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="profile-card">
                         <h4>Payment Summary</h4>
-                        <p><i class="fa-solid fa-indian-rupee-sign"></i> Total: $${parseFloat(customer.total_purchase_amount).toLocaleString()}</p>
+                        <p><i class="fa-solid fa-indian-rupee-sign"></i> Total: ₹${parseFloat(customer.total_purchase_amount).toLocaleString()}</p>
                         <p><i class="fa-solid fa-credit-card"></i> Mode: ${customer.payment_mode || 'Cash'}</p>
                         <p><i class="fa-solid fa-money-bill-transfer"></i> Plan: ${customer.payment_plan || 'Ready Cash'}</p>
                         <p><i class="fa-solid fa-calendar"></i> Joined: ${new Date(customer.date_joined).toLocaleDateString()}</p>
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <tr>
                                     <td>${new Date(o.order_date).toLocaleDateString()}</td>
                                     <td>${o.product_category}</td>
-                                    <td>$${parseFloat(o.order_amount).toLocaleString()}</td>
+                                    <td>₹${parseFloat(o.order_amount).toLocaleString()}</td>
                                 </tr>
                             `).join('') : '<tr><td colspan="3" style="text-align:center;">No orders found</td></tr>'}
                         </tbody>
