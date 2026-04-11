@@ -11,6 +11,8 @@ def create_app():
     
     return app
 
+# Create the app instance at the module level so Gunicorn can find it
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
     app.run(debug=True, port=5000)
