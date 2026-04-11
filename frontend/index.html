@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Dashboard | Analytics</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="glass">
+        <div class="logo-area">
+            <img src="../sales_dashboard_logo_1775876015127.png" alt="Sales Logo">
+            <h1>Sales Dashboard</h1>
+        </div>
+        <div id="clock">Loading time...</div>
+        <div class="nav-actions">
+            <button id="theme-toggle" title="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="customer-trigger glass" id="open-modal" title="Add New Customer">
+                <i class="fa-solid fa-user-plus"></i>
+                <span class="badge" id="daily-customers-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- KPI Summary Row -->
+        <div class="kpi-grid">
+            <div class="kpi-card glass">
+                <span class="kpi-title">Total Revenue</span>
+                <span class="kpi-value" id="kpi-revenue">$0.00</span>
+                <div class="kpi-trend trend-up">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>12% from last month</span>
+                </div>
+            </div>
+            <div class="kpi-card glass">
+                <span class="kpi-title">Total Orders</span>
+                <span class="kpi-value" id="kpi-orders">0</span>
+                <div class="kpi-trend trend-up">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>5% from last month</span>
+                </div>
+            </div>
+            <div class="kpi-card glass">
+                <span class="kpi-title">Total Customers</span>
+                <span class="kpi-value" id="kpi-customers">0</span>
+                <div class="kpi-trend trend-up">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>8% from last month</span>
+                </div>
+            </div>
+            <div class="kpi-card glass">
+                <span class="kpi-title">Avg. Order Value</span>
+                <span class="kpi-value" id="kpi-aov">$0.00</span>
+                <div class="kpi-trend trend-down">
+                    <i class="fa-solid fa-arrow-down"></i>
+                    <span>2% from last month</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Row -->
+        <div class="controls-row">
+            <div class="search-box" style="flex: 2;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="customer-search" placeholder="Search by name, city, or phone...">
+            </div>
+            <div class="date-search-box">
+                <input type="date" id="customer-date-search" title="Filter by date joined">
+                <button id="clear-date" title="Clear date filter" style="display:none; background:none; border:none; color:var(--text); cursor:pointer; padding-left: 0.5rem;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="filters-box">
+                <select id="date-range-filter">
+                    <option value="7">Last 7 days</option>
+                    <option value="30" selected>Last 30 days</option>
+                    <option value="90">Last 3 months</option>
+                    <option value="all">All Time</option>
+                </select>
+                <button class="btn-primary" id="export-csv">
+                    <i class="fa-solid fa-file-export"></i> Export CSV
+                </button>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+            <div class="chart-card glass">
+                <div class="chart-header">
+                    <h3>Monthly Sales Revenue</h3>
+                </div>
+                <canvas id="monthly-sales-chart"></canvas>
+            </div>
+            <div class="chart-card glass">
+                <div class="chart-header">
+                    <h3>Sales Trend</h3>
+                </div>
+                <canvas id="sales-trend-chart"></canvas>
+            </div>
+            <div class="chart-card glass">
+                <div class="chart-header">
+                    <h3>Revenue by Category</h3>
+                </div>
+                <canvas id="category-chart"></canvas>
+            </div>
+            <div class="chart-card glass">
+                <div class="chart-header">
+                    <h3>Cumulative Growth</h3>
+                </div>
+                <canvas id="growth-chart"></canvas>
+            </div>
+        </div>
+
+        <!-- Tables Grid -->
+        <div class="tables-grid">
+            <div class="table-card glass">
+                <div class="table-header">
+                    <h3>Top 5 Customers</h3>
+                </div>
+                <table id="top-customers-table">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Phone</th>
+                            <th>Purchase</th>
+                            <th>Mode</th>
+                            <th>Plan</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="top-customers-body">
+                        <!-- Dynamic rows -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-card glass">
+                <div class="table-header">
+                    <h3>Recent Orders</h3>
+                </div>
+                <table id="recent-orders-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-orders-body">
+                        <!-- Dynamic rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal glass">
+            <div class="modal-header">
+                <h2>Add New Customer</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <form id="add-customer-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="cust-name" required placeholder="Enter full name">
+                    <span class="error-msg" id="err-name">Name is required</span>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="cust-email" required placeholder="email@example.com">
+                    <span class="error-msg" id="err-email">Invalid email format</span>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="cust-phone" required placeholder="10-digit phone number">
+                    <span class="error-msg" id="err-phone">Invalid phone (10 digits required)</span>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" id="cust-city" required placeholder="Enter city">
+                    <span class="error-msg" id="err-city">City is required</span>
+                </div>
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Purchase Amount</label>
+                        <input type="number" id="cust-amount" value="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Date Joined</label>
+                        <input type="date" id="cust-date">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>What he purchased (Select Categories)</label>
+                    <div class="category-scroll-view glass" id="cust-categories">
+                        <label class="check-item"><input type="checkbox" value="Electronics"> Electronics</label>
+                        <label class="check-item"><input type="checkbox" value="Clothing"> Clothing</label>
+                        <label class="check-item"><input type="checkbox" value="Food"> Food</label>
+                        <label class="check-item"><input type="checkbox" value="Furniture"> Furniture</label>
+                        <label class="check-item"><input type="checkbox" value="Sports"> Sports</label>
+                        <label class="check-item"><input type="checkbox" value="Beauty"> Beauty & Personal Care</label>
+                        <label class="check-item"><input type="checkbox" value="Books"> Books & Stationery</label>
+                        <label class="check-item"><input type="checkbox" value="Home Decor"> Home Decor</label>
+                        <label class="check-item"><input type="checkbox" value="Toys"> Toys & Games</label>
+                        <label class="check-item"><input type="checkbox" value="Automotive"> Automotive Accessories</label>
+                    </div>
+                </div>
+
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Mode of Payment</label>
+                        <select id="cust-payment-mode">
+                            <option value="Cash">Cash</option>
+                            <option value="Card">Card</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Net Banking">Net Banking</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Plan</label>
+                        <div class="toggle-group">
+                            <label><input type="radio" name="payment-plan" value="EMI"> EMI</label>
+                            <label><input type="radio" name="payment-plan" value="Ready Cash" checked> Ready Cash</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Add Customer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Customer Profile Modal -->
+    <div class="modal-overlay" id="profile-modal-overlay">
+        <div class="modal glass profile-modal">
+            <div class="modal-header">
+                <h2>Customer Profile</h2>
+                <button class="close-modal" id="close-profile-modal">&times;</button>
+            </div>
+            <div id="profile-content">
+                <!-- Data populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="charts.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
