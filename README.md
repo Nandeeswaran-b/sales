@@ -1,4 +1,7 @@
 # Sales Data Analysis & Dashboard
+FOR LOGIN 
+EMAIL-nandeeswaran033@gmail.com
+PASSWORD-nandees123@#
 
 A high-fidelity sales analytics platform built with Supabase, Flask, and Chart.js.
 
