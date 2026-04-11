@@ -6,5 +6,9 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // Initialize Supabase Client
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// Render Flask Backend URL
+const API_BASE_URL = 'https://sales-backend-api-6znx.onrender.com/api';
+
 // Export for use in other scripts
 window.supabaseClient = _supabase;
+window.API_BASE_URL = API_BASE_URL;
