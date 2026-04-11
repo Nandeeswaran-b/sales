@@ -173,25 +173,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- UI Updates ---
 
-    async function updateUI() {
+    function updateUI() {
         updateKPIs();
         updateTables();
         updateDailyBadge();
         
-        let apiData = { growthStats: [], cumulative: [] };
-        try {
-            const [growthRes, cumRes] = await Promise.all([
-                fetch(`${API_BASE_URL}/sales/growth-rate`),
-                fetch(`${API_BASE_URL}/sales/cumulative`)
-            ]);
-            if (growthRes.ok) apiData.growthStats = await growthRes.json();
-            if (cumRes.ok) apiData.cumulative = await cumRes.json();
-        } catch(e) {
-            console.error("Failed to fetch from full-stack API:", e);
-        }
-        
-        // Prepare data for charts with real analytics
-        const chartData = prepareChartData(apiData);
+        // Prepare data for charts directly from Supabase data
+        const chartData = prepareChartData();
         window.updateCharts(chartData);
 
         // Notify if no results
@@ -245,8 +233,8 @@ document.addEventListener('DOMContentLoaded', () => {
         dailyCountEl.textContent = state.dailyCustomersCount;
     }
 
-    function prepareChartData(apiData) {
-        // Category Sales (from Supabase state)
+    function prepareChartData() {
+        // Category Sales
         const categories = {
             'Electronics': 0, 'Clothing': 0, 'Food': 0, 'Furniture': 0, 'Sports': 0
         };
@@ -256,25 +244,45 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Group by day for simple trend (from Supabase state)
+        // Group by day for trend
         const dailyOrders = {};
         state.orders.forEach(o => {
             const date = o.order_date;
             dailyOrders[date] = (dailyOrders[date] || 0) + 1;
         });
 
-        // 1. Monthly Revenue Analytics (From Flask API)
-        const monthlyLabels = apiData.growthStats.map(d => d.month);
-        const monthlyValues = apiData.growthStats.map(d => parseFloat(d.total_revenue));
+        // Monthly Revenue (calculated from Supabase orders)
+        const monthlyRevenue = {};
+        state.orders.forEach(o => {
+            const month = o.order_date.substring(0, 7); // "2026-03"
+            monthlyRevenue[month] = (monthlyRevenue[month] || 0) + parseFloat(o.order_amount);
+        });
+        const sortedMonths = Object.keys(monthlyRevenue).sort();
+        const monthNames = sortedMonths.map(m => {
+            const [year, mon] = m.split('-');
+            const monthName = new Date(year, parseInt(mon) - 1).toLocaleString('default', { month: 'short' });
+            return `${monthName} ${year}`;
+        });
 
-        // 2. Cumulative Growth Analytics (From Flask API)
-        const cumLabels = apiData.cumulative.map(d => new Date(d.order_date).toLocaleDateString());
-        const cumValues = apiData.cumulative.map(d => parseFloat(d.cumulative_revenue));
+        // Cumulative Growth (running total by date)
+        const sortedDates = Object.keys(dailyOrders).sort();
+        let cumulative = 0;
+        const cumulativeData = {};
+        state.orders.sort((a, b) => a.order_date.localeCompare(b.order_date)).forEach(o => {
+            cumulative += parseFloat(o.order_amount);
+            cumulativeData[o.order_date] = cumulative;
+        });
+        const cumDates = Object.keys(cumulativeData).sort();
+        const cumLabels = cumDates.slice(-15).map(d => {
+            const dt = new Date(d);
+            return `${dt.getDate()}/${dt.getMonth() + 1}`;
+        });
+        const cumValues = cumDates.slice(-15).map(d => cumulativeData[d]);
 
         return {
             monthly: {
-                labels: monthlyLabels.length ? monthlyLabels : ['Jan'],
-                values: monthlyValues.length ? monthlyValues : [0]
+                labels: monthNames.length ? monthNames : ['No Data'],
+                values: sortedMonths.length ? sortedMonths.map(m => monthlyRevenue[m]) : [0]
             },
             trend: {
                 labels: Object.keys(dailyOrders).sort(),
@@ -282,8 +290,8 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             categories: Object.values(categories),
             growth: {
-                labels: cumLabels.length ? cumLabels.slice(-15) : ['Day 1'],
-                values: cumValues.length ? cumValues.slice(-15) : [0]
+                labels: cumLabels.length ? cumLabels : ['No Data'],
+                values: cumValues.length ? cumValues : [0]
             }
         };
     }
