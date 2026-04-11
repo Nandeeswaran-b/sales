@@ -7,7 +7,9 @@ api_blueprint = Blueprint('api', __name__)
 
 # Reads your Supabase Connection String from the Render Environment Variables
 # Key should be an environment variable named DATABASE_URL
-DB_CONNECTION_STRING = os.environ.get('DATABASE_URL', "postgresql://postgres:[YOUR_PASSWORD]@db.[YOUR_PROJECT_ID].supabase.co:5432/postgres")
+_raw_db_url = os.environ.get('DATABASE_URL', "postgresql://postgres:[YOUR_PASSWORD]@db.[YOUR_PROJECT_ID].supabase.co:5432/postgres")
+# Supabase pooler requires SSL - append if not already present
+DB_CONNECTION_STRING = _raw_db_url if 'sslmode' in _raw_db_url else _raw_db_url + '?sslmode=require'
 
 def get_db_connection():
     try:
