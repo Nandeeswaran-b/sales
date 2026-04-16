@@ -591,3 +591,22 @@ th, td {
 .login-box .logo-area h1 {
     font-size: 1.5rem;
 }
+
+/* Delete Button */
+.delete-btn {
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    opacity: 0.6;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+    background: rgba(239, 68, 68, 0.1);
+    transform: scale(1.1);
+}

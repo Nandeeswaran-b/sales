@@ -210,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${c.payment_mode || 'Cash'}</td>
                 <td><span class="status-badge ${c.payment_plan === 'EMI' ? 'status-pending' : 'status-completed'}">${c.payment_plan || 'Ready Cash'}</span></td>
                 <td>₹${parseFloat(c.total_purchase_amount).toLocaleString()}</td>
+                <td><button class="delete-btn" data-id="${c.id}" data-name="${c.name}" title="Delete customer"><i class="fa-solid fa-trash"></i></button></td>
             </tr>
         `).join('');
 
@@ -459,6 +460,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- Delete Customer ---
+
+    async function deleteCustomer(customerId, customerName) {
+        if (!confirm(`Are you sure you want to delete "${customerName}"? This will also delete all their orders.`)) {
+            return;
+        }
+
+        try {
+            // First delete all orders for this customer
+            const { error: orderError } = await supabase
+                .from('orders')
+                .delete()
+                .eq('customer_id', customerId);
+            if (orderError) throw orderError;
+
+            // Then delete the customer
+            const { error: custError } = await supabase
+                .from('customers')
+                .delete()
+                .eq('id', customerId);
+            if (custError) throw custError;
+
+            showToast(`Customer "${customerName}" deleted successfully ✓`);
+            fetchData(); // Refresh
+        } catch (err) {
+            showToast('Error deleting customer: ' + err.message, 'error');
+        }
+    }
+
     // --- Utils ---
 
     function exportToCSV() {
@@ -576,6 +606,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.getElementById('top-customers-body').addEventListener('click', (e) => {
+            // Handle delete button click
+            const deleteBtn = e.target.closest('.delete-btn');
+            if (deleteBtn) {
+                e.stopPropagation(); // Prevent row click (profile open)
+                deleteCustomer(deleteBtn.dataset.id, deleteBtn.dataset.name);
+                return;
+            }
+            // Handle row click (profile)
             const row = e.target.closest('.clickable-row');
             if (row) {
                 showCustomerProfile(row.dataset.id);
