@@ -354,8 +354,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!validateForm(data)) return;
 
         try {
-            const { error } = await supabase.from('customers').insert([data]);
+            const { data: newCustomer, error } = await supabase.from('customers').insert([data]).select();
             if (error) throw error;
+
+            // Also create an order if there's a purchase amount
+            if (data.total_purchase_amount > 0 && newCustomer && newCustomer[0]) {
+                const orderData = {
+                    customer_id: newCustomer[0].id,
+                    product_category: selectedCategories.split(',')[0].trim() || 'Other',
+                    order_amount: data.total_purchase_amount,
+                    order_date: data.date_joined,
+                    status: 'Completed'
+                };
+                const { error: orderError } = await supabase.from('orders').insert([orderData]);
+                if (orderError) console.error('Order insert error:', orderError);
+            }
 
             showToast('Customer added successfully ✓');
             addCustomerForm.reset();
