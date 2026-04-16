@@ -213,16 +213,31 @@ document.addEventListener('DOMContentLoaded', () => {
             </tr>
         `).join('');
 
-        // Recent Orders
+        // Recent Orders - Show ALL orders with customer details
         const recentBody = document.getElementById('recent-orders-body');
-        recentBody.innerHTML = state.orders.slice(0, 10).map(o => {
-            const custName = state.customers.find(c => c.id === o.customer_id)?.name || 'Unknown';
+        const totalOrdersCount = document.getElementById('total-orders-count');
+
+        // Count orders per customer
+        const orderCountMap = {};
+        state.orders.forEach(o => {
+            orderCountMap[o.customer_id] = (orderCountMap[o.customer_id] || 0) + 1;
+        });
+
+        totalOrdersCount.textContent = `Total: ${state.orders.length} orders`;
+
+        recentBody.innerHTML = state.orders.map(o => {
+            const customer = state.customers.find(c => c.id === o.customer_id);
+            const custName = customer?.name || 'Unknown';
+            const custPhone = customer?.phone || '-';
+            const custOrderCount = orderCountMap[o.customer_id] || 0;
             return `
                 <tr>
                     <td>${new Date(o.order_date).toLocaleDateString()}</td>
-                    <td>${custName}</td>
+                    <td><strong>${custName}</strong></td>
+                    <td>${custPhone}</td>
                     <td>${o.product_category}</td>
                     <td>₹${parseFloat(o.order_amount).toLocaleString()}</td>
+                    <td><span class="status-badge status-completed">${custOrderCount}</span></td>
                     <td><span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span></td>
                 </tr>
             `;
