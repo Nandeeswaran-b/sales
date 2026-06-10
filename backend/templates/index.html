@@ -1536,7 +1536,10 @@
     let activeTab = 'dashboard';
     let forecastDegree = 1; // Polynomial forecast model degree state
     let rfmCustomerList = []; // RFM cohort lookup data cache
-    const API_BASE = ''; // Flask serves same-origin
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+        ? '' 
+        : 'https://sales-analysist.onrender.com';
+
 
     // ═══════════════════════════════════════════════════════
     // TAB ROUTING MANAGEMENT
