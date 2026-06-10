@@ -3,294 +3,2826 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shelf Scanning System</title>
+    <title>Sales Intelligence & Analytics | Data Science Portfolio</title>
+    <meta name="description" content="Advanced sales analytics platform with regression forecasting, RFM customer segmentation, anomaly detection, and statistical distribution analysis.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* ═══════════════════════════════════════════════════════
+           DESIGN SYSTEM — Modern Dark Theme
+           ═══════════════════════════════════════════════════════ */
         :root {
-            --primary: #2563eb;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #1e293b;
-            --border: #e2e8f0;
-            --success: #22c55e;
-            --warning: #f59e0b;
-            --danger: #ef4444;
+            --bg-primary: #080a10;
+            --bg-secondary: #0f121d;
+            --bg-card: #141829;
+            --bg-card-hover: #1a1f35;
+            --bg-input: #0b0d16;
+
+            --text-primary: #f1f3f9;
+            --text-secondary: #a3adc2;
+            --text-muted: #626b82;
+
+            --accent-violet: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --accent-amber: #f59e0b;
+            --accent-emerald: #10b981;
+            --accent-blue: #3b82f6;
+
+            --border: rgba(139, 92, 246, 0.1);
+            --border-hover: rgba(139, 92, 246, 0.25);
+
+            --gradient-primary: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            --gradient-warm: linear-gradient(135deg, #ec4899, #8b5cf6);
+            --gradient-cool: linear-gradient(135deg, #06b6d4, #3b82f6);
+            --gradient-emerald: linear-gradient(135deg, #10b981, #06b6d4);
+
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.12);
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Ambient glowing background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 45%),
+                        radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.04) 0%, transparent 45%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 24px 32px;
+            position: relative;
+            z-index: 1;
         }
 
+        /* ═══════════════════════════════════════════════════════
+           HEADER
+           ═══════════════════════════════════════════════════════ */
         header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            color: var(--text);
-        }
-
-        button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        button.active {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        button.scan-btn {
-            background-color: var(--text);
-            color: white;
-        }
-
-        .shelf-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .shelf-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .shelf-header {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #64748b;
-        }
-
-        .item-name {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .count-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 5px;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .input-group {
+        .header-left {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
 
-        label {
-            font-size: 0.85rem;
-            color: #64748b;
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        input[type="number"] {
-            padding: 8px;
+        #date-display {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Tabs Navigation */
+        .tabs-nav {
+            display: flex;
+            background: var(--bg-secondary);
+            padding: 4px;
+            border-radius: var(--radius-sm);
             border: 1px solid var(--border);
-            border-radius: 6px;
-            width: 80px;
-            font-size: 1rem;
         }
 
-        .status-badge {
-            margin-top: 15px;
-            padding: 8px;
+        .tab-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 13px;
             border-radius: 6px;
-            text-align: center;
-            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           TAB CONTENT STRUCTURE
+           ═══════════════════════════════════════════════════════ */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           KPI CARDS (4 Column Grid)
+           ═══════════════════════════════════════════════════════ */
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 22px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 3px 3px 0 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .kpi-card:nth-child(1)::before { background: var(--gradient-primary); }
+        .kpi-card:nth-child(2)::before { background: var(--gradient-cool); }
+        .kpi-card:nth-child(3)::before { background: var(--gradient-emerald); }
+        .kpi-card:nth-child(4)::before { background: var(--gradient-warm); }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md), var(--shadow-glow);
+            border-color: var(--border-hover);
+        }
+
+        .kpi-card:hover::before {
+            opacity: 1;
+        }
+
+        .kpi-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .kpi-card:nth-child(1) .kpi-icon { background: rgba(139, 92, 246, 0.1); color: var(--accent-violet); }
+        .kpi-card:nth-child(2) .kpi-icon { background: rgba(6, 182, 212, 0.1); color: var(--accent-cyan); }
+        .kpi-card:nth-child(3) .kpi-icon { background: rgba(16, 185, 129, 0.1); color: var(--accent-emerald); }
+        .kpi-card:nth-child(4) .kpi-icon { background: rgba(236, 72, 153, 0.1); color: var(--accent-pink); }
+
+        .kpi-title {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
         }
 
-        .status-normal { background-color: #dcfce7; color: #166534; }
-        .status-low { background-color: #fef3c7; color: #92400e; }
-        .status-missing { background-color: #fee2e2; color: #991b1b; }
-        .status-unknown { background-color: #f1f5f9; color: #64748b; }
+        .kpi-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
 
+        .kpi-value.small-text {
+            font-size: 18px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .kpi-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-top: 8px;
+        }
+
+        .kpi-badge.up {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-emerald);
+        }
+
+        .kpi-badge.down {
+            background: rgba(236, 72, 153, 0.1);
+            color: var(--accent-pink);
+        }
+
+        .kpi-subtext {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           CHARTS & PANELS LAYOUTS
+           ═══════════════════════════════════════════════════════ */
+        .charts-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .charts-grid-1-2 {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .charts-grid-2-1 {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .chart-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-hover);
+        }
+
+        .chart-header {
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .chart-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-title .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .chart-title .dot.violet { background: var(--accent-violet); }
+        .chart-title .dot.cyan { background: var(--accent-cyan); }
+        .chart-title .dot.pink { background: var(--accent-pink); }
+        .chart-title .dot.amber { background: var(--accent-amber); }
+        .chart-title .dot.emerald { background: var(--accent-emerald); }
+        .chart-title .dot.blue { background: var(--accent-blue); }
+
+        .chart-subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 260px;
+            width: 100%;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           STATISTICS PANELS
+           ═══════════════════════════════════════════════════════ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .stats-item {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.2s;
+        }
+
+        .stats-item:hover {
+            border-color: rgba(139, 92, 246, 0.2);
+        }
+
+        .stats-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
+        }
+
+        .stats-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stats-meta {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           CORRELATION HEATMAP
+           ═══════════════════════════════════════════════════════ */
+        .heatmap-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            min-height: 250px;
+        }
+
+        .heatmap-table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 360px;
+        }
+
+        .heatmap-cell {
+            text-align: center;
+            font-weight: 700;
+            font-size: 12px;
+            height: 44px;
+            width: 70px;
+            border: 1px solid var(--bg-card);
+            transition: all 0.2s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .heatmap-label {
+            font-weight: 600;
+            font-size: 10px;
+            color: var(--text-secondary);
+            padding: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .heatmap-label.row-lbl {
+            text-align: right;
+            padding-right: 12px;
+            white-space: nowrap;
+        }
+
+        .heatmap-label.col-lbl {
+            text-align: center;
+            padding-bottom: 8px;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           TABLES (Transactions & Anomalies)
+           ═══════════════════════════════════════════════════════ */
+        .table-section {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+
+        .table-header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .filters-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background-color: var(--bg-input);
+            color: var(--text-primary);
+            width: 260px;
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-violet);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 11px 14px;
+            text-align: left;
+            background-color: var(--bg-input);
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+        th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+
+        td {
+            padding: 12px 14px;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.04);
+            color: var(--text-secondary);
+        }
+
+        tbody tr {
+            transition: background-color 0.15s ease;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(139, 92, 246, 0.03);
+        }
+
+        .product-cell {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .badge {
+            display: inline-flex;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-payment {
+            background: rgba(6, 182, 212, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.15);
+        }
+
+        .badge-mobile {
+            background: rgba(139, 92, 246, 0.08);
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+        }
+
+        .badge-anomaly {
+            background: rgba(236, 72, 153, 0.12);
+            color: var(--accent-pink);
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            font-weight: 700;
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; box-shadow: 0 0 8px rgba(236, 72, 153, 0.3); }
+            100% { opacity: 0.8; }
+        }
+
+        .money-cell {
+            font-weight: 700;
+            color: var(--accent-emerald);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .zscore-cell {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .zscore-cell.high-z {
+            color: var(--accent-pink);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 36px 16px;
+            color: var(--text-muted);
+        }
+
+        .empty-state .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+            opacity: 0.4;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           MODAL
+           ═══════════════════════════════════════════════════════ */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 28px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-hover);
+            width: 100%;
+            max-width: 480px;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-20px) scale(0.97);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 22px;
+            padding: 4px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--accent-violet);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .btn-submit {
+            background: var(--gradient-primary);
+            border: none;
+            color: #fff;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            width: 100%;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 6px;
+            font-family: inherit;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+            transition: all 0.25s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(139, 92, 246, 0.35);
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           LOADING INDICATORS & TOASTS
+           ═══════════════════════════════════════════════════════ */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite ease-in-out;
+            border-radius: 6px;
+        }
+
+        .skeleton-value {
+            height: 28px;
+            width: 130px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--accent-emerald);
+            color: var(--accent-emerald);
+            padding: 12px 20px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 13px;
+            box-shadow: var(--shadow-lg);
+            z-index: 2000;
+            transform: translateY(80px);
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Loading Overlay for tab content switching */
+        .analytics-loading {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(8, 10, 16, 0.75);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            z-index: 100;
+            border-radius: var(--radius-md);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(139, 92, 246, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent-violet);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           RESPONSIVE STYLES
+           ═══════════════════════════════════════════════════════ */
+        .charts-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 1200px) {
+            .kpi-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .charts-grid-2, .charts-grid-1-2, .charts-grid-2-1, .charts-grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+            .kpi-container {
+                grid-template-columns: 1fr;
+            }
+            .table-header-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filters-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-input {
+                width: 100%;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           PRINT MEDIA STYLES (PDF Report Generation)
+           ═══════════════════════════════════════════════════════ */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            body::before {
+                display: none !important;
+            }
+            header, .tabs-nav, #btn-refresh, #btn-add-sale, #btn-print, .modal-overlay, .toast, .analytics-loading {
+                display: none !important;
+            }
+            .kpi-card, .chart-card, .table-section {
+                background: #ffffff !important;
+                color: #000000 !important;
+                border: 1px solid #e2e8f0 !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+            .kpi-value, .kpi-title, .stats-value, .stats-label, td, th, .chart-title, .chart-subtitle, .kpi-subtext {
+                color: #000000 !important;
+            }
+            .stats-item {
+                background: #f8fafc !important;
+                border-color: #e2e8f0 !important;
+            }
+            .table-scroll {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+            .container {
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            canvas {
+                max-width: 100% !important;
+            }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>Shelf Scanning System</h1>
-        <p>Monitor stock levels and detect anomalies without hardware.</p>
+        <div class="header-left">
+            <h1 id="brand-title">Sales Intelligence Platform</h1>
+            <div id="date-display"></div>
+        </div>
+        <div class="header-actions">
+            <!-- Navigation Tabs -->
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="switchTab('dashboard')" id="tab-dashboard">📊 Dashboard</button>
+                <button class="tab-btn" onclick="switchTab('analytics')" id="tab-analytics">🧪 Analytics & ML</button>
+                <button class="tab-btn" onclick="switchTab('sql')" id="tab-sql">👁️ SQL Sandbox</button>
+            </div>
+            <button class="btn btn-secondary" onclick="openSimModal()" id="btn-sim-sandbox">⚙️ Simulate Data</button>
+            <button class="btn btn-secondary" onclick="refreshData()" id="btn-refresh">↻ Refresh</button>
+            <button class="btn btn-secondary" onclick="window.print()" id="btn-print">🖨️ Export PDF</button>
+            <button class="btn btn-primary" onclick="openModal()" id="btn-add-sale">+ Add Sale</button>
+        </div>
     </header>
 
-    <div class="controls">
-        <button onclick="setEnv('Supermarket')" id="btn-Supermarket" class="active">Supermarket</button>
-        <button onclick="setEnv('Library')" id="btn-Library">Library</button>
-        <button onclick="setEnv('Museum')" id="btn-Museum">Museum</button>
-        <div style="width: 20px;"></div> <!-- Spacer -->
-        <button onclick="triggerRobotScan()" class="scan-btn">🤖 Run Robot Simulation</button>
+    <!-- ═══════════════════════════════════════════════════════
+         DASHBOARD VIEW
+         ═══════════════════════════════════════════════════════ -->
+    <div id="dashboard-view" class="tab-content active">
+        <!-- KPI Cards -->
+        <div class="kpi-container">
+            <div class="kpi-card">
+                <div class="kpi-icon">💰</div>
+                <div class="kpi-title">Total Revenue</div>
+                <div class="kpi-value" id="kpi-revenue"><div class="skeleton skeleton-value"></div></div>
+                <div class="kpi-badge" id="kpi-revenue-trend" style="display: none;"></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">📦</div>
+                <div class="kpi-title">Total Orders</div>
+                <div class="kpi-value" id="kpi-orders"><div class="skeleton skeleton-value"></div></div>
+                <div class="kpi-subtext">Across seeded sales log</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">📈</div>
+                <div class="kpi-title">Average Order Value</div>
+                <div class="kpi-value" id="kpi-aov"><div class="skeleton skeleton-value"></div></div>
+                <div class="kpi-subtext">Mean transaction value</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">🏆</div>
+                <div class="kpi-title">Top Product</div>
+                <div class="kpi-value small-text" id="kpi-product"><div class="skeleton skeleton-value"></div></div>
+                <div class="kpi-subtext">Highest demand frequency</div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid-2">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot violet"></span> Monthly Revenue Trend</div>
+                        <div class="chart-subtitle">Aggregate revenue calculated monthly</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper"><canvas id="monthlyChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot cyan"></span> Revenue by Category</div>
+                        <div class="chart-subtitle">Market share breakdown across segments</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper"><canvas id="categoryChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="charts-grid-2-1" style="grid-template-columns: 1fr;">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot pink"></span> Top 5 Customers</div>
+                        <div class="chart-subtitle">Key accounts by gross revenue contribution</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper" style="height: 240px;"><canvas id="customersChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Recent Transactions Table -->
+        <div class="table-section">
+            <div class="table-header-container">
+                <div class="chart-title">📋 Sales Transactions Log</div>
+                <div class="filters-row">
+                    <input type="date" id="dateFilter" class="search-input" style="width: 160px;" title="Filter by Date">
+                    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search product, customer, mobile...">
+                </div>
+            </div>
+            <div class="table-scroll">
+                <table id="salesTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Customer</th>
+                            <th>Mobile No.</th>
+                            <th>Payment</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="7" class="empty-state"><div class="icon">📊</div>Loading transactions...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <div id="shelf-grid" class="shelf-grid">
-        <!-- Shelves will be inserted here -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         ANALYTICS & MACHINE LEARNING VIEW
+         ═══════════════════════════════════════════════════════ -->
+    <div id="analytics-view" class="tab-content">
+        <!-- Analytics Top Row Cards -->
+        <div class="kpi-container">
+            <div class="kpi-card">
+                <div class="kpi-icon">🔮</div>
+                <div class="kpi-title">Regression Model (R²)</div>
+                <div class="kpi-value" id="kpi-r2">—</div>
+                <div class="kpi-subtext" id="kpi-r2-sub">Goodness of fit metric</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">🚨</div>
+                <div class="kpi-title">Anomaly Rate</div>
+                <div class="kpi-value" id="kpi-anomaly-count">—</div>
+                <div class="kpi-subtext" id="kpi-anomaly-rate">0% of gross data</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">📊</div>
+                <div class="kpi-title">Skewness Coefficient</div>
+                <div class="kpi-value" id="kpi-skewness">—</div>
+                <div class="kpi-subtext" id="kpi-skewness-desc">Price distribution symmetry</div>
+            </div>
+            <div class="kpi-card" style="display:flex; flex-direction:column; justify-content:center;">
+                <div class="kpi-icon" style="margin-bottom:8px;">📥</div>
+                <div class="kpi-title">Export Dataset</div>
+                <a href="/api/export/csv" class="btn btn-primary" style="padding: 8px; font-size:12px; text-decoration:none; text-align:center; display:block; width:100%; border-radius:6px; margin-top:2px;">Download CSV Report</a>
+            </div>
+        </div>
+
+        <!-- Row 1: Sales Forecasting & Histogram -->
+        <div class="charts-grid-2">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot violet"></span> Sales Forecasting (OLS Polynomial Regression)</div>
+                        <div class="chart-subtitle">Calculated using NumPy Polyfit. 3-month forecast with 95% confidence interval bands.</div>
+                    </div>
+                    <select id="forecastDegreeSelect" class="search-input" style="width: 140px; padding: 6px 10px; font-size: 12px; height: auto;" onchange="updateForecastModel(this.value)">
+                        <option value="1">Linear Fit (Deg 1)</option>
+                        <option value="2">Quadratic Fit (Deg 2)</option>
+                    </select>
+                </div>
+                <div class="chart-wrapper"><canvas id="forecastChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot pink"></span> Price Distribution & Normal Density Overlay</div>
+                        <div class="chart-subtitle">Binned transaction sizes plotted against standard Gaussian probability curve.</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper"><canvas id="distributionChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Row 2: Descriptive Stats, Goal Seek Planner & Outliers -->
+        <div class="charts-grid-3">
+            <!-- Statistics Grid -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot cyan"></span> Descriptive Statistics</div>
+                        <div class="chart-subtitle">Key metrics computed directly on backend</div>
+                    </div>
+                </div>
+                <div class="stats-grid" id="stats-panel-grid" style="grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Goal Seek Prescriptive Planner -->
+            <div class="chart-card" style="display:flex; flex-direction:column; justify-content:space-between;">
+                <div class="chart-header" style="margin-bottom: 12px;">
+                    <div>
+                        <div class="chart-title"><span class="dot emerald"></span> Goal-Seek Revenue Planner</div>
+                        <div class="chart-subtitle">Determine required sales volume and target transaction size (AOV) to hit monthly goals</div>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:12px;">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label style="font-size:11px; font-weight:700;">Target Monthly Revenue (₹)</label>
+                        <div style="display:flex; gap:8px;">
+                            <input type="number" id="goalSeekTarget" class="search-input" style="width:100%; height:36px; padding:6px 12px;" value="5000000" placeholder="e.g. 5000000">
+                            <button class="btn btn-primary" onclick="calculateGoalSeek()" style="padding: 0 14px; height:36px; border-radius:var(--radius-sm);">Plan</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="goalSeekResults" style="display:flex; flex-direction:column; gap:8px; background:var(--bg-input); padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border); font-size:12px; flex-grow:1; justify-content:center;">
+                    <div style="text-align:center; color:var(--text-muted); font-size:12px; padding: 12px 0;">Enter target revenue and click Plan.</div>
+                </div>
+            </div>
+
+            <!-- Outliers List -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot pink"></span> Outliers Detected</div>
+                        <div class="chart-subtitle">Transactions flagged using IQR Method</div>
+                    </div>
+                </div>
+                <div class="table-scroll" style="max-height: 250px; overflow-y: auto;">
+                    <table id="anomaliesTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Z-Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3: RFM Bubble Chart & Correlation Heatmap -->
+        <div class="charts-grid-2-1">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot amber"></span> RFM Cohort Clustering Segmentation</div>
+                        <div class="chart-subtitle">X: Recency (days since last order), Y: Frequency. Bubble size: Monetary value.</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper"><canvas id="rfmChart"></canvas></div>
+            </div>
+            <div class="chart-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot blue"></span> Feature Correlation</div>
+                        <div class="chart-subtitle">Pearson coefficient matrix</div>
+                    </div>
+                </div>
+                <div class="heatmap-container" id="correlation-heatmap-container">
+                    <!-- Heatmap populated via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3.5: RFM Marketing Lookup Panel -->
+        <div class="table-section">
+            <div class="table-header-container" style="margin-bottom:12px;">
+                <div>
+                    <div class="chart-title"><span class="dot amber"></span> 🎯 RFM Marketing Cohort Lookup</div>
+                    <div class="chart-subtitle">Analyze target customer groups matching specific cohorts for targeted business outreach</div>
+                </div>
+                <div class="filters-row">
+                    <select id="rfmCohortFilter" class="search-input" style="width: 220px;" onchange="filterRFMTable(this.value)">
+                        <option value="ALL">All Cohorts (Full Cohort List)</option>
+                        <option value="Champions">Champions (Best Customers)</option>
+                        <option value="Loyal Customers">Loyal Customers (Frequent Spenders)</option>
+                        <option value="Potential Loyalists">Potential Loyalists (Recent, Promising)</option>
+                        <option value="New Customers">New Customers (Recent, low frequency)</option>
+                        <option value="At Risk">At Risk (Spend high, inactive recently)</option>
+                        <option value="Cannot Lose">Cannot Lose (High spend, inactive long)</option>
+                        <option value="Lost">Lost (Inactive, low frequency, low spend)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Cohort Strategy Prescriptions Grid -->
+            <div id="cohortStrategistCard" style="display:grid; grid-template-columns: 1fr 2fr; gap:16px; margin-bottom:16px; background:var(--bg-input); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border);">
+                <!-- Profile stats -->
+                <div style="display:flex; flex-direction:column; gap:6px; border-right: 1px solid var(--border); padding-right:16px;">
+                    <div class="stats-label" style="font-size:10px; letter-spacing:1.2px; margin-bottom:4px;">Cohort Profile</div>
+                    <div style="font-size:12.5px; color:var(--text-secondary);">Cohort Size: <strong id="cohort-size-txt" style="color:var(--text-primary);">0</strong></div>
+                    <div style="font-size:12.5px; color:var(--text-secondary);">Total Value: <strong id="cohort-value-txt" style="color:var(--accent-emerald);">₹0</strong></div>
+                    <div style="font-size:12.5px; color:var(--text-secondary);">Avg Ticket: <strong id="cohort-aov-txt" style="color:var(--accent-cyan);">₹0</strong></div>
+                </div>
+                <!-- Prescriptive strategy -->
+                <div style="display:flex; flex-direction:column; gap:6px; justify-content:center;">
+                    <div class="stats-label" style="font-size:10px; letter-spacing:1.2px; color:var(--accent-amber); margin-bottom:4px;">Strategic Outreach Prescription</div>
+                    <div id="cohort-strategy-txt" style="font-size:12px; color:var(--text-secondary); line-height:1.4;">
+                        Select a cohort segment from the dropdown filter to inspect target segments and strategic marketing prescriptions.
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-scroll" style="max-height: 250px; overflow-y: auto;">
+                <table id="rfmLookupTable">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Mobile</th>
+                            <th>Cohort</th>
+                            <th>Recency</th>
+                            <th>Frequency</th>
+                            <th>Monetary</th>
+                            <th>AOV</th>
+                            <th>RFM Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="8" class="empty-state"><div class="icon">🎯</div>Loading cohort data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Row 4: MoM Growth & Cumulative Revenue -->
+        <div class="charts-grid-2">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot emerald"></span> Month-over-Month Growth Rates (%)</div>
+                        <div class="chart-subtitle">Growth speed indicating periodic momentum</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper"><canvas id="growthChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot violet"></span> Cumulative Revenue (Lifetime Curve)</div>
+                        <div class="chart-subtitle">Running sum of gross revenue generated over time</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper"><canvas id="cumulativeChart"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SQL SANDBOX EXPLORATORY DATA ANALYSIS VIEW
+         ═══════════════════════════════════════════════════════ -->
+    <div id="sql-view" class="tab-content">
+        <!-- Main SQL Grid -->
+        <div class="charts-grid-1-2" style="grid-template-columns: 1fr 3fr; gap: 24px;">
+            <!-- Queries Templates Sidebar -->
+            <div class="chart-card" style="display:flex; flex-direction:column; gap:12px;">
+                <div class="chart-title">📋 Sample SQL Templates</div>
+                <div class="chart-subtitle" style="margin-bottom:8px;">Click to load analytical templates</div>
+                
+                <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(1)">1. Category Contribution</button>
+                <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(2)">2. Payment Split</button>
+                <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(3)">3. Outliers &gt; ₹1 Lakh</button>
+                <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(4)">4. Top 5 Spenders</button>
+                <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(5)">5. Revenue by Month</button>
+            </div>
+
+            <!-- Query console editor and results table -->
+            <div class="chart-card" style="display:flex; flex-direction:column; gap:16px;">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title"><span class="dot violet"></span> Direct SQLite Query Console</div>
+                        <div class="chart-subtitle">Direct read-only SELECT interface against 'sales' database schema.</div>
+                    </div>
+                    <button class="btn btn-primary" onclick="runConsoleQuery()">⚡ Run Query</button>
+                </div>
+                
+                <textarea id="sqlQueryText" style="width:100%; height:110px; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 14px; color:var(--text-primary); font-family:'JetBrains Mono', monospace; font-size:12px; outline:none; resize:none; transition: border-color 0.25s;" placeholder="SELECT * FROM sales LIMIT 10;"></textarea>
+
+                <div id="sqlErrorLog" style="display:none; background:rgba(236,72,153,0.08); border:1px solid rgba(236,72,153,0.3); color:var(--accent-pink); padding:10px 14px; border-radius:6px; font-size:12px; font-family:'JetBrains Mono', monospace;"></div>
+
+                <div class="table-scroll" style="max-height:280px; overflow-y:auto; border-top: 1px solid var(--border); padding-top:12px;">
+                    <table id="sqlResultTable">
+                        <thead>
+                            <tr id="sqlResultHeader">
+                                <th>No query run</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sqlResultBody">
+                            <tr><td class="empty-state">Load a template from the sidebar or write SELECT query above, then click Run Query.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<script>
-    let currentData = [];
+<!-- Add Sale Modal -->
+<div class="modal-overlay" id="addModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span>Add New Sale</span>
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+        </div>
+        <form id="addDataForm">
+            <div class="form-group">
+                <label>Customer Name</label>
+                <input type="text" id="customer_name" placeholder="Enter customer name" required>
+            </div>
+            <div class="form-group">
+                <label>Mobile No.</label>
+                <input type="text" id="mobile_no" maxlength="10" pattern="\d{10}" title="Must be exactly 10 digits" placeholder="10-digit mobile number" required>
+            </div>
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" id="product_name" list="products_list" autocomplete="off" placeholder="Search or select product..." required>
+                <datalist id="products_list">
+                    <!-- Laptops -->
+                    <option value="Laptop (MacBook Pro)"></option>
+                    <option value="Laptop (MacBook Air M3)"></option>
+                    <option value="Laptop (Dell XPS 15)"></option>
+                    <option value="Laptop (HP Pavilion)"></option>
+                    <option value="Laptop (Lenovo ThinkPad X1)"></option>
+                    <option value="Laptop (ASUS ROG Zephyrus)"></option>
+                    <option value="Laptop (Acer Predator Helios)"></option>
+                    <option value="Laptop (HP Spectre x360)"></option>
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
-        fetchStatus();
+                    <!-- Smartphones -->
+                    <option value="Smartphone (iPhone 15)"></option>
+                    <option value="Smartphone (iPhone 15 Pro Max)"></option>
+                    <option value="Smartphone (Samsung S24)"></option>
+                    <option value="Smartphone (Samsung Galaxy Fold 5)"></option>
+                    <option value="Smartphone (OnePlus 12)"></option>
+                    <option value="Smartphone (OnePlus Open)"></option>
+                    <option value="Smartphone (Google Pixel 8 Pro)"></option>
+                    <option value="Smartphone (Xiaomi 14 Ultra)"></option>
+                    <option value="Smartphone (Nothing Phone 2)"></option>
+                    <option value="Smartphone (Vivo X100 Pro)"></option>
+                    <option value="Smartphone (Realme GT 5)"></option>
+                    <option value="Smartphone (Motorola Edge 50)"></option>
+
+                    <!-- Tablets -->
+                    <option value="Tablet (iPad Air)"></option>
+                    <option value="Tablet (iPad Pro M4)"></option>
+                    <option value="Tablet (Galaxy Tab S9)"></option>
+                    <option value="Tablet (Lenovo Tab P12)"></option>
+
+                    <!-- Wearables -->
+                    <option value="Smartwatch (Apple Watch)"></option>
+                    <option value="Smartwatch (Samsung Galaxy)"></option>
+                    <option value="Smartwatch (Garmin Fenix 7)"></option>
+                    <option value="Smartwatch (Fitbit Sense 2)"></option>
+
+                    <!-- Audio -->
+                    <option value="Wireless Earbuds (AirPods Pro)"></option>
+                    <option value="Wireless Earbuds (Samsung Buds 2 Pro)"></option>
+                    <option value="Wireless Earbuds (Sony WF-1000XM5)"></option>
+                    <option value="Over-ear Headphones (Sony WH)"></option>
+                    <option value="Over-ear Headphones (Bose QuietComfort)"></option>
+
+                    <!-- Televisions -->
+                    <option value="4K Television (LG OLED 55&quot;)"></option>
+                    <option value="4K Television (Samsung 50&quot;)"></option>
+                    <option value="Sony Bravia 65&quot; 4K Google TV"></option>
+                    <option value="Xiaomi Smart TV 55&quot;"></option>
+
+                    <!-- Gaming -->
+                    <option value="Gaming Console (PS5)"></option>
+                    <option value="Gaming Console (Xbox Series X)"></option>
+                    <option value="Nintendo Switch OLED"></option>
+                    <option value="Steam Deck OLED"></option>
+
+                    <!-- Monitors -->
+                    <option value="External Monitor (Dell 27&quot;)"></option>
+
+                    <!-- Accessories -->
+                    <option value="Wireless Mouse/Keyboard Combo"></option>
+                    <option value="Mechanical Keyboard (Keychron K2)"></option>
+                    <option value="Wireless Gaming Mouse (Logitech G502)"></option>
+                    <option value="USB-C Hub Adapter"></option>
+                    <option value="Laptop Bag (Premium)"></option>
+                </datalist>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Price (₹)</label>
+                    <input type="number" id="total_price" step="0.01" min="1" placeholder="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="sale_date" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Mode of Payment</label>
+                <select id="mode_of_payment">
+                    <option value="UPI">UPI</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">💾 Save Sale</button>
+        </form>
+    </div>
+</div>
+
+<!-- Simulation Sandbox Modal -->
+<div class="modal-overlay" id="simModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span>⚙️ Data Simulation Sandbox</span>
+            <button class="close-btn" onclick="closeSimModal()">&times;</button>
+        </div>
+        <form id="simDataForm">
+            <div class="form-group">
+                <label>Sample Size (Records: <span id="sim-records-val">200</span>)</label>
+                <input type="range" id="sim_records" min="50" max="1000" step="50" value="200" oninput="document.getElementById('sim-records-val').textContent = this.value">
+            </div>
+            <div class="form-group">
+                <label>Business Growth Trend Bias</label>
+                <select id="sim_trend">
+                    <option value="positive">📈 Positive Growth (Triangular Bias)</option>
+                    <option value="neutral">➡️ Flat / Neutral Trend (Uniform Distribution)</option>
+                    <option value="negative">📉 Negative Contraction (Reverse Triangular Bias)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Outlier/Anomaly Rate (Percentage: <span id="sim-anomaly-val">3%</span>)</label>
+                <input type="range" id="sim_anomaly" min="0" max="20" step="1" value="3" oninput="document.getElementById('sim-anomaly-val').textContent = this.value + '%'">
+            </div>
+            <button type="submit" class="btn-submit">⚡ Generate Simulated Dataset</button>
+        </form>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<script>
+    // ═══════════════════════════════════════════════════════
+    // INITIALIZATION & GLOBAL UTILITIES
+    // ═══════════════════════════════════════════════════════
+
+    // Set Date in header
+    document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
     });
 
-    async function setEnv(envName) {
-        // Update UI buttons
-        document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
-        const btn = document.getElementById(`btn-${envName}`);
-        if(btn) btn.classList.add('active');
+    // Indian Currency Formatter (INR)
+    const currencyFormatter = new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        maximumFractionDigits: 0
+    });
 
-        // Call API
+    // Chart.js Style Defaults
+    Chart.defaults.color = '#7d869e';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.borderColor = 'rgba(139, 92, 246, 0.05)';
+    Chart.defaults.plugins.tooltip.padding = 10;
+    Chart.defaults.plugins.tooltip.cornerRadius = 8;
+    Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(20, 24, 41, 0.95)';
+    Chart.defaults.plugins.tooltip.borderColor = 'rgba(139, 92, 246, 0.2)';
+    Chart.defaults.plugins.tooltip.borderWidth = 1;
+
+    // Charts objects registry for hot replacement / refresh
+    let charts = {
+        monthly: null,
+        category: null,
+        customers: null,
+        forecast: null,
+        distribution: null,
+        rfm: null,
+        growth: null,
+        cumulative: null
+    };
+
+    let allSalesData = [];
+    let anomalySet = new Set(); // Stores anomaly IDs for table badges
+    let activeTab = 'dashboard';
+    let forecastDegree = 1; // Polynomial forecast model degree state
+    let rfmCustomerList = []; // RFM cohort lookup data cache
+    const API_BASE = ''; // Flask serves same-origin
+
+    // ═══════════════════════════════════════════════════════
+    // TAB ROUTING MANAGEMENT
+    // ═══════════════════════════════════════════════════════
+    
+    function switchTab(tabId) {
+        if (tabId === activeTab) return;
+        activeTab = tabId;
+
+        // Toggle Buttons active classes
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+
+        // Toggle Content Sections
+        document.querySelectorAll('.tab-content').forEach(sect => sect.classList.remove('active'));
+        document.getElementById(`${tabId}-view`).classList.add('active');
+
+        // Trigger appropriate data fetches
+        if (tabId === 'analytics') {
+            loadAnalyticsData();
+        } else if (tabId === 'sql') {
+            loadSQLConsoleData();
+        } else {
+            loadDashboardData();
+        }
+        
+        // Sync hash
+        window.location.hash = tabId;
+    }
+
+    // Support back/forward browser navigation using hash
+    window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash === 'analytics' || hash === 'dashboard' || hash === 'sql') {
+            switchTab(hash);
+        }
+    });
+
+    // Initial routing setup
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash === 'analytics' || initialHash === 'sql') {
+        switchTab(initialHash);
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // CORE SERVICES: FETCH DASHBOARD DATA
+    // ═══════════════════════════════════════════════════════
+
+    async function loadDashboardData() {
         try {
-            const res = await fetch('/api/env', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({environment: envName})
+            // First fetch summaries & core charts in parallel
+            const [summaryRes, monthlyRes, categoryRes, customersRes, salesRes, anomalyRes] = await Promise.all([
+                fetch(API_BASE + '/api/summary'),
+                fetch(API_BASE + '/api/chart/monthly'),
+                fetch(API_BASE + '/api/chart/category'),
+                fetch(API_BASE + '/api/chart/customers'),
+                fetch(API_BASE + '/api/sales'),
+                fetch(API_BASE + '/api/analytics/anomalies')
+            ]);
+
+            const summary = await summaryRes.json();
+            const monthly = await monthlyRes.json();
+            const category = await categoryRes.json();
+            const customers = await customersRes.json();
+            allSalesData = await salesRes.json();
+            const anomaliesData = await anomalyRes.json();
+
+            // Store anomalies for quick lookup mapping
+            anomalySet.clear();
+            if (anomaliesData.anomalies) {
+                anomaliesData.anomalies.forEach(a => anomalySet.add(a.id));
+            }
+
+            // Render KPIs with count-up animations
+            animateValue('kpi-revenue', summary.total_revenue, true);
+            animateValue('kpi-orders', summary.total_orders, false);
+            animateValue('kpi-aov', summary.avg_order_value, true);
+            document.getElementById('kpi-product').textContent = summary.top_product;
+
+            // MoM Growth Indicator Badge
+            const trendBadge = document.getElementById('kpi-revenue-trend');
+            trendBadge.style.display = 'inline-flex';
+            if (summary.mom_growth > 0) {
+                trendBadge.className = 'kpi-badge up';
+                trendBadge.innerHTML = `▲ +${summary.mom_growth}% MoM`;
+            } else if (summary.mom_growth < 0) {
+                trendBadge.className = 'kpi-badge down';
+                trendBadge.innerHTML = `▼ ${summary.mom_growth}% MoM`;
+            } else {
+                trendBadge.className = 'kpi-badge';
+                trendBadge.style.background = 'rgba(255,255,255,0.05)';
+                trendBadge.style.color = 'var(--text-muted)';
+                trendBadge.innerHTML = `● 0.0% MoM`;
+            }
+
+            // Render Charts
+            renderMonthlyChart(monthly);
+            renderCategoryChart(category);
+            renderCustomersChart(customers);
+
+            // Render Table log
+            renderTable(allSalesData);
+
+        } catch (error) {
+            console.error('Error fetching dashboard datasets:', error);
+            showToast('⚠️ Failed to load dashboard data. Check database connections.', true);
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // CORE SERVICES: FETCH ANALYTICS DATA (DS/ML TAB)
+    // ═══════════════════════════════════════════════════════
+
+    async function loadAnalyticsData() {
+        // Create full overlay spinner
+        const targetView = document.getElementById('analytics-view');
+        let loader = document.createElement('div');
+        loader.className = 'analytics-loading';
+        loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:600; font-size:14px;">Computing metrics & loading models...</p>';
+        targetView.appendChild(loader);
+
+        try {
+            const [forecastRes, statsRes, rfmRes, anomaliesRes, correlationRes, distributionRes, growthRes] = await Promise.all([
+                fetch(API_BASE + `/api/analytics/forecast?degree=${forecastDegree}`),
+                fetch(API_BASE + '/api/analytics/stats'),
+                fetch(API_BASE + '/api/analytics/rfm'),
+                fetch(API_BASE + '/api/analytics/anomalies'),
+                fetch(API_BASE + '/api/analytics/correlation'),
+                fetch(API_BASE + '/api/analytics/distribution'),
+                fetch(API_BASE + '/api/analytics/growth')
+            ]);
+
+            const forecast = await forecastRes.json();
+            const stats = await statsRes.json();
+            const rfm = await rfmRes.json();
+            
+            // Cache RFM customer list data for lookup rendering
+            rfmCustomerList = rfm;
+            const anomalies = await anomaliesRes.json();
+            const correlation = await correlationRes.json();
+            const distribution = await distributionRes.json();
+            const growth = await growthRes.json();
+
+            // Populate top KPI cards
+            document.getElementById('kpi-r2').textContent = forecast.model.r_squared.toFixed(4);
+            document.getElementById('kpi-r2-sub').textContent = `Fit: ${forecast.model.equation}`;
+            
+            document.getElementById('kpi-anomaly-count').textContent = anomalies.anomaly_count;
+            document.getElementById('kpi-anomaly-rate').textContent = `${anomalies.anomaly_rate}% of sales binned`;
+
+            document.getElementById('kpi-skewness').textContent = stats.skewness.toFixed(3);
+            const skewType = stats.skewness > 0.5 ? 'Right-skewed (High sales)' : (stats.skewness < -0.5 ? 'Left-skewed' : 'Symmetric density');
+            document.getElementById('kpi-skewness-desc').textContent = skewType;
+
+            // Render complex analytics visual modules
+            renderForecastChart(forecast);
+            renderPriceDistribution(distribution);
+            renderStatsGrid(stats);
+            renderAnomaliesTable(anomalies.anomalies);
+            renderRFMBubbles(rfm);
+            renderRFMLookupTable(rfm); // Populate RFM lookup panel
+            renderCorrelationHeatmap(correlation);
+            renderMoMGrowthChart(growth.monthly);
+            renderCumulativeChart(growth.monthly);
+
+        } catch (e) {
+            console.error('Error fetching analytics calculations:', e);
+            showToast('⚠️ Statistical computation failed. Check python environment log.', true);
+        } finally {
+            // Destroy loader
+            if (loader.parentNode) {
+                loader.parentNode.removeChild(loader);
+            }
+        }
+    }
+
+    function refreshData() {
+        if (activeTab === 'dashboard') {
+            loadDashboardData();
+        } else {
+            loadAnalyticsData();
+        }
+        showToast('🔄 Dataset re-indexed successfully.');
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // KPI COUNT ANIMATION ENGINE
+    // ═══════════════════════════════════════════════════════
+
+    function animateValue(elementId, finalValue, isCurrency) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        const duration = 650;
+        const startTime = performance.now();
+
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+            const current = Math.floor(eased * finalValue);
+
+            if (isCurrency) {
+                el.textContent = currencyFormatter.format(current);
+            } else {
+                el.textContent = current.toLocaleString('en-IN');
+            }
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                el.textContent = isCurrency ? currencyFormatter.format(finalValue) : finalValue.toLocaleString('en-IN');
+            }
+        }
+
+        requestAnimationFrame(update);
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // VISUALS: DASHBOARD TAB CHARTS
+    // ═══════════════════════════════════════════════════════
+
+    function renderMonthlyChart(data) {
+        const ctx = document.getElementById('monthlyChart').getContext('2d');
+        const labels = data.map(d => {
+            const [y, m] = d.month.split('-');
+            return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+        });
+        const revenues = data.map(d => d.revenue);
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, 260);
+        gradient.addColorStop(0, 'rgba(139, 92, 246, 0.85)');
+        gradient.addColorStop(1, 'rgba(6, 182, 212, 0.3)');
+
+        if (charts.monthly) charts.monthly.destroy();
+
+        charts.monthly = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Revenue',
+                    data: revenues,
+                    backgroundColor: gradient,
+                    borderRadius: 6,
+                    borderSkipped: false,
+                    barPercentage: 0.65
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: context => ` Revenue: ${currencyFormatter.format(context.raw)}`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.03)' },
+                        ticks: {
+                            callback: val => val >= 100000 ? '₹' + (val / 100000).toFixed(1) + 'L' : '₹' + (val / 1000).toFixed(0) + 'K'
+                        }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    function renderCategoryChart(data) {
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+        const labels = data.map(d => d.category);
+        const revenues = data.map(d => d.revenue);
+        const colors = ['#8b5cf6', '#06b6d4', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#a855f7'];
+
+        if (charts.category) charts.category.destroy();
+
+        charts.category = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels,
+                datasets: [{
+                    data: revenues,
+                    backgroundColor: colors.slice(0, labels.length),
+                    borderWidth: 3,
+                    borderColor: 'var(--bg-card)',
+                    hoverBorderWidth: 0,
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '72%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            padding: 14,
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            color: '#a3adc2'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: context => ` ${context.label}: ${currencyFormatter.format(context.raw)}`
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function renderCustomersChart(data) {
+        const ctx = document.getElementById('customersChart').getContext('2d');
+        const labels = data.map(d => d.name);
+        const revenues = data.map(d => d.revenue);
+
+        const gradient = ctx.createLinearGradient(0, 0, 600, 0);
+        gradient.addColorStop(0, 'rgba(236, 72, 153, 0.7)');
+        gradient.addColorStop(1, 'rgba(139, 92, 246, 0.75)');
+
+        if (charts.customers) charts.customers.destroy();
+
+        charts.customers = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Spent',
+                    data: revenues,
+                    backgroundColor: gradient,
+                    borderRadius: 6,
+                    borderSkipped: false,
+                    barPercentage: 0.55
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: context => ` Spend: ${currencyFormatter.format(context.raw)}`
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.03)' },
+                        ticks: {
+                            callback: val => val >= 100000 ? '₹' + (val / 100000).toFixed(1) + 'L' : '₹' + (val / 1000).toFixed(0) + 'K'
+                        }
+                    },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // VISUALS: ANALYTICS TAB CHARTS
+    // ═══════════════════════════════════════════════════════
+
+    function renderForecastChart(data) {
+        const ctx = document.getElementById('forecastChart').getContext('2d');
+        
+        const historicalLabels = data.historical.map(h => {
+            const [y, m] = h.month.split('-');
+            return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+        });
+        const forecastLabels = data.forecast.map(f => {
+            const [y, m] = f.month.split('-');
+            return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+        });
+
+        const allLabels = [...historicalLabels, ...forecastLabels];
+        const histActuals = data.historical.map(h => h.actual);
+        const forecastPredicted = data.forecast.map(f => f.predicted);
+        const forecastLower = data.forecast.map(f => f.lower_bound);
+        const forecastUpper = data.forecast.map(f => f.upper_bound);
+
+        const lastActualVal = histActuals[histActuals.length - 1];
+
+        // Format data streams aligning the points properly
+        const actualData = [...histActuals, ...new Array(forecastLabels.length).fill(null)];
+        const fittedData = data.historical.map(h => h.fitted);
+        const forecastData = [...new Array(histActuals.length - 1).fill(null), lastActualVal, ...forecastPredicted];
+        const upperData = [...new Array(histActuals.length - 1).fill(null), lastActualVal, ...forecastUpper];
+        const lowerData = [...new Array(histActuals.length - 1).fill(null), lastActualVal, ...forecastLower];
+
+        if (charts.forecast) charts.forecast.destroy();
+
+        charts.forecast = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: allLabels,
+                datasets: [
+                    {
+                        label: 'Actual Revenue',
+                        data: actualData,
+                        borderColor: '#8b5cf6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        tension: 0.35
+                    },
+                    {
+                        label: 'Fitted Regression',
+                        data: fittedData,
+                        borderColor: 'rgba(139, 92, 246, 0.3)',
+                        borderWidth: 1.5,
+                        borderDash: [3, 4],
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Forecast Trend',
+                        data: forecastData,
+                        borderColor: '#06b6d4',
+                        borderWidth: 3,
+                        borderDash: [6, 4],
+                        backgroundColor: 'transparent',
+                        pointRadius: 4,
+                        tension: 0.35
+                    },
+                    {
+                        label: 'Upper Bound',
+                        data: upperData,
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                        pointRadius: 0,
+                        fill: false
+                    },
+                    {
+                        label: '95% Confidence Band',
+                        data: lowerData,
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                        pointRadius: 0,
+                        fill: 3, // Fill between dataset indices 4 (lower) and 3 (upper)
+                        backgroundColor: 'rgba(6, 182, 212, 0.08)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            filter: item => item.text !== 'Upper Bound' && item.text !== 'Fitted Regression'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: context => ` ${context.dataset.label}: ${currencyFormatter.format(context.raw)}`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: { color: 'rgba(255,255,255,0.03)' },
+                        ticks: {
+                            callback: val => val >= 100000 ? '₹' + (val / 100000).toFixed(1) + 'L' : '₹' + (val / 1000).toFixed(0) + 'K'
+                        }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    function renderPriceDistribution(data) {
+        const ctx = document.getElementById('distributionChart').getContext('2d');
+        const labels = data.bins.map(b => b.label);
+        const counts = data.bins.map(b => b.count);
+
+        // Compute normal curve values alignment at each bin center (Scaled to sample size)
+        const binCenters = data.bins.map(b => (b.bin_start + b.bin_end) / 2);
+        const normValues = binCenters.map(x => {
+            const m = data.stats.mean;
+            const s = data.stats.std;
+            const n = data.stats.n;
+            const w = data.bins[0].bin_end - data.bins[0].bin_start;
+            const exp = -0.5 * Math.pow((x - m) / s, 2);
+            const pdf = (1 / (s * Math.sqrt(2 * Math.PI))) * Math.exp(exp);
+            return pdf * n * w;
+        });
+
+        if (charts.distribution) charts.distribution.destroy();
+
+        charts.distribution = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [
+                    {
+                        type: 'line',
+                        label: 'Normal distribution overlay',
+                        data: normValues,
+                        borderColor: '#ec4899',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        tension: 0.45,
+                        fill: false
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Binned Count',
+                        data: counts,
+                        backgroundColor: 'rgba(139, 92, 246, 0.4)',
+                        borderColor: 'rgba(139, 92, 246, 0.8)',
+                        borderWidth: 1.5,
+                        borderRadius: 4,
+                        barPercentage: 0.95,
+                        categoryPercentage: 0.95
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.03)' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    function renderRFMBubbles(data) {
+        const ctx = document.getElementById('rfmChart').getContext('2d');
+
+        // Group bubble points by RFM Segments for discrete toggling legend
+        const groups = {};
+        data.forEach(item => {
+            const seg = item.segment;
+            if (!groups[seg]) groups[seg] = [];
+            groups[seg].push({
+                x: item.recency_days,
+                y: item.frequency,
+                r: Math.max(4, Math.min(22, item.monetary / 6000)), // Scale bubble size
+                customer: item.customer_name,
+                monetary: item.monetary,
+                rfm: item.rfm_score
             });
-            const data = await res.json();
-            currentData = data.data; // The list of shelves
-            renderShelves();
-        } catch (e) {
-            console.error("Error setting env:", e);
-        }
+        });
+
+        const segmentColors = {
+            'Champions': '#10b981',
+            'Loyal Customers': '#06b6d4',
+            'Potential Loyalists': '#3b82f6',
+            'New Customers': '#8b5cf6',
+            'At Risk': '#f59e0b',
+            'Cannot Lose': '#ec4899',
+            'Lost': '#ef4444'
+        };
+
+        const datasets = Object.keys(groups).map(segName => {
+            return {
+                label: segName,
+                data: groups[segName],
+                backgroundColor: segmentColors[segName] || 'rgba(255,255,255,0.25)',
+                borderColor: 'var(--bg-card)',
+                borderWidth: 1.5
+            };
+        });
+
+        if (charts.rfm) charts.rfm.destroy();
+
+        charts.rfm = new Chart(ctx, {
+            type: 'bubble',
+            data: { datasets },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            boxWidth: 10,
+                            usePointStyle: true,
+                            color: '#a3adc2'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: context => {
+                                const pt = context.raw;
+                                return ` ${pt.customer} (Score: ${pt.rfm}) | Spend: ${currencyFormatter.format(pt.monetary)} | Recency: ${pt.x}d, Freq: ${pt.y}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Frequency (No. of Orders)', color: 'var(--text-secondary)' },
+                        grid: { color: 'rgba(255,255,255,0.03)' }
+                    },
+                    x: {
+                        title: { display: true, text: 'Recency (Days since last purchase)', color: 'var(--text-secondary)' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
     }
 
-    async function fetchStatus() {
-        try {
-            const res = await fetch('/api/status');
-            currentData = await res.json();
-            renderShelves();
-        } catch (e) {
-            console.error("Error fetching status:", e);
-        }
-    }
-
-    async function triggerRobotScan() {
-        try {
-            const res = await fetch('/api/scan', {method: 'POST'});
-            currentData = await res.json();
-            renderShelves();
-        } catch (e) {
-            console.error("Error triggering scan:", e);
-        }
-    }
-
-    function calculateStatus(expected, detected) {
-        detected = parseInt(detected) || 0;
-        expected = parseInt(expected) || 0;
-
-        if (detected === 0) return 'MISSING';
-        if (detected < expected) return 'LOW STOCK';
-        if (detected === expected) return 'NORMAL';
-        if (detected > expected) return 'NORMAL'; // Or OVERSTOCK if needed, but user didn't specify
-        return 'UNKNOWN';
-    }
-
-    function updateLocalStatus(shelfId, inputEl) {
-        const detected = inputEl.value;
-        const shelfConfig = currentData.find(s => s.id === shelfId);
+    function renderMoMGrowthChart(monthlyData) {
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        // Filter out first month since growth is 0
+        const items = monthlyData.slice(1);
+        const labels = items.map(m => {
+            const [y, mm] = m.month.split('-');
+            return new Date(y, mm - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+        });
+        const rates = items.map(m => m.growth_rate);
         
-        if (!shelfConfig) return;
+        // Colors: green for positive, pink for negative MoM contraction
+        const colors = rates.map(r => r >= 0 ? 'rgba(16, 185, 129, 0.7)' : 'rgba(236, 72, 153, 0.7)');
 
-        // Update local data model
-        const expected = shelfConfig.item.expected_count;
-        const newStatus = calculateStatus(expected, detected);
-        
-        // Update UI
-        const card = document.getElementById(`card-${shelfId}`);
-        const badge = card.querySelector('.status-badge');
-        
-        badge.className = 'status-badge'; // reset
-        badge.classList.add(`status-${newStatus.toLowerCase().replace(' ', '-')}`);
-        badge.textContent = newStatus;
+        if (charts.growth) charts.growth.destroy();
+
+        charts.growth = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [{
+                    data: rates,
+                    backgroundColor: colors,
+                    borderRadius: 4,
+                    barPercentage: 0.5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: context => ` Growth rate: ${context.raw}%`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: { color: 'rgba(255,255,255,0.03)' },
+                        ticks: { callback: val => val + '%' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
     }
 
-    function renderShelves() {
-        const grid = document.getElementById('shelf-grid');
+    function renderCumulativeChart(monthlyData) {
+        const ctx = document.getElementById('cumulativeChart').getContext('2d');
+        const labels = monthlyData.map(m => {
+            const [y, mm] = m.month.split('-');
+            return new Date(y, mm - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+        });
+        const cumulativeSum = monthlyData.map(m => m.cumulative_revenue);
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, 260);
+        gradient.addColorStop(0, 'rgba(139, 92, 246, 0.3)');
+        gradient.addColorStop(1, 'rgba(139, 92, 246, 0.0)');
+
+        if (charts.cumulative) charts.cumulative.destroy();
+
+        charts.cumulative = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Cumulative Gross',
+                    data: cumulativeSum,
+                    borderColor: 'var(--accent-violet)',
+                    backgroundColor: gradient,
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: context => ` Cumulative: ${currencyFormatter.format(context.raw)}`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: { color: 'rgba(255,255,255,0.03)' },
+                        ticks: {
+                            callback: val => val >= 100000 ? '₹' + (val / 100000).toFixed(1) + 'L' : '₹' + (val / 1000).toFixed(0) + 'K'
+                        }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // VISUALS: DESCRIPTIVE STATISTICS GRID RENDER
+    // ═══════════════════════════════════════════════════════
+
+    function renderStatsGrid(stats) {
+        const grid = document.getElementById('stats-panel-grid');
         grid.innerHTML = '';
 
-        currentData.forEach(shelf => {
-            const item = shelf.item;
-            const status = calculateStatus(item.expected_count, item.detected_count);
-            
-            const card = document.createElement('div');
-            card.className = 'shelf-card';
-            card.id = `card-${shelf.id}`;
+        const statConfigs = [
+            { label: 'Sample Size (N)', val: stats.count, meta: 'Total sales generated' },
+            { label: 'Mean Revenue', val: currencyFormatter.format(stats.mean), meta: 'Standard arithmetic average' },
+            { label: 'Median Revenue', val: currencyFormatter.format(stats.median), meta: '50th percentile checkpoint' },
+            { label: 'Mode Class', val: `₹${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density price range' },
+            { label: 'Std. Deviation', val: currencyFormatter.format(stats.std_dev), meta: 'Data dispersion spread' },
+            { label: 'IQR Fences', val: currencyFormatter.format(stats.iqr), meta: `Q1-Q3 (${currencyFormatter.format(stats.q1)} - ${currencyFormatter.format(stats.q3)})` },
+            { label: 'Variance (S²)', val: stats.variance.toLocaleString('en-IN'), meta: 'Squared deviations sum' },
+            { label: 'Coeff. of Variation', val: `${stats.coefficient_of_variation.toFixed(1)}%`, meta: 'Relative dispersion ratio' },
+            { label: 'Range Min/Max', val: `₹${(stats.min / 1000).toFixed(0)}K - ₹${(stats.max / 1000).toFixed(0)}K`, meta: `Spread: ${currencyFormatter.format(stats.range)}` }
+        ];
 
-            card.innerHTML = `
-                <div class="shelf-header">
-                    <span>Shelf ${shelf.row}-${shelf.col}</span>
-                    <span>${shelf.id}</span>
+        statConfigs.forEach(conf => {
+            const item = document.createElement('div');
+            item.className = 'stats-item';
+            item.innerHTML = `
+                <div>
+                    <div class="stats-label">${conf.label}</div>
+                    <div class="stats-value">${conf.val}</div>
                 </div>
-                <div class="item-name">${item.name}</div>
-                
-                <div class="count-row">
-                    <div class="input-group">
-                        <label>Expected</label>
-                        <strong>${item.expected_count}</strong>
-                    </div>
-                    <div class="input-group">
-                        <label>Detected (Simulate)</label>
-                        <input type="number" 
-                               value="${item.detected_count}" 
-                               min="0"
-                               oninput="updateLocalStatus('${shelf.id}', this)"
-                        >
-                    </div>
-                </div>
-
-                <div class="status-badge status-${status.toLowerCase().replace(' ', '-')}">
-                    ${status}
-                </div>
+                <div class="stats-meta">${conf.meta}</div>
             `;
-            grid.appendChild(card);
+            grid.appendChild(item);
         });
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // VISUALS: CORRELATION MATRIX HEATMAP TABLE
+    // ═══════════════════════════════════════════════════════
+
+    function renderCorrelationHeatmap(data) {
+        const container = document.getElementById('correlation-heatmap-container');
+        container.innerHTML = '';
+
+        const table = document.createElement('table');
+        table.className = 'heatmap-table';
+
+        // Columns headers
+        const header = document.createElement('tr');
+        header.appendChild(document.createElement('th')); // corner
+        data.features.forEach(f => {
+            const th = document.createElement('th');
+            th.className = 'heatmap-label col-lbl';
+            th.textContent = f;
+            header.appendChild(th);
+        });
+        table.appendChild(header);
+
+        // Table Matrix cells
+        data.features.forEach((lblY, yIndex) => {
+            const row = document.createElement('tr');
+            
+            // row title header
+            const th = document.createElement('th');
+            th.className = 'heatmap-label row-lbl';
+            th.textContent = lblY;
+            row.appendChild(th);
+
+            data.features.forEach((lblX, xIndex) => {
+                const val = data.matrix[yIndex][xIndex];
+                const td = document.createElement('td');
+                td.className = 'heatmap-cell';
+                td.textContent = val >= 0 ? `+${val.toFixed(2)}` : val.toFixed(2);
+
+                // Alpha shading: Positive violet, negative pink
+                let bg;
+                if (val >= 0) {
+                    bg = `rgba(139, 92, 246, ${val * 0.8 + 0.08})`;
+                } else {
+                    bg = `rgba(236, 72, 153, ${Math.abs(val) * 0.8 + 0.08})`;
+                }
+                td.style.backgroundColor = bg;
+                td.style.color = Math.abs(val) > 0.4 ? '#ffffff' : 'var(--text-secondary)';
+                td.title = `Pearson Correlation (${lblY} ⇎ ${lblX}): ${val}`;
+                
+                row.appendChild(td);
+            });
+            table.appendChild(row);
+        });
+
+        container.appendChild(table);
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // VISUALS: DATA TABLES DRAW & FILTER
+    // ═══════════════════════════════════════════════════════
+
+    function renderTable(data) {
+        const tbody = document.querySelector('#salesTable tbody');
+        tbody.innerHTML = '';
+
+        if (data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><div class="icon">🔍</div>No matching transactions logged.</td></tr>';
+            return;
+        }
+
+        // Show top 60 rows for browser scroll efficiency
+        const visible = data.slice(0, 60);
+
+        visible.forEach(item => {
+            const tr = document.createElement('tr');
+            
+            const dateObj = new Date(item.sale_date + 'T00:00:00');
+            const formattedDate = dateObj.toLocaleDateString('en-IN', {
+                day: '2-digit', month: 'short', year: 'numeric'
+            });
+
+            // If transaction was flagged in anomalies, render outlier flag badge
+            const isAnomaly = anomalySet.has(item.id);
+            const badgeClass = isAnomaly ? 'badge badge-anomaly' : 'badge badge-mobile';
+            const badgeText = isAnomaly ? '⚠️ Outlier' : (item.mobile_no || 'N/A');
+
+            tr.innerHTML = `
+                <td>${formattedDate}</td>
+                <td class="product-cell">${item.product_name}</td>
+                <td><span class="badge badge-payment">${item.category}</span></td>
+                <td>${item.customer_name}</td>
+                <td><span class="${badgeClass}">${badgeText}</span></td>
+                <td><span class="badge badge-payment" style="border-radius:4px;">${item.mode_of_payment || 'UPI'}</span></td>
+                <td class="money-cell">${currencyFormatter.format(item.total_price)}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        if (data.length > 60) {
+            const extra = document.createElement('tr');
+            extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12px; padding: 12px;">Showing top 60 of ${data.length} records. Filter to refine query.</td>`;
+            tbody.appendChild(extra);
+        }
+    }
+
+    function renderAnomaliesTable(anomalies) {
+        const tbody = document.querySelector('#anomaliesTable tbody');
+        tbody.innerHTML = '';
+
+        if (anomalies.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">✅</div>No outliers currently flagged by model.</td></tr>';
+            return;
+        }
+
+        anomalies.forEach(a => {
+            const tr = document.createElement('tr');
+            const dObj = new Date(a.sale_date + 'T00:00:00');
+            const fDate = dObj.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
+
+            tr.innerHTML = `
+                <td>${fDate}</td>
+                <td>${a.customer_name}</td>
+                <td class="product-cell">${a.product_name}</td>
+                <td class="money-cell" style="color: var(--accent-pink);">${currencyFormatter.format(a.total_price)}</td>
+                <td class="zscore-cell high-z">+${a.z_score.toFixed(2)}σ</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Live search filters
+    const searchInput = document.getElementById('searchInput');
+    const dateFilter = document.getElementById('dateFilter');
+
+    function applyFilters() {
+        const q = searchInput.value.toLowerCase();
+        const d = dateFilter.value;
+
+        const filtered = allSalesData.filter(item => {
+            const matchesText = !q ||
+                item.product_name.toLowerCase().includes(q) ||
+                item.customer_name.toLowerCase().includes(q) ||
+                item.category.toLowerCase().includes(q) ||
+                (item.mobile_no && item.mobile_no.includes(q)) ||
+                (item.mode_of_payment && item.mode_of_payment.toLowerCase().includes(q));
+
+            const matchesDate = !d || item.sale_date === d;
+
+            return matchesText && matchesDate;
+        });
+
+        renderTable(filtered);
+    }
+
+    let searchDebouncer;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(searchDebouncer);
+        searchDebouncer = setTimeout(applyFilters, 200);
+    });
+    dateFilter.addEventListener('change', applyFilters);
+
+    // ═══════════════════════════════════════════════════════
+    // NEW SALE MODAL & FORM INGESTION
+    // ═══════════════════════════════════════════════════════
+
+    function openModal() {
+        document.getElementById('addModal').classList.add('active');
+        document.getElementById('sale_date').valueAsDate = new Date();
+    }
+
+    function closeModal() {
+        document.getElementById('addModal').classList.remove('active');
+    }
+
+    document.getElementById('addModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    document.getElementById('addDataForm').addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const payload = {
+            customer_name: document.getElementById('customer_name').value,
+            mobile_no: document.getElementById('mobile_no').value,
+            product_name: document.getElementById('product_name').value,
+            total_price: parseFloat(document.getElementById('total_price').value),
+            sale_date: document.getElementById('sale_date').value,
+            mode_of_payment: document.getElementById('mode_of_payment').value
+        };
+
+        try {
+            const res = await fetch(API_BASE + '/api/sales/new', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (res.ok) {
+                closeModal();
+                document.getElementById('addDataForm').reset();
+                showToast('✅ Sale added. Database rebuilt.');
+                
+                // Reload whatever tab is currently active
+                if (activeTab === 'dashboard') {
+                    loadDashboardData();
+                } else {
+                    loadAnalyticsData();
+                }
+            } else {
+                const err = await res.json();
+                showToast(`⚠️ Ingestion failed: ${err.error || 'Server rejected request'}`, true);
+            }
+        } catch (err) {
+            showToast('⚠️ Network failure. Verify backend flask server is running.', true);
+        }
+    });
+
+    // ═══════════════════════════════════════════════════════
+    // TOAST NOTIFICATIONS MANAGER
+    // ═══════════════════════════════════════════════════════
+
+    function showToast(message, isError = false) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.style.borderColor = isError ? '#ef4444' : 'var(--accent-emerald)';
+        toast.style.color = isError ? '#ef4444' : 'var(--accent-emerald)';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // POLYNOMIAL MODEL TUNING & DYNAMIC SWITCH
+    // ═══════════════════════════════════════════════════════
+    async function updateForecastModel(deg) {
+        forecastDegree = parseInt(deg);
+        showToast(`🔄 Re-fitting regression curve (Degree ${deg})...`);
+        
+        try {
+            const res = await fetch(API_BASE + `/api/analytics/forecast?degree=${forecastDegree}`);
+            const forecast = await res.json();
+            
+            // Re-render Forecast Chart
+            renderForecastChart(forecast);
+            
+            // Re-populate forecast R² metrics card
+            document.getElementById('kpi-r2').textContent = forecast.model.r_squared.toFixed(4);
+            document.getElementById('kpi-r2-sub').textContent = `Fit: ${forecast.model.equation}`;
+        } catch (e) {
+            console.error('Failed to update forecast regression degree:', e);
+            showToast('⚠️ Model fitting failed.', true);
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // GOAL SEEK PRESCRIPTIVE MODELING
+    // ═══════════════════════════════════════════════════════
+    async function calculateGoalSeek() {
+        const inputVal = parseFloat(document.getElementById('goalSeekTarget').value);
+        const resultPanel = document.getElementById('goalSeekResults');
+
+        if (isNaN(inputVal) || inputVal <= 0) {
+            showToast('⚠️ Please enter a valid positive revenue target.', true);
+            return;
+        }
+
+        resultPanel.innerHTML = '<div class="spinner" style="width:20px; height:20px; margin: 10px auto;"></div>';
+        
+        try {
+            const res = await fetch(API_BASE + `/api/analytics/goalseek?target=${inputVal}`);
+            const data = await res.json();
+
+            if (res.ok) {
+                const isGrowth = data.percent_change_needed >= 0;
+                const trendIcon = isGrowth ? '📈' : '📉';
+                const trendColor = isGrowth ? 'var(--accent-emerald)' : 'var(--accent-pink)';
+
+                resultPanel.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+                        <span>Current Mo. Average:</span>
+                        <span style="font-family:'JetBrains Mono';">${currencyFormatter.format(data.avg_monthly_revenue)}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+                        <span>Target Revenue Goal:</span>
+                        <span style="font-family:'JetBrains Mono'; color:var(--accent-violet);">${currencyFormatter.format(data.target_revenue)}</span>
+                    </div>
+                    <div style="border-top:1px dashed var(--border); margin:6px 0;"></div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-secondary);">
+                        <span>Monthly Sales Needed:</span>
+                        <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${data.orders_needed} orders</strong>
+                    </div>
+                    <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming current AOV of ${currencyFormatter.format(data.current_aov)})</span>
+                    
+                    <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-secondary);">
+                        <span>Target AOV Needed:</span>
+                        <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${currencyFormatter.format(data.aov_needed)}</strong>
+                    </div>
+                    <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming average volume of ${data.avg_monthly_orders} orders)</span>
+                    
+                    <div style="border-top:1px dashed var(--border); margin:6px 0;"></div>
+                    <div style="display:flex; justify-content:space-between; font-weight:700; color:${trendColor};">
+                        <span>Required Growth:</span>
+                        <span>${trendIcon} ${isGrowth ? '+' : ''}${data.percent_change_needed}%</span>
+                    </div>
+                `;
+            } else {
+                resultPanel.innerHTML = `<div style="color:var(--accent-pink); text-align:center;">${data.error}</div>`;
+            }
+        } catch (e) {
+            console.error('Goal seek computation error:', e);
+            resultPanel.innerHTML = '<div style="color:var(--accent-pink); text-align:center;">Network request failed.</div>';
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // EXPLORATORY DATA ANALYSIS (SQL CONSOLE SANDBOX)
+    // ═══════════════════════════════════════════════════════
+    function loadSQLConsoleData() {
+        // Load default template when opening the tab
+        loadQueryTemplate(1);
+    }
+
+    function loadQueryTemplate(id) {
+        const queryText = document.getElementById('sqlQueryText');
+        const templates = {
+            1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(AVG(total_price), 2) as average_ticket\nFROM sales\nGROUP BY category\nORDER BY category_revenue DESC;",
+            2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM sales\nGROUP BY mode_of_payment\nORDER BY txn_count DESC;",
+            3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >= 100000\nORDER BY total_price DESC;",
+            4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as total_lifetime_value\nFROM sales\nGROUP BY customer_name\nORDER BY total_lifetime_value DESC\nLIMIT 5;",
+            5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_price), 2) as monthly_revenue\nFROM sales\nGROUP BY sales_month\nORDER BY sales_month ASC;"
+        };
+        queryText.value = templates[id] || "";
+        document.getElementById('sqlErrorLog').style.display = 'none';
+    }
+
+    async function runConsoleQuery() {
+        const query = document.getElementById('sqlQueryText').value;
+        const errLog = document.getElementById('sqlErrorLog');
+        const rHeader = document.getElementById('sqlResultHeader');
+        const rBody = document.getElementById('sqlResultBody');
+
+        errLog.style.display = 'none';
+        rHeader.innerHTML = '<th>No query run</th>';
+        rBody.innerHTML = '<tr><td class="empty-state"><div class="spinner" style="width:20px; height:20px; margin:0 auto;"></div> Running query...</td></tr>';
+
+        try {
+            const res = await fetch(API_BASE + '/api/query', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                // Render table headers
+                rHeader.innerHTML = '';
+                data.columns.forEach(col => {
+                    const th = document.createElement('th');
+                    th.textContent = col;
+                    rHeader.appendChild(th);
+                });
+
+                // Render table rows
+                rBody.innerHTML = '';
+                if (data.rows.length === 0) {
+                    rBody.innerHTML = `<tr><td colspan="${data.columns.length}" class="empty-state">Query executed successfully. 0 records returned.</td></tr>`;
+                    return;
+                }
+
+                data.rows.forEach((row, rIdx) => {
+                    const tr = document.createElement('tr');
+                    data.columns.forEach(col => {
+                        const td = document.createElement('td');
+                        const val = row[col];
+                        
+                        // Format currency values dynamically if column looks like revenue/price
+                        if (typeof val === 'number' && (col.includes('price') || col.includes('revenue') || col.includes('value') || col.includes('ticket'))) {
+                            td.textContent = currencyFormatter.format(val);
+                            td.className = 'money-cell';
+                        } else {
+                            td.textContent = val !== null ? val : 'NULL';
+                        }
+                        tr.appendChild(td);
+                    });
+                    rBody.appendChild(tr);
+                });
+            } else {
+                rHeader.innerHTML = '<th>Query Error</th>';
+                rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation failed. Check diagnostic log above.</td></tr>';
+                errLog.style.display = 'block';
+                errLog.textContent = data.error || "Unknown server response.";
+            }
+        } catch (e) {
+            console.error('SQL Console execute error:', e);
+            rHeader.innerHTML = '<th>Network Error</th>';
+            rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Check backend Flask state.</td></tr>';
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // RFM COHORT MARKETING LOOKUP TABLES
+    // ═══════════════════════════════════════════════════════
+    function renderRFMLookupTable(data, segmentName = 'ALL') {
+        const tbody = document.querySelector('#rfmLookupTable tbody');
+        tbody.innerHTML = '';
+
+        // Calculate cohort profiling statistics
+        const size = data.length;
+        const totalVal = data.reduce((acc, curr) => acc + curr.monetary, 0);
+        const totalOrders = data.reduce((acc, curr) => acc + curr.frequency, 0);
+        const avgOrderVal = totalOrders > 0 ? (totalVal / totalOrders) : 0;
+
+        document.getElementById('cohort-size-txt').textContent = size.toLocaleString('en-IN') + ' accounts';
+        document.getElementById('cohort-value-txt').textContent = currencyFormatter.format(totalVal);
+        document.getElementById('cohort-aov-txt').textContent = currencyFormatter.format(avgOrderVal);
+
+        // Map cohorts to strategic prescriptions
+        const strategies = {
+            'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence profiling and data-driven marketing strategy prescriptions.",
+            'Champions': "💎 <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive early access to new MacBook/iPhone releases, and premium status benefits. Do not offer discount campaigns; focus on luxury service.",
+            'Loyal Customers': "⭐ <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (Keychron keyboards, Logitech gaming mice, high-res monitors) or offer bundle pricing to increase average transaction sizes.",
+            'Potential Loyalists': "📈 <strong>Prescription</strong>: Promising buyers. Push recommendations for their second/third product orders. Offer short-term vouchers (e.g. ₹2,000 off next monitor or accessory) to build retention.",
+            'New Customers': "🌱 <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email detailing setup guides, warranties, and basic accessories, keeping our brand top of mind.",
+            'At Risk': "⚠️ <strong>Prescription</strong>: High churn probability! Automatically trigger a reactivation discount code (e.g., 12% off any new mobile or tablet) to capture attention before competitor acquisition.",
+            'Cannot Lose': "🚨 <strong>Prescription</strong>: High-spending historic accounts about to churn. Proactively send a personalized outreach email from customer relations offering a complimentary VIP service package.",
+            'Lost': "💤 <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-engage only during seasonal clearance sales or deep-discount holiday catalogs."
+        };
+        document.getElementById('cohort-strategy-txt').innerHTML = strategies[segmentName] || strategies['ALL'];
+
+        if (size === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><div class="icon">🔍</div>No customers in this cohort matching query.</td></tr>';
+            return;
+        }
+
+        data.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="product-cell">${item.customer_name}</td>
+                <td><span class="badge badge-mobile">${item.mobile_no || 'N/A'}</span></td>
+                <td><span class="badge" style="background: rgba(245, 158, 11, 0.08); color: var(--accent-amber);">${item.segment}</span></td>
+                <td style="font-family: 'JetBrains Mono', monospace;">${item.recency_days.toFixed(0)}d ago</td>
+                <td style="font-family: 'JetBrains Mono', monospace;">${item.frequency} orders</td>
+                <td class="money-cell">${currencyFormatter.format(item.monetary)}</td>
+                <td class="money-cell">${currencyFormatter.format(item.avg_order)}</td>
+                <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-violet);">${item.rfm_score}/15</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function filterRFMTable(cohort) {
+        if (cohort === 'ALL') {
+            renderRFMLookupTable(rfmCustomerList, 'ALL');
+        } else {
+            const filtered = rfmCustomerList.filter(c => c.segment === cohort);
+            renderRFMLookupTable(filtered, cohort);
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // DATA SIMULATION SANDBOX CONTROLS
+    // ═══════════════════════════════════════════════════════
+    function openSimModal() {
+        document.getElementById('simModal').classList.add('active');
+    }
+
+    function closeSimModal() {
+        document.getElementById('simModal').classList.remove('active');
+    }
+
+    // Modal overlay click listener
+    document.getElementById('simModal').addEventListener('click', function(e) {
+        if (e.target === this) closeSimModal();
+    });
+
+    document.getElementById('simDataForm').addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const payload = {
+            n_records: parseInt(document.getElementById('sim_records').value),
+            trend: document.getElementById('sim_trend').value,
+            anomaly_rate: parseFloat(document.getElementById('sim_anomaly').value) / 100
+        };
+
+        showToast('⚡ Rebuilding SQLite database and simulating sales...', false);
+        closeSimModal();
+
+        try {
+            const res = await fetch(API_BASE + '/api/simulation/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (res.ok) {
+                const info = await res.json();
+                showToast(`✅ Database Rebuilt: simulated ${info.records_count} records!`);
+                
+                // Refresh active tab views
+                if (activeTab === 'dashboard') {
+                    loadDashboardData();
+                } else {
+                    loadAnalyticsData();
+                }
+            } else {
+                showToast('⚠️ Simulation generation failed on server.', true);
+            }
+        } catch (e) {
+            showToast('⚠️ Connection error during data generation sandbox.', true);
+        }
+    });
+
+    // ═══════════════════════════════════════════════════════
+    // APP TRIGGER (STARTUP)
+    // ═══════════════════════════════════════════════════════
+
+    // Load initial tab data
+    if (activeTab === 'dashboard') {
+        loadDashboardData();
+    } else {
+        loadAnalyticsData();
     }
 </script>
 
