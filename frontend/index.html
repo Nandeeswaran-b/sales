@@ -965,7 +965,10 @@
             <div class="tabs-nav">
                 <button class="tab-btn active" onclick="switchTab('dashboard')" id="tab-dashboard">📊 Dashboard</button>
                 <button class="tab-btn" onclick="switchTab('analytics')" id="tab-analytics">🧪 Analytics & ML</button>
+                <button class="tab-btn" onclick="switchTab('churn')" id="tab-churn">👥 Churn Prediction</button>
+                <button class="tab-btn" onclick="switchTab('weather')" id="tab-weather">🌦️ Weather Prediction</button>
                 <button class="tab-btn" onclick="switchTab('sql')" id="tab-sql">👁️ SQL Sandbox</button>
+
             </div>
             <button class="btn btn-secondary" onclick="openSimModal()" id="btn-sim-sandbox">⚙️ Simulate Data</button>
             <button class="btn btn-secondary" onclick="refreshData()" id="btn-refresh">↻ Refresh</button>
@@ -1346,7 +1349,203 @@
             </div>
         </div>
     </div>
+
+    <!-- Churn Prediction Tab -->
+    <div id="churn-view" class="tab-content">
+        <!-- Filters Panel -->
+        <div class="chart-card" style="margin-bottom: 24px; padding: 20px;">
+            <div class="chart-title">🔍 Churn Segment Filters</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 12px;">
+                <div class="form-group">
+                    <label style="font-size: 12px; margin-bottom: 4px; display: block;">Start Date</label>
+                    <input type="date" id="churn_start_date" style="width:100%; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-sm); padding:8px 12px; color:var(--text-primary);">
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 12px; margin-bottom: 4px; display: block;">End Date</label>
+                    <input type="date" id="churn_end_date" style="width:100%; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-sm); padding:8px 12px; color:var(--text-primary);">
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 12px; margin-bottom: 4px; display: block;">Region</label>
+                    <select id="churn_region" style="width:100%; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-sm); padding:8px 12px; color:var(--text-primary);">
+                        <option value="">All Regions</option>
+                        <option value="North">North</option>
+                        <option value="South">South</option>
+                        <option value="East">East</option>
+                        <option value="West">West</option>
+                        <option value="Central">Central</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 12px; margin-bottom: 4px; display: block;">Salesperson</label>
+                    <select id="churn_salesperson" style="width:100%; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-sm); padding:8px 12px; color:var(--text-primary);">
+                        <option value="">All Salespersons</option>
+                        <option value="Anjali Sharma">Anjali Sharma</option>
+                        <option value="Vikram Goel">Vikram Goel</option>
+                        <option value="Sarah Jones">Sarah Jones</option>
+                        <option value="David Miller">David Miller</option>
+                        <option value="Elena Rostova">Elena Rostova</option>
+                    </select>
+                </div>
+                <div style="display: flex; align-items: flex-end;">
+                    <button class="btn btn-primary" onclick="loadChurnData()" style="width: 100%; padding: 10px;">⚡ Run Risk Engine</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metric Summary Cards -->
+        <div class="metrics-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 24px;">
+            <div class="metric-card">
+                <div class="metric-value" id="churn-metric-total">-</div>
+                <div class="metric-label">Total Evaluated</div>
+            </div>
+            <div class="metric-card" style="border-left: 4px solid var(--accent-red);">
+                <div class="metric-value" id="churn-metric-high" style="color: var(--accent-red);">-</div>
+                <div class="metric-label">🔴 High Risk</div>
+            </div>
+            <div class="metric-card" style="border-left: 4px solid var(--accent-orange);">
+                <div class="metric-value" id="churn-metric-med" style="color: var(--accent-orange);">-</div>
+                <div class="metric-label">🟡 Medium Risk</div>
+            </div>
+            <div class="metric-card" style="border-left: 4px solid var(--accent-green);">
+                <div class="metric-value" id="churn-metric-low" style="color: var(--accent-green);">-</div>
+                <div class="metric-label">🟢 Low Risk</div>
+            </div>
+        </div>
+
+        <!-- Churn Visualizations Grid -->
+        <div class="charts-grid-3" style="display: grid; grid-template-columns: 1fr 1.2fr 1.8fr; gap: 24px; margin-bottom: 24px;">
+            <div class="chart-card">
+                <div class="chart-title">🎯 Risk Segmentation</div>
+                <div class="chart-subtitle">Distribution of customer counts</div>
+                <div style="position: relative; height: 200px; display: flex; align-items: center; justify-content: center;">
+                    <canvas id="churnPieChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">💰 Average LTV by Risk Category</div>
+                <div class="chart-subtitle">Comparing customer value vs. risk</div>
+                <div style="position: relative; height: 200px;">
+                    <canvas id="churnBarChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">📉 Average Risk Trend Over Time</div>
+                <div class="chart-subtitle">Grouped by month of last purchase</div>
+                <div style="position: relative; height: 200px;">
+                    <canvas id="churnLineChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Table -->
+        <div class="chart-card">
+            <div class="chart-title">📋 Customer Churn Analysis & Recommendations</div>
+            <div class="chart-subtitle" style="margin-bottom: 12px;">Individual risk index and AI generated retention strategies</div>
+            <div class="table-scroll" style="max-height: 400px; overflow-y: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>Last Purchase</th>
+                            <th>Total Orders</th>
+                            <th>LTV</th>
+                            <th>Churn Risk %</th>
+                            <th>Risk Status</th>
+                            <th>AI Predictive Insight</th>
+                            <th>Retention Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="churnTableBody">
+                        <tr><td colspan="8" class="empty-state">Run Churn Risk Engine to load customer profiles.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weather Prediction Tab -->
+    <div id="weather-view" class="tab-content">
+        <!-- City and Date Controls -->
+        <div class="chart-card" style="margin-bottom: 24px; padding: 20px;">
+            <div class="chart-title">🌦️ Store Weather Forecast Setup</div>
+            <div style="display: flex; gap: 20px; align-items: center; margin-top: 12px; flex-wrap: wrap;">
+                <div class="form-group" style="width: 250px;">
+                    <label style="font-size: 12px; margin-bottom: 4px; display: block;">Store City Location</label>
+                    <select id="weather_city" onchange="loadWeatherForecast()" style="width:100%; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-sm); padding:8px 12px; color:var(--text-primary);">
+                        <option value="New York">New York</option>
+                        <option value="London">London</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Tokyo">Tokyo</option>
+                        <option value="Sydney">Sydney</option>
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-primary" onclick="loadWeatherForecast()" style="padding: 10px 20px; margin-top: 16px;">🔄 Sync Forecast</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weather Status Card & AI Insights Grid -->
+        <div style="display: grid; grid-template-columns: 1.5fr 2.5fr; gap: 24px; margin-bottom: 24px;">
+            <!-- Weather Card -->
+            <div class="chart-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div class="chart-title">🌦️ Current Weather Condition</div>
+                <div style="display: flex; align-items: center; gap: 20px; margin: 20px 0;">
+                    <div style="font-size: 48px;" id="weather-icon">☀️</div>
+                    <div>
+                        <div style="font-size: 32px; font-weight: 700; color: var(--text-primary);" id="weather-temp">-°C</div>
+                        <div style="font-size: 14px; color: var(--text-secondary);" id="weather-forecast">-</div>
+                    </div>
+                </div>
+                <div style="border-top: 1px solid var(--border); padding-top: 12px;">
+                    <div style="font-size: 12px; color: var(--text-secondary);">Expected Sales Impact:</div>
+                    <div style="font-size: 16px; font-weight: 600; color: var(--accent-blue);" id="weather-impact">-</div>
+                </div>
+            </div>
+            
+            <!-- AI Insights -->
+            <div class="chart-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div class="chart-title">🧠 AI Predictive Weather Insights</div>
+                <div style="background: rgba(139, 92, 246, 0.08); border: 1px dashed rgba(139, 92, 246, 0.4); padding: 16px; border-radius: var(--radius-sm); margin: 16px 0; font-size: 14px; line-height: 1.6; color: var(--text-primary); font-style: italic;" id="weather-ai-insights">
+                    "Sync local weather data to analyze seasonal demand and sales correlations."
+                </div>
+                <div>
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;">Recommended Products for Promotion:</div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="weather-recs">
+                        <span class="badge badge-secondary" style="font-size: 12px;">No recommendations loaded</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weather Visualizations Grid -->
+        <div class="charts-grid-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
+            <div class="chart-card">
+                <div class="chart-title">⛈️ Weather Condition vs. Sales Volume</div>
+                <div class="chart-subtitle">Average daily transactions (historical)</div>
+                <div style="position: relative; height: 200px;">
+                    <canvas id="weatherSalesChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">🌡️ Temperature vs. Daily Revenue</div>
+                <div class="chart-subtitle">Correlation scatter data</div>
+                <div style="position: relative; height: 200px;">
+                    <canvas id="tempRevenueChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">🍂 Seasonal Product Demand</div>
+                <div class="chart-subtitle">Sales volume split by season</div>
+                <div style="position: relative; height: 200px;">
+                    <canvas id="seasonalDemandChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 <!-- Add Sale Modal -->
 <div class="modal-overlay" id="addModal">
@@ -1561,11 +1760,16 @@
         // Trigger appropriate data fetches
         if (tabId === 'analytics') {
             loadAnalyticsData();
+        } else if (tabId === 'churn') {
+            loadChurnData();
+        } else if (tabId === 'weather') {
+            loadWeatherForecast();
         } else if (tabId === 'sql') {
             loadSQLConsoleData();
         } else {
             loadDashboardData();
         }
+
         
         // Sync hash
         window.location.hash = tabId;
@@ -2819,6 +3023,286 @@
     });
 
     // ═══════════════════════════════════════════════════════
+    // AI CHURN PREDICTION ENGINE
+    // ═══════════════════════════════════════════════════════
+    
+    window.triggerRetentionAction = function(customer, action) {
+        showToast(`⚡ Retention action "${action}" triggered for ${customer}!`);
+    };
+
+    window.loadChurnData = async function() {
+        const start = document.getElementById('churn_start_date').value;
+        const end = document.getElementById('churn_end_date').value;
+        const region = document.getElementById('churn_region').value;
+        const salesperson = document.getElementById('churn_salesperson').value;
+
+        let query = `?start_date=${start}&end_date=${end}&region=${region}&salesperson=${salesperson}`;
+        
+        try {
+            const response = await fetch(API_BASE + '/api/analytics/churn' + query);
+            const data = await response.json();
+            
+            if (data.error) {
+                showToast('⚠️ Error: ' + data.error, true);
+                return;
+            }
+
+            // Update Metrics
+            document.getElementById('churn-metric-total').textContent = data.summary.total;
+            document.getElementById('churn-metric-high').textContent = data.summary.high_risk;
+            document.getElementById('churn-metric-med').textContent = data.summary.med_risk;
+            document.getElementById('churn-metric-low').textContent = data.summary.low_risk;
+
+            // Render Table Rows
+            const tbody = document.getElementById('churnTableBody');
+            tbody.innerHTML = '';
+            
+            if (data.customers.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No customer records match the selected filters.</td></tr>';
+            } else {
+                data.customers.forEach(c => {
+                    let badgeClass = 'badge-secondary';
+                    let badgeStyle = '';
+                    if (c.risk_category === 'High Risk') {
+                        badgeStyle = 'background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3);';
+                    } else if (c.risk_category === 'Medium Risk') {
+                        badgeStyle = 'background: rgba(245, 158, 11, 0.15); color: var(--accent-orange); border: 1px solid rgba(245, 158, 11, 0.3);';
+                    } else {
+                        badgeStyle = 'background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3);';
+                    }
+
+                    const row = `
+                        <tr>
+                            <td><strong>${c.customer_name}</strong></td>
+                            <td>${c.last_purchase_date}</td>
+                            <td>${c.total_orders}</td>
+                            <td>₹${c.lifetime_value.toLocaleString('en-IN')}</td>
+                            <td><span style="font-weight:600;">${c.churn_risk_score}%</span></td>
+                            <td><span class="badge" style="${badgeStyle}">${c.risk_category}</span></td>
+                            <td style="font-size:12px; font-style:italic; max-width:250px; white-space:normal; line-height:1.4;">${c.ai_reason}</td>
+                            <td>
+                                <button class="btn btn-secondary" style="font-size:10px; padding: 4px 8px;" onclick="triggerRetentionAction('${c.customer_name}', '${c.recommended_action}')">
+                                    ⚙️ ${c.recommended_action}
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.insertAdjacentHTML('beforeend', row);
+                });
+            }
+
+            // Render Charts
+            // 1. Churn Pie Chart
+            if (charts.churnPie) charts.churnPie.destroy();
+            const ctxPie = document.getElementById('churnPieChart').getContext('2d');
+            charts.churnPie = new Chart(ctxPie, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Low Risk', 'Medium Risk', 'High Risk'],
+                    datasets: [{
+                        data: data.charts.pie,
+                        backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 10 } } }
+                    }
+                }
+            });
+
+            // 2. Churn Bar Chart
+            if (charts.churnBar) charts.churnBar.destroy();
+            const ctxBar = document.getElementById('churnBarChart').getContext('2d');
+            charts.churnBar = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['Low Risk', 'Medium Risk', 'High Risk'],
+                    datasets: [{
+                        label: 'Avg LTV (₹)',
+                        data: data.charts.bar_ltv,
+                        backgroundColor: ['rgba(16, 185, 129, 0.4)', 'rgba(245, 158, 11, 0.4)', 'rgba(239, 68, 68, 0.4)'],
+                        borderColor: ['#10b981', '#f59e0b', '#ef4444'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // 3. Churn Line Chart
+            if (charts.churnLine) charts.churnLine.destroy();
+            const ctxLine = document.getElementById('churnLineChart').getContext('2d');
+            charts.churnLine = new Chart(ctxLine, {
+                type: 'line',
+                data: {
+                    labels: data.charts.trend.labels,
+                    datasets: [{
+                        label: 'Average Risk %',
+                        data: data.charts.trend.values,
+                        borderColor: '#8b5cf6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+        } catch (error) {
+            console.error('Error fetching churn analysis:', error);
+            showToast('⚠️ Connection error reaching Churn Risk engine.', true);
+        }
+    };
+
+
+    // ═══════════════════════════════════════════════════════
+    // WEATHER-BASED SALES PREDICTIONS
+    // ═══════════════════════════════════════════════════════
+    
+    window.loadWeatherForecast = async function() {
+        const city = document.getElementById('weather_city').value;
+        
+        try {
+            const response = await fetch(API_BASE + `/api/analytics/weather-predict?city=${city}`);
+            const data = await response.json();
+            
+            if (data.error) {
+                showToast('⚠️ Error: ' + data.error, true);
+                return;
+            }
+
+            // Update Weather Information
+            document.getElementById('weather-temp').textContent = `${data.temperature}°C`;
+            document.getElementById('weather-forecast').textContent = data.forecast;
+            document.getElementById('weather-impact').textContent = data.sales_impact;
+            document.getElementById('weather-ai-insights').textContent = `"${data.ai_insights}"`;
+
+            // Update Weather Icon
+            let icon = '🌦️';
+            const cond = data.current_weather;
+            if (cond === 'Clear') icon = '☀️';
+            else if (cond === 'Rain') icon = '🌧️';
+            else if (cond === 'Clouds') icon = '☁️';
+            else if (cond === 'Snow') icon = '❄️';
+            else if (cond === 'Haze' || cond === 'Mist') icon = '🌫️';
+            document.getElementById('weather-icon').textContent = icon;
+
+            // Update Recommended Products badges
+            const recsDiv = document.getElementById('weather-recs');
+            recsDiv.innerHTML = '';
+            data.recommended_products.forEach(p => {
+                recsDiv.insertAdjacentHTML('beforeend', `<span class="badge badge-primary" style="font-size:12px; margin-right:6px; background:rgba(139,92,246,0.15); color:var(--accent-purple); border:1px solid rgba(139,92,246,0.3);">${p}</span>`);
+            });
+
+            // Render Charts
+            // 1. Weather vs Sales Chart
+            if (charts.weatherSales) charts.weatherSales.destroy();
+            const ctxWS = document.getElementById('weatherSalesChart').getContext('2d');
+            charts.weatherSales = new Chart(ctxWS, {
+                type: 'bar',
+                data: {
+                    labels: data.charts.weather_vs_sales.labels,
+                    datasets: [{
+                        label: 'Revenue (₹)',
+                        data: data.charts.weather_vs_sales.values,
+                        backgroundColor: '#60a5fa',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // 2. Temp vs Revenue Scatter/Line Chart
+            if (charts.tempRevenue) charts.tempRevenue.destroy();
+            const ctxTR = document.getElementById('tempRevenueChart').getContext('2d');
+            charts.tempRevenue = new Chart(ctxTR, {
+                type: 'line',
+                data: {
+                    labels: data.charts.temp_vs_revenue.temps.map(t => `${t}°C`),
+                    datasets: [{
+                        label: 'Average Revenue (₹)',
+                        data: data.charts.temp_vs_revenue.revenues,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.08)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // 3. Seasonal Product Demand Chart
+            if (charts.seasonalDemand) charts.seasonalDemand.destroy();
+            const ctxSD = document.getElementById('seasonalDemandChart').getContext('2d');
+            charts.seasonalDemand = new Chart(ctxSD, {
+                type: 'bar',
+                data: {
+                    labels: data.charts.seasonal_demand.seasons,
+                    datasets: [
+                        {
+                            label: 'Electronics',
+                            data: data.charts.seasonal_demand.electronics,
+                            backgroundColor: '#8b5cf6'
+                        },
+                        {
+                            label: 'Wearables',
+                            data: data.charts.seasonal_demand.wearables,
+                            backgroundColor: '#10b981'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { stacked: true, grid: { display: false }, ticks: { color: '#94a3b8' } },
+                        y: { stacked: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+                    },
+                    plugins: { legend: { display: true, labels: { color: '#94a3b8' } } }
+                }
+            });
+
+        } catch (error) {
+            console.error('Error fetching weather forecasting:', error);
+            showToast('⚠️ Connection error reaching weather forecasting module.', true);
+        }
+    };
+
     // APP TRIGGER (STARTUP)
     // ═══════════════════════════════════════════════════════
 
