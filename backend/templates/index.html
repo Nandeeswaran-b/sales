@@ -1824,14 +1824,14 @@
     // Support back/forward browser navigation using hash
     window.addEventListener('hashchange', () => {
         const hash = window.location.hash.replace('#', '');
-        if (hash === 'analytics' || hash === 'dashboard' || hash === 'sql') {
+        if (hash === 'analytics' || hash === 'dashboard' || hash === 'sql' || hash === 'churn' || hash === 'weather') {
             switchTab(hash);
         }
     });
 
     // Initial routing setup
     const initialHash = window.location.hash.replace('#', '');
-    if (initialHash === 'analytics' || initialHash === 'sql') {
+    if (initialHash === 'analytics' || initialHash === 'sql' || initialHash === 'churn' || initialHash === 'weather') {
         switchTab(initialHash);
     }
 
