@@ -1,0 +1,7 @@
+STDOUT:
+
+
+STDERR:
+Error fetching dashboard datasets: ReferenceError: requestAnimationFrame is not defined
+    at animateValue (D:\projects\scratch\SALES DATA ANALYSIS\live_test.js:336:9)
+    at loadDashboardData (D:\projects\scratch\SALES DATA ANALYSIS\live_test.js:151:13)

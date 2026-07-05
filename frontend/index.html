@@ -1538,7 +1538,14 @@
 </div>
 
 <!-- Toast Notification -->
+<!-- Server Wake-Up Banner (shown during Render cold start) -->
+<div id="server-wake-banner" style="position:fixed; top:0; left:0; right:0; z-index:9999; background:rgba(139,92,246,0.12); border-bottom:1px solid rgba(139,92,246,0.35); padding:10px 24px; display:flex; align-items:center; gap:12px; backdrop-filter:blur(8px);">
+    <div style="width:16px;height:16px;border:2px solid rgba(139,92,246,0.8);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0;"></div>
+    <span style="color:#c4b5fd;font-size:13px;font-weight:500;">Connecting to server... (waking up from sleep)</span>
+    <span style="color:#7c6c9e;font-size:12px;margin-left:auto;">Free tier servers sleep after inactivity — this takes up to 30s</span>
+</div>
 <div class="toast" id="toast"></div>
+
 
 <script>
     // ═══════════════════════════════════════════════════════
@@ -1589,6 +1596,30 @@
         ? 'http://localhost:5000' 
         : 'https://sales-backend-k5rw.onrender.com';
 
+    // ═══════════════════════════════════════════════════════
+    // SERVER WAKE-UP PING (Render free tier cold start fix)
+    // ═══════════════════════════════════════════════════════
+    async function pingUntilAlive() {
+        const banner = document.getElementById('server-wake-banner');
+        const MAX_TRIES = 12; // 60 seconds max
+        for (let i = 0; i < MAX_TRIES; i++) {
+            try {
+                const res = await fetch(API_BASE + '/api/summary', { signal: AbortSignal.timeout(6000) });
+                if (res.ok) {
+                    if (banner) banner.style.display = 'none';
+                    return true;
+                }
+            } catch (e) { /* still sleeping */ }
+            if (banner) banner.querySelector('span').textContent = `Connecting to server... (${i+1}/12)`;
+            await new Promise(r => setTimeout(r, 5000));
+        }
+        if (banner) {
+            banner.style.background = 'rgba(239,68,68,0.15)';
+            banner.style.borderColor = 'rgba(239,68,68,0.4)';
+            banner.querySelector('span').textContent = 'Server unreachable. Please refresh the page.';
+        }
+        return false;
+    }
 
 
     // ═══════════════════════════════════════════════════════
@@ -2927,13 +2958,17 @@
     // APP TRIGGER (STARTUP)
     // ═══════════════════════════════════════════════════════
 
-    // Initial routing setup
-    const initialHash = window.location.hash.replace('#', '');
-    if (initialHash === 'analytics' || initialHash === 'sql') {
-        switchTab(initialHash);
-    } else {
-        loadDashboardData();
-    }
+    // Initial routing setup — wait for server to wake up first
+    (async () => {
+        const alive = await pingUntilAlive();
+        if (!alive) return;
+        const initialHash = window.location.hash.replace('#', '');
+        if (initialHash === 'analytics' || initialHash === 'sql') {
+            switchTab(initialHash);
+        } else {
+            loadDashboardData();
+        }
+    })();
 </script>
 
 </body>
