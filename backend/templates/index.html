@@ -1156,7 +1156,7 @@
                 </div>
                 <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:12px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label style="font-size:11px; font-weight:700;">Target Monthly Revenue (₹)</label>
+                        <label style="font-size:11px; font-weight:700;">Target Monthly Revenue (Rs. )</label>
                         <div style="display:flex; gap:8px;">
                             <input type="number" id="goalSeekTarget" class="search-input" style="width:100%; height:36px; padding:6px 12px;" value="5000000" placeholder="e.g. 5000000">
                             <button class="btn btn-primary" onclick="calculateGoalSeek()" style="padding: 0 14px; height:36px; border-radius:var(--radius-sm);">Plan</button>
@@ -1246,8 +1246,8 @@
                 <div style="display:flex; flex-direction:column; gap:6px; border-right: 1px solid var(--border); padding-right:16px;">
                     <div class="stats-label" style="font-size:10px; letter-spacing:1.2px; margin-bottom:4px;">Cohort Profile</div>
                     <div style="font-size:12.5px; color:var(--text-secondary);">Cohort Size: <strong id="cohort-size-txt" style="color:var(--text-primary);">0</strong></div>
-                    <div style="font-size:12.5px; color:var(--text-secondary);">Total Value: <strong id="cohort-value-txt" style="color:var(--accent-emerald);">₹0</strong></div>
-                    <div style="font-size:12.5px; color:var(--text-secondary);">Avg Ticket: <strong id="cohort-aov-txt" style="color:var(--accent-cyan);">₹0</strong></div>
+                    <div style="font-size:12.5px; color:var(--text-secondary);">Total Value: <strong id="cohort-value-txt" style="color:var(--accent-emerald);">Rs. 0</strong></div>
+                    <div style="font-size:12.5px; color:var(--text-secondary);">Avg Ticket: <strong id="cohort-aov-txt" style="color:var(--accent-cyan);">Rs. 0</strong></div>
                 </div>
                 <!-- Prescriptive strategy -->
                 <div style="display:flex; flex-direction:column; gap:6px; justify-content:center;">
@@ -1361,7 +1361,7 @@
                 
                 <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(1)">1. Category Contribution</button>
                 <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(2)">2. Payment Split</button>
-                <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(3)">3. Outliers &gt; ₹1 Lakh</button>
+                <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(3)">3. Outliers &gt; Rs. 1 Lakh</button>
                 <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(4)">4. Top 5 Spenders</button>
                 <button class="btn btn-secondary" style="font-size:12px; font-family:'JetBrains Mono', monospace; text-align:left; justify-content:flex-start; padding:8px 12px; width:100%; border-radius:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" onclick="loadQueryTemplate(5)">5. Revenue by Month</button>
             </div>
@@ -1681,7 +1681,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Price (₹)</label>
+                    <label>Price (Rs. )</label>
                     <input type="number" id="total_price" step="0.01" min="1" placeholder="0.00" required>
                 </div>
                 <div class="form-group">
@@ -2100,7 +2100,7 @@
                         beginAtZero: true,
                         grid: { color: 'rgba(255,255,255,0.03)' },
                         ticks: {
-                            callback: val => val >= 100000 ? '₹' + (val / 100000).toFixed(1) + 'L' : '₹' + (val / 1000).toFixed(0) + 'K'
+                            callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).toFixed(0) + 'K'
                         }
                     },
                     x: { grid: { display: false } }
@@ -2195,7 +2195,7 @@
                         beginAtZero: true,
                         grid: { color: 'rgba(255,255,255,0.03)' },
                         ticks: {
-                            callback: val => val >= 100000 ? '₹' + (val / 100000).toFixed(1) + 'L' : '₹' + (val / 1000).toFixed(0) + 'K'
+                            callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).toFixed(0) + 'K'
                         }
                     },
                     y: { grid: { display: false } }
@@ -2310,7 +2310,7 @@
                     y: {
                         grid: { color: 'rgba(255,255,255,0.03)' },
                         ticks: {
-                            callback: val => val >= 100000 ? '₹' + (val / 100000).toFixed(1) + 'L' : '₹' + (val / 1000).toFixed(0) + 'K'
+                            callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).toFixed(0) + 'K'
                         }
                     },
                     x: { grid: { display: false } }
@@ -2554,7 +2554,7 @@
                     y: {
                         grid: { color: 'rgba(255,255,255,0.03)' },
                         ticks: {
-                            callback: val => val >= 100000 ? '₹' + (val / 100000).toFixed(1) + 'L' : '₹' + (val / 1000).toFixed(0) + 'K'
+                            callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).toFixed(0) + 'K'
                         }
                     },
                     x: { grid: { display: false } }
@@ -2575,12 +2575,12 @@
             { label: 'Sample Size (N)', val: stats.count, meta: 'Total sales generated' },
             { label: 'Mean Revenue', val: currencyFormatter.format(stats.mean), meta: 'Standard arithmetic average' },
             { label: 'Median Revenue', val: currencyFormatter.format(stats.median), meta: '50th percentile checkpoint' },
-            { label: 'Mode Class', val: `₹${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density price range' },
+            { label: 'Mode Class', val: `Rs. ${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density price range' },
             { label: 'Std. Deviation', val: currencyFormatter.format(stats.std_dev), meta: 'Data dispersion spread' },
             { label: 'IQR Fences', val: currencyFormatter.format(stats.iqr), meta: `Q1-Q3 (${currencyFormatter.format(stats.q1)} - ${currencyFormatter.format(stats.q3)})` },
             { label: 'Variance (S²)', val: stats.variance.toLocaleString('en-IN'), meta: 'Squared deviations sum' },
             { label: 'Coeff. of Variation', val: `${stats.coefficient_of_variation.toFixed(1)}%`, meta: 'Relative dispersion ratio' },
-            { label: 'Range Min/Max', val: `₹${(stats.min / 1000).toFixed(0)}K - ₹${(stats.max / 1000).toFixed(0)}K`, meta: `Spread: ${currencyFormatter.format(stats.range)}` }
+            { label: 'Range Min/Max', val: `Rs. ${(stats.min / 1000).toFixed(0)}K - Rs. ${(stats.max / 1000).toFixed(0)}K`, meta: `Spread: ${currencyFormatter.format(stats.range)}` }
         ];
 
         statConfigs.forEach(conf => {
@@ -3022,7 +3022,7 @@
             'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence profiling and data-driven marketing strategy prescriptions.",
             'Champions': "💎 <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive early access to new MacBook/iPhone releases, and premium status benefits. Do not offer discount campaigns; focus on luxury service.",
             'Loyal Customers': "⭐ <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (Keychron keyboards, Logitech gaming mice, high-res monitors) or offer bundle pricing to increase average transaction sizes.",
-            'Potential Loyalists': "📈 <strong>Prescription</strong>: Promising buyers. Push recommendations for their second/third product orders. Offer short-term vouchers (e.g. ₹2,000 off next monitor or accessory) to build retention.",
+            'Potential Loyalists': "📈 <strong>Prescription</strong>: Promising buyers. Push recommendations for their second/third product orders. Offer short-term vouchers (e.g. Rs. 2,000 off next monitor or accessory) to build retention.",
             'New Customers': "🌱 <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email detailing setup guides, warranties, and basic accessories, keeping our brand top of mind.",
             'At Risk': "⚠️ <strong>Prescription</strong>: High churn probability! Automatically trigger a reactivation discount code (e.g., 12% off any new mobile or tablet) to capture attention before competitor acquisition.",
             'Cannot Lose': "🚨 <strong>Prescription</strong>: High-spending historic accounts about to churn. Proactively send a personalized outreach email from customer relations offering a complimentary VIP service package.",
@@ -3167,7 +3167,7 @@
                             <td><strong>${c.customer_name}</strong></td>
                             <td>${c.last_purchase_date}</td>
                             <td>${c.total_orders}</td>
-                            <td>₹${c.lifetime_value.toLocaleString('en-IN')}</td>
+                            <td>Rs. ${c.lifetime_value.toLocaleString('en-IN')}</td>
                             <td><span style="font-weight:600;">${c.churn_risk_score}%</span></td>
                             <td><span class="badge" style="${badgeStyle}">${c.risk_category}</span></td>
                             <td style="font-size:12px; font-style:italic; max-width:250px; white-space:normal; line-height:1.4;">${c.ai_reason}</td>
@@ -3213,7 +3213,7 @@
                 data: {
                     labels: ['Low Risk', 'Medium Risk', 'High Risk'],
                     datasets: [{
-                        label: 'Avg LTV (₹)',
+                        label: 'Avg LTV (Rs. )',
                         data: data.charts.bar_ltv,
                         backgroundColor: ['rgba(16, 185, 129, 0.4)', 'rgba(245, 158, 11, 0.4)', 'rgba(239, 68, 68, 0.4)'],
                         borderColor: ['#10b981', '#f59e0b', '#ef4444'],
@@ -3313,7 +3313,7 @@
                 data: {
                     labels: data.charts.weather_vs_sales.labels,
                     datasets: [{
-                        label: 'Revenue (₹)',
+                        label: 'Revenue (Rs. )',
                         data: data.charts.weather_vs_sales.values,
                         backgroundColor: '#60a5fa',
                         borderRadius: 4
@@ -3338,7 +3338,7 @@
                 data: {
                     labels: data.charts.temp_vs_revenue.temps.map(t => `${t}°C`),
                     datasets: [{
-                        label: 'Average Revenue (₹)',
+                        label: 'Average Revenue (Rs. )',
                         data: data.charts.temp_vs_revenue.revenues,
                         borderColor: '#f59e0b',
                         backgroundColor: 'rgba(245, 158, 11, 0.08)',
