@@ -1829,11 +1829,7 @@
         }
     });
 
-    // Initial routing setup
-    const initialHash = window.location.hash.replace('#', '');
-    if (initialHash === 'analytics' || initialHash === 'sql' || initialHash === 'churn' || initialHash === 'weather') {
-        switchTab(initialHash);
-    }
+
 
     // ═══════════════════════════════════════════════════════
     // CORE SERVICES: FETCH DASHBOARD DATA
@@ -3397,11 +3393,12 @@
     // APP TRIGGER (STARTUP)
     // ═══════════════════════════════════════════════════════
 
-    // Load initial tab data
-    if (activeTab === 'dashboard') {
-        loadDashboardData();
+    // Initial routing setup
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash === 'analytics' || initialHash === 'sql' || initialHash === 'churn' || initialHash === 'weather') {
+        switchTab(initialHash);
     } else {
-        loadAnalyticsData();
+        loadDashboardData();
     }
 </script>
 
