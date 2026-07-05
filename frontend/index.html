@@ -3117,7 +3117,7 @@
         showToast(`⚡ Retention action "${action}" triggered for ${customer}!`);
     };
 
-    window.loadChurnData = async function() {
+    async function loadChurnData() {
         const start = document.getElementById('churn_start_date').value;
         const end = document.getElementById('churn_end_date').value;
         const region = document.getElementById('churn_region').value;
@@ -3265,7 +3265,7 @@
     // WEATHER-BASED SALES PREDICTIONS
     // ═══════════════════════════════════════════════════════
     
-    window.loadWeatherForecast = async function() {
+    async function loadWeatherForecast() {
         const city = document.getElementById('weather_city').value;
         
         try {
