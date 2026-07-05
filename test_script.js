@@ -1,5 +1,5 @@
 
-const globalWindow = { location: { hash: '#churn', hostname: 'localhost' }, addEventListener: () => {} };
+const globalWindow = { location: { hash: '#sql', hostname: 'localhost' }, addEventListener: () => {} };
 global.window = globalWindow;
 const globalDocument = {
     addEventListener: () => {},
@@ -21,14 +21,8 @@ global.Chart = class {
         plugins: { tooltip: {} }
     }; 
 };
-
-// Make window assignments global
 const proxyHandler = {
-    set: function(obj, prop, value) {
-        global[prop] = value;
-        obj[prop] = value;
-        return true;
-    }
+    set: function(obj, prop, value) { global[prop] = value; obj[prop] = value; return true; }
 };
 global.window = new Proxy(globalWindow, proxyHandler);
 
@@ -101,10 +95,6 @@ global.window = new Proxy(globalWindow, proxyHandler);
         // Trigger appropriate data fetches
         if (tabId === 'analytics') {
             loadAnalyticsData();
-        } else if (tabId === 'churn') {
-            loadChurnData();
-        } else if (tabId === 'weather') {
-            loadWeatherForecast();
         } else if (tabId === 'sql') {
             loadSQLConsoleData();
         } else {
@@ -119,7 +109,7 @@ global.window = new Proxy(globalWindow, proxyHandler);
     // Support back/forward browser navigation using hash
     window.addEventListener('hashchange', () => {
         const hash = window.location.hash.replace('#', '');
-        if (hash === 'analytics' || hash === 'dashboard' || hash === 'sql' || hash === 'churn' || hash === 'weather') {
+        if (hash === 'analytics' || hash === 'dashboard' || hash === 'sql') {
             switchTab(hash);
         }
     });
@@ -1412,7 +1402,7 @@ global.window = new Proxy(globalWindow, proxyHandler);
         showToast(`⚡ Retention action "${action}" triggered for ${customer}!`);
     };
 
-    window.loadChurnData = async function() {
+    async function loadChurnData() {
         const start = document.getElementById('churn_start_date').value;
         const end = document.getElementById('churn_end_date').value;
         const region = document.getElementById('churn_region').value;
@@ -1557,140 +1547,15 @@ global.window = new Proxy(globalWindow, proxyHandler);
 
 
     // ═══════════════════════════════════════════════════════
-    // WEATHER-BASED SALES PREDICTIONS
-    // ═══════════════════════════════════════════════════════
+
     
-    window.loadWeatherForecast = async function() {
-        const city = document.getElementById('weather_city').value;
-        
-        try {
-            const response = await fetch(API_BASE + `/api/analytics/weather-predict?city=${city}`);
-            const data = await response.json();
-            
-            if (data.error) {
-                showToast('⚠️ Error: ' + data.error, true);
-                return;
-            }
-
-            // Update Weather Information
-            document.getElementById('weather-temp').textContent = `${data.temperature}°C`;
-            document.getElementById('weather-forecast').textContent = data.forecast;
-            document.getElementById('weather-impact').textContent = data.sales_impact;
-            document.getElementById('weather-ai-insights').textContent = `"${data.ai_insights}"`;
-
-            // Update Weather Icon
-            let icon = '🌦️';
-            const cond = data.current_weather;
-            if (cond === 'Clear') icon = '☀️';
-            else if (cond === 'Rain') icon = '🌧️';
-            else if (cond === 'Clouds') icon = '☁️';
-            else if (cond === 'Snow') icon = '❄️';
-            else if (cond === 'Haze' || cond === 'Mist') icon = '🌫️';
-            document.getElementById('weather-icon').textContent = icon;
-
-            // Update Recommended Products badges
-            const recsDiv = document.getElementById('weather-recs');
-            recsDiv.innerHTML = '';
-            data.recommended_products.forEach(p => {
-                recsDiv.insertAdjacentHTML('beforeend', `<span class="badge badge-primary" style="font-size:12px; margin-right:6px; background:rgba(139,92,246,0.15); color:var(--accent-purple); border:1px solid rgba(139,92,246,0.3);">${p}</span>`);
-            });
-
-            // Render Charts
-            // 1. Weather vs Sales Chart
-            if (charts.weatherSales) charts.weatherSales.destroy();
-            const ctxWS = document.getElementById('weatherSalesChart').getContext('2d');
-            charts.weatherSales = new Chart(ctxWS, {
-                type: 'bar',
-                data: {
-                    labels: data.charts.weather_vs_sales.labels,
-                    datasets: [{
-                        label: 'Revenue (Rs. )',
-                        data: data.charts.weather_vs_sales.values,
-                        backgroundColor: '#60a5fa',
-                        borderRadius: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
-                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
-                    },
-                    plugins: { legend: { display: false } }
-                }
-            });
-
-            // 2. Temp vs Revenue Scatter/Line Chart
-            if (charts.tempRevenue) charts.tempRevenue.destroy();
-            const ctxTR = document.getElementById('tempRevenueChart').getContext('2d');
-            charts.tempRevenue = new Chart(ctxTR, {
-                type: 'line',
-                data: {
-                    labels: data.charts.temp_vs_revenue.temps.map(t => `${t}°C`),
-                    datasets: [{
-                        label: 'Average Revenue (Rs. )',
-                        data: data.charts.temp_vs_revenue.revenues,
-                        borderColor: '#f59e0b',
-                        backgroundColor: 'rgba(245, 158, 11, 0.08)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
-                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
-                    },
-                    plugins: { legend: { display: false } }
-                }
-            });
-
-            // 3. Seasonal Product Demand Chart
-            if (charts.seasonalDemand) charts.seasonalDemand.destroy();
-            const ctxSD = document.getElementById('seasonalDemandChart').getContext('2d');
-            charts.seasonalDemand = new Chart(ctxSD, {
-                type: 'bar',
-                data: {
-                    labels: data.charts.seasonal_demand.seasons,
-                    datasets: [
-                        {
-                            label: 'Electronics',
-                            data: data.charts.seasonal_demand.electronics,
-                            backgroundColor: '#8b5cf6'
-                        },
-                        {
-                            label: 'Wearables',
-                            data: data.charts.seasonal_demand.wearables,
-                            backgroundColor: '#10b981'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { stacked: true, grid: { display: false }, ticks: { color: '#94a3b8' } },
-                        y: { stacked: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
-                    },
-                    plugins: { legend: { display: true, labels: { color: '#94a3b8' } } }
-                }
-            });
-
-        } catch (error) {
-            console.error('Error fetching weather forecasting:', error);
-            showToast('⚠️ Connection error reaching weather forecasting module.', true);
-        }
-    };
 
     // APP TRIGGER (STARTUP)
     // ═══════════════════════════════════════════════════════
 
     // Initial routing setup
     const initialHash = window.location.hash.replace('#', '');
-    if (initialHash === 'analytics' || initialHash === 'sql' || initialHash === 'churn' || initialHash === 'weather') {
+    if (initialHash === 'analytics' || initialHash === 'sql') {
         switchTab(initialHash);
     } else {
         loadDashboardData();

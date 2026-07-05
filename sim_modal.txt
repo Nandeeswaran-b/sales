@@ -1,0 +1,27 @@
+<div class="modal-overlay" id="simModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span>⚙️ Data Simulation Sandbox</span>
+            <button class="close-btn" onclick="closeSimModal()">&times;</button>
+        </div>
+        <form id="simDataForm">
+            <div class="form-group">
+                <label>Sample Size (Records: <span id="sim-records-val">200</span>)</label>
+                <input type="range" id="sim_records" min="50" max="1000" step="50" value="200" oninput="document.getElementById('sim-records-val').textContent = this.value">
+            </div>
+            <div class="form-group">
+                <label>Business Growth Trend Bias</label>
+                <select id="sim_trend">
+                    <option value="positive">📈 Positive Growth (Triangular Bias)</option>
+                    <option value="neutral">➡️ Flat / Neutral Trend (Uniform Distribution)</option>
+                    <option value="negative">📉 Negative Contraction (Reverse Triangular Bias)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Outlier/Anomaly Rate (Percentage: <span id="sim-anomaly-val">3%</span>)</label>
+                <input type="range" id="sim_anomaly" min="0" max="20" step="1" value="3" oninput="document.getElementById('sim-anomaly-val').textContent = this.value + '%'">
+            </div>
+            <button type="submit" class="btn-submit">⚡ Generate Simulated Dataset</button>
+        </form>
+    </div>
+</div>

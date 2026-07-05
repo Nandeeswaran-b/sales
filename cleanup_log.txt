@@ -1,0 +1,20 @@
+frontend/index.html: removed 0 chars
+  churnPieChart: removed
+  loadChurnData: removed
+  Churn Segment Filters: removed
+  takeRetentionAction: removed
+  dashboard-view: present
+  sql-view: present
+  simModal: present
+  loadSQLConsoleData: present
+
+backend/templates/index.html: removed 7166 chars
+  churnPieChart: removed
+  loadChurnData: removed
+  Churn Segment Filters: removed
+  takeRetentionAction: removed
+  dashboard-view: present
+  sql-view: present
+  simModal: present
+  loadSQLConsoleData: present
+
