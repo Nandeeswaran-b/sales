@@ -1549,8 +1549,33 @@
 
 <script>
     // ═══════════════════════════════════════════════════════
+    // GLOBAL ERROR HANDLING & DIAGNOSTICS
+    // ═══════════════════════════════════════════════════════
+    window.onerror = function(message, source, lineno, colno, error) {
+        console.error("Global JS Error Captured: ", message, " at ", source, ":", lineno);
+        const errorDiv = document.createElement('div');
+        errorDiv.style.position = 'fixed';
+        errorDiv.style.bottom = '20px';
+        errorDiv.style.right = '20px';
+        errorDiv.style.background = 'rgba(239, 68, 68, 0.95)';
+        errorDiv.style.color = '#fff';
+        errorDiv.style.padding = '14px 20px';
+        errorDiv.style.borderRadius = '8px';
+        errorDiv.style.zIndex = '999999';
+        errorDiv.style.fontFamily = 'monospace';
+        errorDiv.style.fontSize = '12px';
+        errorDiv.style.maxWidth = '450px';
+        errorDiv.style.boxShadow = '0 4px 16px rgba(0,0,0,0.3)';
+        errorDiv.style.borderLeft = '5px solid #7f1d1d';
+        errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${lineno}:${colno} in ${source.split('/').pop()}</small>`;
+        document.body.appendChild(errorDiv);
+        return false;
+    };
+
+    // ═══════════════════════════════════════════════════════
     // INITIALIZATION & GLOBAL UTILITIES
     // ═══════════════════════════════════════════════════════
+
 
     // Set Date in header
     document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', {
@@ -1604,7 +1629,10 @@
         const MAX_TRIES = 12; // 60 seconds max
         for (let i = 0; i < MAX_TRIES; i++) {
             try {
-                const res = await fetch(API_BASE + '/api/summary', { signal: AbortSignal.timeout(6000) });
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 6000);
+                const res = await fetch(API_BASE + '/api/summary', { signal: controller.signal });
+                clearTimeout(timeoutId);
                 if (res.ok) {
                     if (banner) banner.style.display = 'none';
                     return true;
@@ -2958,10 +2986,9 @@
     // APP TRIGGER (STARTUP)
     // ═══════════════════════════════════════════════════════
 
-    // Initial routing setup — wait for server to wake up first
+    // Initial routing setup — wait for server to wake up first, but proceed anyway if offline
     (async () => {
-        const alive = await pingUntilAlive();
-        if (!alive) return;
+        await pingUntilAlive();
         const initialHash = window.location.hash.replace('#', '');
         if (initialHash === 'analytics' || initialHash === 'sql') {
             switchTab(initialHash);
