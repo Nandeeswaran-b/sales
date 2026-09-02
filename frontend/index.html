@@ -16,35 +16,35 @@
            DESIGN SYSTEM — Modern Dark Theme
            ═══════════════════════════════════════════════════════ */
         :root {
-            --bg-primary: #171a18;
-            --bg-secondary: #202420;
-            --bg-card: #292e2a;
-            --bg-card-hover: #333a34;
-            --bg-input: #1d211e;
+            --bg-primary: #0b0b0c;
+            --bg-secondary: #141416;
+            --bg-card: #1d1d20;
+            --bg-card-hover: #29292d;
+            --bg-input: #111113;
 
-            --text-primary: #eee8dc;
-            --text-secondary: #b7b2a7;
-            --text-muted: #7e857b;
+            --text-primary: #f2f0ed;
+            --text-secondary: #b7b3af;
+            --text-muted: #777579;
 
-            --accent-violet: #bf7652;
-            --accent-cyan: #8fa69a;
-            --accent-pink: #c87968;
-            --accent-amber: #c49a5a;
-            --accent-emerald: #789778;
-            --accent-blue: #8ca5ad;
+            --accent-violet: #d44747;
+            --accent-cyan: #d17b72;
+            --accent-pink: #ef6262;
+            --accent-amber: #d29a55;
+            --accent-emerald: #7f9b83;
+            --accent-blue: #8ca9c4;
 
-            --border: rgba(238, 232, 220, 0.11);
-            --border-hover: rgba(191, 118, 82, 0.45);
+            --border: rgba(242, 240, 237, 0.11);
+            --border-hover: rgba(212, 71, 71, 0.5);
 
-            --gradient-primary: linear-gradient(135deg, #bf7652, #8f5742);
-            --gradient-warm: linear-gradient(135deg, #c87968, #9b5f54);
-            --gradient-cool: linear-gradient(135deg, #8fa69a, #657d73);
-            --gradient-emerald: linear-gradient(135deg, #789778, #58745e);
+            --gradient-primary: linear-gradient(135deg, #d44747, #8f252b);
+            --gradient-warm: linear-gradient(135deg, #ef6262, #a83238);
+            --gradient-cool: linear-gradient(135deg, #b34c4c, #672c32);
+            --gradient-emerald: linear-gradient(135deg, #7f9b83, #496550);
 
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
             --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.35);
             --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
-            --shadow-glow: 0 0 20px rgba(191, 118, 82, 0.08);
+            --shadow-glow: 0 0 20px rgba(212, 71, 71, 0.1);
 
             --radius-sm: 8px;
             --radius-md: 14px;
@@ -74,7 +74,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background-image: radial-gradient(rgba(238, 232, 220, 0.045) 0.7px, transparent 0.7px);
+            background-image: radial-gradient(rgba(242, 240, 237, 0.04) 0.7px, transparent 0.7px);
             background-size: 14px 14px;
             pointer-events: none;
             z-index: 0;
@@ -112,7 +112,7 @@
             font-size: 26px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            color: var(--accent-violet);
+            color: var(--accent-pink);
             font-family: 'Fraunces', Georgia, serif;
         }
 
@@ -1967,7 +1967,7 @@
         const ctx = document.getElementById('categoryChart').getContext('2d');
         const labels = data.map(d => d.category);
         const revenues = data.map(d => d.revenue);
-        const colors = ['#bf7652', '#8fa69a', '#c87968', '#c49a5a', '#789778', '#8ca5ad', '#bd675d', '#9b8069'];
+        const colors = ['#d44747', '#ef6262', '#b83b43', '#d29a55', '#7f9b83', '#8ca9c4', '#8f252b', '#c24f4f'];
 
         if (charts.category) charts.category.destroy();
 
@@ -2099,8 +2099,8 @@
                     {
                         label: 'Actual Revenue',
                         data: actualData,
-                        borderColor: '#bf7652',
-                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        borderColor: '#d44747',
+                        backgroundColor: 'rgba(212, 71, 71, 0.1)',
                         borderWidth: 3,
                         pointRadius: 4,
                         pointHoverRadius: 6,
@@ -2109,7 +2109,7 @@
                     {
                         label: 'Fitted Regression',
                         data: fittedData,
-                        borderColor: 'rgba(139, 92, 246, 0.3)',
+                        borderColor: 'rgba(212, 71, 71, 0.35)',
                         borderWidth: 1.5,
                         borderDash: [3, 4],
                         pointRadius: 0,
@@ -2119,7 +2119,7 @@
                     {
                         label: 'Forecast Trend',
                         data: forecastData,
-                        borderColor: '#8fa69a',
+                        borderColor: '#ef6262',
                         borderWidth: 3,
                         borderDash: [6, 4],
                         backgroundColor: 'transparent',
@@ -2141,7 +2141,7 @@
                         borderWidth: 0,
                         pointRadius: 0,
                         fill: 3, // Fill between dataset indices 4 (lower) and 3 (upper)
-                        backgroundColor: 'rgba(6, 182, 212, 0.08)'
+                        backgroundColor: 'rgba(239, 98, 98, 0.08)'
                     }
                 ]
             },
@@ -2201,7 +2201,7 @@
                         type: 'line',
                         label: 'Normal distribution overlay',
                         data: normValues,
-                        borderColor: '#c87968',
+                        borderColor: '#b83b43',
                         borderWidth: 2,
                         pointRadius: 0,
                         tension: 0.45,
@@ -2211,8 +2211,8 @@
                         type: 'bar',
                         label: 'Binned Count',
                         data: counts,
-                        backgroundColor: 'rgba(139, 92, 246, 0.4)',
-                        borderColor: 'rgba(139, 92, 246, 0.8)',
+                        backgroundColor: 'rgba(212, 71, 71, 0.4)',
+                        borderColor: 'rgba(212, 71, 71, 0.8)',
                         borderWidth: 1.5,
                         borderRadius: 4,
                         barPercentage: 0.95,
@@ -2256,12 +2256,12 @@
         });
 
         const segmentColors = {
-            'Champions': '#789778',
-            'Loyal Customers': '#8fa69a',
-            'Potential Loyalists': '#8ca5ad',
-            'New Customers': '#bf7652',
+            'Champions': '#7f9b83',
+            'Loyal Customers': '#ef6262',
+            'Potential Loyalists': '#8ca9c4',
+            'New Customers': '#d44747',
             'At Risk': '#f59e0b',
-            'Cannot Lose': '#c87968',
+            'Cannot Lose': '#b83b43',
             'Lost': '#ef4444'
         };
 
