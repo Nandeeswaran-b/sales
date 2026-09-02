@@ -1,0 +1,47 @@
+=== LIVE VERCEL PAGE CHECK ===
+
+Should be REMOVED:
+  churn-view: removed OK
+  loadChurnData: removed OK
+  churnPieChart: removed OK
+  weather-view: removed OK
+  loadWeatherForecast: removed OK
+
+Should be PRESENT:
+  dashboard-view: present OK
+  sql-view: present OK
+  simModal: present OK
+  loadSQLConsoleData: present OK
+  switchTab: present OK
+
+Line 217:         .tab-content {
+
+Line 221:         .tab-content.active {
+
+Line 974:                 <button class="tab-btn active" onclick="switchTab('dashboard')" id="tab-dashboard">📊 Dashboard</button>
+
+Line 975:                 <button class="tab-btn" onclick="switchTab('analytics')" id="tab-analytics">🧪 Analytics & ML</button>
+
+Line 976:                 <button class="tab-btn" onclick="switchTab('sql')" id="tab-sql">👁️ SQL Sandbox</button>
+
+Line 989:     <div id="dashboard-view" class="tab-content active">
+
+Line 1086:     <div id="analytics-view" class="tab-content">
+
+Line 1360:     <div id="sql-view" class="tab-content">
+
+Line 1520: <div class="modal-overlay" id="simModal">
+
+Line 1606:     function switchTab(tabId) {
+
+Line 1615:         document.querySelectorAll('.tab-content').forEach(sect => sect.classList.remove('active'));
+
+Line 1636:             switchTab(hash);
+
+Line 2871:         document.getElementById('simModal').classList.add('active');
+
+Line 2875:         document.getElementById('simModal').classList.remove('active');
+
+Line 2879:     document.getElementById('simModal').addEventListener('click', function(e) {
+
+Line 2941:         switchTab(initialHash);

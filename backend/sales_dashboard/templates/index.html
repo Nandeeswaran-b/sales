@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Data Dashboard</title>
+    <!-- Chart.js for visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Modern Dark Theme Design System */
+        :root {
+            --bg-color: #0f111a;
+            --card-bg: #1a1d2d;
+            --text-color: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-primary: #8b5cf6;
+            --accent-secondary: #06b6d4;
+            --border-color: #2e334d;
+            --hover-bg: #232741;
+            --positive: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 24px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #date-display {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* KPI Cards */
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .kpi-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            border-color: #4338ca;
+        }
+
+        .kpi-title {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .kpi-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        /* Table Section */
+        .table-container {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .table-header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            width: 300px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-color);
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr {
+            transition: background-color 0.15s ease;
+        }
+
+        tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .category-badge {
+            background-color: rgba(139, 92, 246, 0.15);
+            color: #a78bfa;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            display: inline-block;
+        }
+
+        .money-cell {
+            font-weight: 600;
+            color: var(--positive);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-content {
+            background-color: var(--card-bg); padding: 30px; border-radius: 16px;
+            border: 1px solid var(--border-color); width: 100%; max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-header { font-size: 20px; font-weight: 600; margin-bottom: 20px; display: flex; justify-content: space-between; }
+        .close-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 24px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 14px; color: var(--text-muted); }
+        .form-group input, .form-group select {
+            width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); 
+            background: var(--bg-color); color: #fff; font-size: 14px; outline: none;
+        }
+        .form-group input:focus, .form-group select:focus { border-color: var(--accent-primary); }
+        .btn-submit {
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border: none; color: #fff; padding: 12px; border-radius: 8px; width: 100%; 
+            font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px;
+        }
+        .add-btn {
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border: none; color: #fff; padding: 10px 20px; border-radius: 8px;
+            font-weight: 600; cursor: pointer; font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>Carze Electronics</h1>
+            <div id="date-display"></div>
+        </div>
+        <button class="add-btn" onclick="openModal()">+ Add Customer & Sale</button>
+    </header>
+
+    <div class="kpi-container">
+        <div class="kpi-card">
+            <div class="kpi-title">Monthly Revenue</div>
+            <div class="kpi-value" id="kpi-revenue">$0.00</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-title">Total Orders</div>
+            <div class="kpi-value" id="kpi-orders">0</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-title">Top Product</div>
+            <div class="kpi-value" id="kpi-product" style="font-size: 28px;">-</div>
+        </div>
+    </div>
+
+    <div class="charts-container">
+        <div class="chart-card">
+            <div class="chart-header">Monthly Revenue Trend</div>
+            <canvas id="monthlyChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <div class="chart-header">Sales by Category</div>
+            <canvas id="categoryChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <div class="chart-header">Top 5 Customers</div>
+            <canvas id="customersChart"></canvas>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-header-container">
+            <div class="chart-header" style="margin: 0;">Recent Transactions</div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <input type="date" id="dateFilter" class="search-input" style="width: auto; padding-right: 10px;" title="Filter by Date">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search product, customer, mobile no...">
+            </div>
+        </div>
+        <table id="salesTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Customer</th>
+                    <th>Mobile No.</th>
+                    <th>Payment</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows injected dynamically via JS -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal-overlay" id="addModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span>Add Customer & Sale</span>
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+        </div>
+        <form id="addDataForm">
+            <div class="form-group"><label>Customer Name</label><input type="text" id="customer_name" required></div>
+            <div class="form-group"><label>Mobile No.</label><input type="text" id="mobile_no" maxlength="10" pattern="\d{10}" title="Must be exactly 10 digits" required></div>
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" id="product_name" list="products_list" autocomplete="off" placeholder="Search or select..." required>
+                <datalist id="products_list">
+                    <option value="Laptop (MacBook / Dell)"></option>
+                    <option value="Smartphone (iPhone / Samsung)"></option>
+                    <option value="Tablet (iPad / Galaxy Tab)"></option>
+                    <option value="Smartwatch (Apple / Samsung)"></option>
+                    <option value="Wireless Earbuds"></option>
+                    <option value="Over-ear Headphones"></option>
+                    <option value="4K Television"></option>
+                    <option value="Gaming Console (PS5 / Xbox)"></option>
+                    <option value="Wireless Mouse/Keyboard"></option>
+                    <option value="External Monitor"></option>
+                </datalist>
+            </div>
+            <div style="display:flex;gap:15px;">
+                <div class="form-group" style="flex:1;"><label>Price</label><input type="number" id="total_price" step="0.01" required></div>
+                <div class="form-group" style="flex:1;"><label>Date</label><input type="date" id="sale_date" required></div>
+            </div>
+            <div class="form-group">
+                <label>Mode of Payment</label>
+                <select id="mode_of_payment">
+                    <option value="Cash">Cash</option><option value="Credit Card">Credit Card</option><option value="Debit Card">Debit Card</option><option value="UPI">UPI</option><option value="Bank Transfer">Bank Transfer</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">Save Data</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Set Current Date
+    document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', { 
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+    });
+
+    // Formatting utility for Currency
+    const currencyFormatter = new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+    });
+
+    // Global Chart Defaults
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.borderColor = '#2e334d';
+
+    let monthlyChart = null;
+    let categoryChart = null;
+    let customersChart = null;
+    let countryChart = null;
+    let allSalesData = []; // Store raw table data for search filtering
+
+    // Main fetch & initialization sequence
+    async function loadDashboardData() {
+        try {
+            // 1. Fetch & populate KPI Summary
+            const summaryRes = await fetch('/api/summary');
+            const summaryData = await summaryRes.json();
+            document.getElementById('kpi-revenue').textContent = currencyFormatter.format(summaryData.total_revenue);
+            document.getElementById('kpi-orders').textContent = summaryData.total_orders;
+            document.getElementById('kpi-product').textContent = summaryData.top_product;
+
+            // 2. Fetch & Render Monthly Bar Chart
+            const monthlyRes = await fetch('/api/chart/monthly');
+            const monthlyData = await monthlyRes.json();
+            renderMonthlyChart(monthlyData);
+
+            // 3. Fetch & Render Category Doughnut Chart
+            const categoryRes = await fetch('/api/chart/category');
+            const categoryData = await categoryRes.json();
+            renderCategoryChart(categoryData);
+
+            // Fetch & Render Customers Chart
+            const customersRes = await fetch('/api/chart/customers');
+            const customersData = await customersRes.json();
+            renderCustomersChart(customersData);
+
+            // 4. Fetch & Render Sales Table
+            const salesRes = await fetch('/api/sales');
+            allSalesData = await salesRes.json();
+            renderTable(allSalesData);
+
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+            alert('Failed to load data. Is the Flask backend running?');
+        }
+    }
+
+    function renderMonthlyChart(data) {
+        const ctx = document.getElementById('monthlyChart').getContext('2d');
+        const labels = data.map(d => {
+            const [y, m] = d.month.split('-');
+            return new Date(y, m-1).toLocaleString('default', { month: 'long', year: 'numeric' });
+        });
+        const revenues = data.map(d => d.revenue);
+
+        // Gradient for Bar Chart
+        let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, '#8b5cf6');
+        gradient.addColorStop(1, '#06b6d4');
+
+        if (monthlyChart) monthlyChart.destroy();
+
+        monthlyChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Revenue',
+                    data: revenues,
+                    backgroundColor: gradient,
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return currencyFormatter.format(context.raw);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#2e334d' },
+                        ticks: {
+                            callback: function(value) { return '₹' + value; }
+                        }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    }
+
+    function renderCategoryChart(data) {
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+        const labels = data.map(d => d.category);
+        const revenues = data.map(d => d.revenue);
+
+        // Modern UI colors
+        const colors = ['#8b5cf6', '#06b6d4', '#f59e0b', '#ec4899', '#10b981', '#3b82f6'];
+
+        if (categoryChart) categoryChart.destroy();
+
+        categoryChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: revenues,
+                    backgroundColor: colors.slice(0, labels.length),
+                    borderWidth: 2,
+                    borderColor: '#1a1d2d',
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return ` ${context.label}: ${currencyFormatter.format(context.raw)}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function renderCustomersChart(data) {
+        const ctx = document.getElementById('customersChart').getContext('2d');
+        const labels = data.map(d => d.name);
+        const revenues = data.map(d => d.revenue);
+
+        let gradient = ctx.createLinearGradient(0, 0, 400, 0);
+        gradient.addColorStop(0, '#ec4899');
+        gradient.addColorStop(1, '#8b5cf6');
+
+        if (customersChart) customersChart.destroy();
+
+        customersChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Revenue',
+                    data: revenues,
+                    backgroundColor: gradient,
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                indexAxis: 'y', // horizontal bar
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) { return currencyFormatter.format(context.raw); }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: { color: '#2e334d' },
+                        ticks: { callback: function(value) { return '₹' + value; } }
+                    },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    function renderCountryChart(data) {
+        const ctx = document.getElementById('countryChart').getContext('2d');
+        const labels = data.map(d => d.country);
+        const revenues = data.map(d => d.revenue);
+        const colors = ['#f59e0b', '#10b981', '#3b82f6', '#06b6d4', '#8b5cf6'];
+
+        if (countryChart) countryChart.destroy();
+
+        countryChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: revenues,
+                    backgroundColor: colors.slice(0, labels.length),
+                    borderWidth: 2,
+                    borderColor: '#1a1d2d',
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'right' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) { return ` ${context.label}: ${currencyFormatter.format(context.raw)}`; }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function renderTable(data) {
+        const tbody = document.querySelector('#salesTable tbody');
+        tbody.innerHTML = ''; // Clear existing rows
+
+        if(data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:30px;">No results found</td></tr>`;
+            return;
+        }
+
+        data.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${item.sale_date}</td>
+                <td style="font-weight: 500; color: #fff;">${item.product_name}</td>
+                <td>${item.customer_name}</td>
+                <td><span class="category-badge">${item.mobile_no || 'N/A'}</span></td>
+                <td>${item.mode_of_payment || 'N/A'}</td>
+                <td class="money-cell">${currencyFormatter.format(item.total_price)}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Search & Date filter logic
+    const searchInput = document.getElementById('searchInput');
+    const dateFilter = document.getElementById('dateFilter');
+
+    function applyFilters() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const dateTerm = dateFilter.value; // Format: YYYY-MM-DD
+
+        const filteredData = allSalesData.filter(item => {
+            const matchesText = item.product_name.toLowerCase().includes(searchTerm) ||
+                                item.customer_name.toLowerCase().includes(searchTerm) ||
+                                (item.category && item.category.toLowerCase().includes(searchTerm)) ||
+                                (item.mobile_no && item.mobile_no.includes(searchTerm));
+            
+            const matchesDate = dateTerm ? item.sale_date === dateTerm : true;
+
+            return matchesText && matchesDate;
+        });
+        renderTable(filteredData);
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    dateFilter.addEventListener('change', applyFilters);
+
+    // Modal & Form Logic
+    function openModal() {
+        document.getElementById('addModal').classList.add('active');
+        document.getElementById('sale_date').valueAsDate = new Date();
+    }
+    function closeModal() { document.getElementById('addModal').classList.remove('active'); }
+    
+    document.getElementById('addDataForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+            customer_name: document.getElementById('customer_name').value,
+            mobile_no: document.getElementById('mobile_no').value,
+            product_name: document.getElementById('product_name').value,
+            total_price: document.getElementById('total_price').value,
+            sale_date: document.getElementById('sale_date').value,
+            mode_of_payment: document.getElementById('mode_of_payment').value
+        };
+        try {
+            const res = await fetch('/api/sales/new', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+            if (res.ok) {
+                closeModal(); document.getElementById('addDataForm').reset();
+                loadDashboardData();
+            } else alert('Error saving data!');
+        } catch(e) { alert('Network Error'); }
+    });
+
+    // Start application
+    loadDashboardData();
+
+</script>
+
+</body>
+</html>

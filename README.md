@@ -1,84 +1,91 @@
-# 📊 Sales Data Analysis & Dashboard
+# Sales Intelligence & Predictive Analytics Platform 📈🔮
 
-A full-stack, production-grade sales analytics platform with real-time data visualization, secure authentication, and a premium glassmorphic UI.
+A modern, full-stack **Sales Intelligence & Data Science Platform** designed to turn raw transactional logs into predictive business insights. Built with a Flask (Python) backend, SQLite database, NumPy analytics engine, and a premium glassmorphic frontend. 
 
-🔗 **Live Demo**: [sales-henna-beta.vercel.app](https://sales-henna-beta.vercel.app)
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | HTML5, CSS3, Vanilla JavaScript, Chart.js |
-| **Backend** | Python, Flask, Gunicorn |
-| **Database** | PostgreSQL (Supabase) |
-| **Auth** | Supabase Authentication |
-| **Hosting** | Vercel (Frontend), Render (Backend) |
-
-## ✨ Key Features
-
-- **Real-time KPI Dashboard** — Revenue, Orders, Customers & AOV tracking
-- **4 Interactive Charts** — Monthly Revenue, Sales Trends, Category Breakdown, Cumulative Growth
-- **Secure Admin Login** — Protected by Supabase Auth with session management
-- **Customer Deep Dive** — Click any customer to view full profile with order history
-- **Advanced Search & Filters** — Search by name, phone, city + date range filtering
-- **Customer Management** — Add customers with purchase category, payment mode & plan
-- **CSV Export** — Download customer data for offline analysis
-- **Dark/Light Mode** — Premium glassmorphic UI with persistent theme preference
-- **Responsive Design** — Works seamlessly across all screen sizes
-- **INR Currency** — All amounts displayed in Indian Rupees (₹)
-
-## 🏗️ Architecture
-
-```
-sales-dashboard/
-├── backend/
-│   ├── app.py              # Flask application factory
-│   ├── routes.py           # API endpoints with PostgreSQL analytics
-│   └── requirements.txt    # Python dependencies
-├── frontend/
-│   ├── index.html          # Single Page Application
-│   ├── style.css           # Glassmorphic design system
-│   ├── app.js              # Core application logic & auth
-│   ├── charts.js           # Chart.js visualizations
-│   └── config.js           # Supabase client configuration
-├── setup.sql               # Database schema & seed data
-└── README.md
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Python 3.x
-- A [Supabase](https://supabase.com) account (free tier)
-
-### 1. Database Setup
-1. Create a new Supabase project
-2. Run `setup.sql` in the SQL Editor to create tables and seed data
-
-### 2. Frontend Setup
-1. Update `frontend/config.js` with your Supabase URL and Anon Key
-
-### 3. Backend Setup
-```bash
-cd backend
-pip install -r requirements.txt
-python app.py
-```
-
-### 4. Run
-Open `frontend/index.html` in your browser!
-
-## 📸 Screenshots
-
-- Premium glassmorphic dashboard with real-time analytics
-- Interactive charts powered by Chart.js
-- Secure admin authentication
-- Customer profile deep dive with order history
-
-## 👨‍💻 Author
-
-**Nandeeswaran B**
+This platform serves as a complete portfolio project showing end-to-end integration of predictive modeling, customer segmentation, statistical anomaly detection, and custom database engineering.
 
 ---
 
-⭐ Star this repo if you found it helpful!
+## 🌟 Key Features
+
+### 🔮 1. Sales Forecasting (NumPy Regressions)
+* Uses Ordinary Least Squares (OLS) **Linear and Polynomial (2nd Degree) regressions** implemented using `numpy.polyfit`.
+* Fits models dynamically to historical monthly sales trends and projects predictions into the future.
+* Lets users interactively toggle between linear (straight trajectory) and quadratic (accelerating/decelerating) curves.
+
+### 👥 2. RFM Customer Segmentation
+* Groups customers dynamically by evaluating three behaviors:
+  * **Recency:** Time elapsed since the last purchase.
+  * **Frequency:** Number of total purchases.
+  * **Monetary:** Total value of spent currency.
+* Generates a 3D scoring profile to categorize customers into strategic cohorts: **Champions** (VIP), **Loyal Customers**, and **At-Risk** customers.
+
+### 🚨 3. Statistical Anomaly Detection
+* Implements the **Interquartile Range (IQR)** method ($Q3 - Q1$) on transaction values.
+* Automatically flags transactions that fall beyond bounds ($1.5 \times IQR$) to catch outliers, data-entry errors, or potential fraud in real-time.
+
+### 🔒 4. Safe SQL Query Sandbox
+* Features an interactive query editor allowing users to run custom SQLite statements.
+* Incorporates regex-based security filters to restrict commands exclusively to `SELECT` operations, preventing any database write or deletion actions.
+
+### 💾 5. Enterprise-Ready Data Exporting
+* **Excel Safeguards:** Prepend UTF-8 BOM (`\ufeff`) to ensure clean character decoding.
+* **Numeric Integrity:** Formats large IDs/mobile numbers into safe Excel text formulas (`="[number]"`) so Excel doesn't convert them to scientific notation (e.g. `9.88E+09`).
+* **Print Styling:** Custom CSS `@media print` rules clean up the dashboard interface, providing tidy layouts when exporting reports to physical PDFs.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Frontend:** HTML5, Vanilla JavaScript, CSS3 (Custom Glassmorphism design system)
+* **Backend:** Python, Flask, Flask-CORS
+* **Calculations:** NumPy
+* **Database:** SQLite3
+* **Production Deployment:** Vercel (Frontend) & Render (Backend)
+
+---
+
+## 🚀 Setup & Installation
+
+### Backend Setup
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   # On Windows:
+   venv\Scripts\activate
+   # On macOS/Linux:
+   source venv/bin/activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Start the backend local server:
+   ```bash
+   python app.py
+   ```
+   *The backend will run on `http://127.0.0.1:5000`.*
+
+### Frontend Setup
+* Open `frontend/index.html` directly in your browser, or serve it using any local server (e.g. VS Code Live Server).
+* The frontend automatically switches to the production backend URL when deployed, and targets `localhost:5000` during local development.
+
+---
+
+## 📁 Repository Structure
+
+```
+├── backend/
+│   ├── app.py             # Flask application server & DS/ML endpoint handlers
+│   ├── requirements.txt   # Python dependencies (Flask, NumPy, gunicorn, etc.)
+│   ├── sales.db           # Seeded SQLite database
+│   └── templates/         # Backend-served HTML views
+├── frontend/
+│   ├── index.html         # Premium Glassmorphic Dashboard UI
+├── README.md              # Project Documentation
+└── .gitignore             # Git exclusion guidelines
+```

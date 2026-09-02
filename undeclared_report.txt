@@ -1,0 +1,1706 @@
+Potential undeclared variables/functions used:
+  Line 990: A -> const badgeText = isAnomaly ? '?? Outlier' : (item.mobile_no || 'N/A');
+  Line 1348: A -> <td><span class="badge badge-mobile">${item.mobile_no || 'N/A'}</span></td>
+  Line 1423: AI -> // AI CHURN PREDICTION ENGINE
+  Line 1312: ALL -> function renderRFMLookupTable(data, segmentName = 'ALL') {
+  Line 1328: ALL -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1337: ALL -> document.getElementById('cohort-strategy-txt').innerHTML = strategies[segmentName] || strategies['AL
+  Line 1361: ALL -> if (cohort === 'ALL') {
+  Line 1362: ALL -> renderRFMLookupTable(rfmCustomerList, 'ALL');
+  Line 1224: ANALYSIS -> // EXPLORATORY DATA ANALYSIS (SQL CONSOLE SANDBOX)
+  Line 210: ANALYTICS -> // CORE SERVICES: FETCH ANALYTICS DATA (DS/ML TAB)
+  Line 514: ANALYTICS -> // VISUALS: ANALYTICS TAB CHARTS
+  Line 331: ANIMATION -> // KPI COUNT ANIMATION ENGINE
+  Line 1200: AOV -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming c
+  Line 1203: AOV -> <span>Target AOV Needed:</span>
+  Line 1437: APP -> // APP TRIGGER (STARTUP)
+  Line 1238: ASC -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 1234: AVG -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 552: Actual -> label: 'Actual Revenue',
+  Line 944: Alpha -> // Alpha shading: Positive violet, negative pink
+  Line 538: Array -> const actualData = [...histActuals, ...new Array(forecastLabels.length).fill(null)];
+  Line 540: Array -> const forecastData = [...new Array(histActuals.length - 1).fill(null), lastActualVal, ...forecastPre
+  Line 541: Array -> const upperData = [...new Array(histActuals.length - 1).fill(null), lastActualVal, ...forecastUpper]
+  Line 542: Array -> const lowerData = [...new Array(histActuals.length - 1).fill(null), lastActualVal, ...forecastLower]
+  Line 1200: Assuming -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming c
+  Line 1206: Assuming -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 715: At -> 'At Risk': '#f59e0b',
+  Line 1333: At -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1333: Automatically -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1234: BY -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: BY -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1236: BY -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1237: BY -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: BY -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 179: Badge -> // MoM Growth Indicator Badge
+  Line 590: Band -> label: '95% Confidence Band',
+  Line 293: Banner -> // Set Top Recommendation Banner
+  Line 1329: Best -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 664: Binned -> label: 'Binned Count',
+  Line 582: Bound -> label: 'Upper Bound',
+  Line 606: Bound -> filter: item => item.text !== 'Upper Bound' && item.text !== 'Fitted Regression'
+  Line 311: Bundle -> ?? Create Bundle
+  Line 112: Buttons -> // Toggle Buttons active classes
+  Line 363: CHARTS -> // VISUALS: DASHBOARD TAB CHARTS
+  Line 514: CHARTS -> // VISUALS: ANALYTICS TAB CHARTS
+  Line 1423: CHURN -> // AI CHURN PREDICTION ENGINE
+  Line 1310: COHORT -> // RFM COHORT MARKETING LOOKUP TABLES
+  Line 1224: CONSOLE -> // EXPLORATORY DATA ANALYSIS (SQL CONSOLE SANDBOX)
+  Line 1370: CONTROLS -> // DATA SIMULATION SANDBOX CONTROLS
+  Line 145: CORE -> // CORE SERVICES: FETCH DASHBOARD DATA
+  Line 210: CORE -> // CORE SERVICES: FETCH ANALYTICS DATA (DS/ML TAB)
+  Line 907: CORRELATION -> // VISUALS: CORRELATION MATRIX HEATMAP TABLE
+  Line 331: COUNT -> // KPI COUNT ANIMATION ENGINE
+  Line 1234: COUNT -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: COUNT -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1237: COUNT -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: COUNT -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 237: Cache -> // Cache RFM customer list data for lookup rendering
+  Line 1316: Calculate -> // Calculate cohort profiling statistics
+  Line 716: Cannot -> 'Cannot Lose': '#ec4899',
+  Line 1334: Cannot -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 711: Champions -> 'Champions': '#10b981',
+  Line 1329: Champions -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 54: Charts -> // Charts objects registry for hot replacement / refresh
+  Line 195: Charts -> // Render Charts
+  Line 205: Check -> showToast('?? Failed to load dashboard data. Check database connections.', true);
+  Line 270: Check -> showToast('?? Statistical computation failed. Check python environment log.', true);
+  Line 1298: Check -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 1305: Check -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Che
+  Line 1335: Churn -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 884: Class -> { label: 'Mode Class', val: `Rs. ${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density p
+  Line 888: Coeff -> { label: 'Coeff. of Variation', val: `${stats.coefficient_of_variation.toFixed(1)}%`, meta: 'Relativ
+  Line 917: Columns -> // Columns headers
+  Line 633: Compute -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 218: Computing -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 590: Confidence -> label: '95% Confidence Band',
+  Line 92: Connecting -> if (banner) banner.querySelector('span').textContent = `Connecting to server... (${i+1}/12)`;
+  Line 1418: Connection -> showToast('?? Connection error during data generation sandbox.', true);
+  Line 1303: Console -> console.error('SQL Console execute error:', e);
+  Line 116: Content -> // Toggle Content Sections
+  Line 1103: Content -> headers: { 'Content-Type': 'application/json' },
+  Line 1257: Content -> headers: { 'Content-Type': 'application/json' },
+  Line 1400: Content -> headers: { 'Content-Type': 'application/json' },
+  Line 953: Correlation -> td.title = `Pearson Correlation (${lblY} ? ${lblX}): ${val}`;
+  Line 664: Count -> label: 'Binned Count',
+  Line 214: Create -> // Create full overlay spinner
+  Line 311: Create -> ?? Create Bundle
+  Line 280: Created -> showToast(`? Created bundle promotion: "${itemA} + ${itemB}" at 10% off!`);
+  Line 838: Cumulative -> label: 'Cumulative Gross',
+  Line 36: Currency -> // Indian Currency Formatter (INR)
+  Line 1188: Current -> <span>Current Mo. Average:</span>
+  Line 296: Customers -> Customers purchasing <strong>${top.item_a}</strong> are
+  Line 712: Customers -> 'Loyal Customers': '#06b6d4',
+  Line 714: Customers -> 'New Customers': '#8b5cf6',
+  Line 1330: Customers -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1332: Customers -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 145: DASHBOARD -> // CORE SERVICES: FETCH DASHBOARD DATA
+  Line 363: DASHBOARD -> // VISUALS: DASHBOARD TAB CHARTS
+  Line 145: DATA -> // CORE SERVICES: FETCH DASHBOARD DATA
+  Line 210: DATA -> // CORE SERVICES: FETCH ANALYTICS DATA (DS/ML TAB)
+  Line 964: DATA -> // VISUALS: DATA TABLES DRAW & FILTER
+  Line 1224: DATA -> // EXPLORATORY DATA ANALYSIS (SQL CONSOLE SANDBOX)
+  Line 1370: DATA -> // DATA SIMULATION SANDBOX CONTROLS
+  Line 1234: DESC -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: DESC -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1236: DESC -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1237: DESC -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 873: DESCRIPTIVE -> // VISUALS: DESCRIPTIVE STATISTICS GRID RENDER
+  Line 3: DIAGNOSTICS -> // GLOBAL ERROR HANDLING & DIAGNOSTICS
+  Line 964: DRAW -> // VISUALS: DATA TABLES DRAW & FILTER
+  Line 210: DS -> // CORE SERVICES: FETCH ANALYTICS DATA (DS/ML TAB)
+  Line 1141: DYNAMIC -> // POLYNOMIAL MODEL TUNING & DYNAMIC SWITCH
+  Line 885: Data -> { label: 'Std. Deviation', val: currencyFormatter.format(stats.std_dev), meta: 'Data dispersion spre
+  Line 1110: Database -> showToast('? Sale added. Database rebuilt.');
+  Line 1406: Database -> showToast(`? Database Rebuilt: simulated ${info.records_count} records!`);
+  Line 327: Dataset -> showToast('? Dataset re-indexed successfully.');
+  Line 763: Days -> title: { display: true, text: 'Recency (Days since last purchase)', color: 'var(--text-secondary)' }
+  Line 43: Defaults -> // Chart.js Style Defaults
+  Line 1145: Degree -> showToast(`? Re-fitting regression curve (Degree ${deg})...`);
+  Line 272: Destroy -> // Destroy loader
+  Line 885: Deviation -> { label: 'Std. Deviation', val: currencyFormatter.format(stats.std_dev), meta: 'Data dispersion spre
+  Line 1329: Do -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 331: ENGINE -> // KPI COUNT ANIMATION ENGINE
+  Line 1423: ENGINE -> // AI CHURN PREDICTION ENGINE
+  Line 3: ERROR -> // GLOBAL ERROR HANDLING & DIAGNOSTICS
+  Line 1224: EXPLORATORY -> // EXPLORATORY DATA ANALYSIS (SQL CONSOLE SANDBOX)
+  Line 6: Error -> console.error("Global JS Error Captured: ", message, " at ", source, ":", lineno);
+  Line 204: Error -> console.error('Error fetching dashboard datasets:', error);
+  Line 269: Error -> console.error('Error fetching analytics calculations:', e);
+  Line 1297: Error -> rHeader.innerHTML = '<th>Query Error</th>';
+  Line 1304: Error -> rHeader.innerHTML = '<th>Network Error</th>';
+  Line 1085: Escape -> if (e.key === 'Escape') closeModal();
+  Line 145: FETCH -> // CORE SERVICES: FETCH DASHBOARD DATA
+  Line 210: FETCH -> // CORE SERVICES: FETCH ANALYTICS DATA (DS/ML TAB)
+  Line 964: FILTER -> // VISUALS: DATA TABLES DRAW & FILTER
+  Line 1068: FORM -> // NEW SALE MODAL & FORM INGESTION
+  Line 205: Failed -> showToast('?? Failed to load dashboard data. Check database connections.', true);
+  Line 1158: Failed -> console.error('Failed to update forecast regression degree:', e);
+  Line 886: Fences -> { label: 'IQR Fences', val: currencyFormatter.format(stats.iqr), meta: `Q1-Q3 (${currencyFormatter.f
+  Line 595: Fill -> fill: 3, // Fill between dataset indices 4 (lower) and 3 (upper)
+  Line 773: Filter -> // Filter out first month since growth is 0
+  Line 1006: Filter -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 150: First -> // First fetch summaries & core charts in parallel
+  Line 562: Fitted -> label: 'Fitted Regression',
+  Line 606: Fitted -> filter: item => item.text !== 'Upper Bound' && item.text !== 'Fitted Regression'
+  Line 1305: Flask -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Che
+  Line 572: Forecast -> label: 'Forecast Trend',
+  Line 1151: Forecast -> // Re-render Forecast Chart
+  Line 537: Format -> // Format data streams aligning the points properly
+  Line 1285: Format -> // Format currency values dynamically if column looks like revenue/price
+  Line 36: Formatter -> // Indian Currency Formatter (INR)
+  Line 759: Frequency -> title: { display: true, text: 'Frequency (No. of Orders)', color: 'var(--text-secondary)' },
+  Line 1332: Fresh -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 21: Frontend -> errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${li
+  Line 3: GLOBAL -> // GLOBAL ERROR HANDLING & DIAGNOSTICS
+  Line 27: GLOBAL -> // INITIALIZATION & GLOBAL UTILITIES
+  Line 1164: GOAL -> // GOAL SEEK PRESCRIPTIVE MODELING
+  Line 873: GRID -> // VISUALS: DESCRIPTIVE STATISTICS GRID RENDER
+  Line 6: Global -> console.error("Global JS Error Captured: ", message, " at ", source, ":", lineno);
+  Line 1218: Goal -> console.error('Goal seek computation error:', e);
+  Line 838: Gross -> label: 'Cumulative Gross',
+  Line 695: Group -> // Group bubble points by RFM Segments for discrete toggling legend
+  Line 179: Growth -> // MoM Growth Indicator Badge
+  Line 804: Growth -> label: context => ` Growth rate: ${context.raw}%`
+  Line 3: HANDLING -> // GLOBAL ERROR HANDLING & DIAGNOSTICS
+  Line 907: HEATMAP -> // VISUALS: CORRELATION MATRIX HEATMAP TABLE
+  Line 253: High -> const skewType = stats.skewness > 0.5 ? 'Right-skewed (High sales)' : (stats.skewness < -0.5 ? 'Left
+  Line 1330: High -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1333: High -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1334: High -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 884: Highest -> { label: 'Mode Class', val: `Rs. ${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density p
+  Line 67: IDs -> let anomalySet = new Set(); // Stores anomaly IDs for table badges
+  Line 37: IN -> const currencyFormatter = new Intl.NumberFormat('en-IN', {
+  Line 349: IN -> el.textContent = current.toLocaleString('en-IN');
+  Line 355: IN -> el.textContent = isCurrency ? currencyFormatter.format(finalValue) : finalValue.toLocaleString('en-I
+  Line 887: IN -> { label: 'Variance (S?)', val: stats.variance.toLocaleString('en-IN'), meta: 'Squared deviations sum
+  Line 983: IN -> const formattedDate = dateObj.toLocaleDateString('en-IN', {
+  Line 1023: IN -> const fDate = dObj.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
+  Line 1322: IN -> document.getElementById('cohort-size-txt').textContent = size.toLocaleString('en-IN') + ' accounts';
+  Line 1068: INGESTION -> // NEW SALE MODAL & FORM INGESTION
+  Line 27: INITIALIZATION -> // INITIALIZATION & GLOBAL UTILITIES
+  Line 36: INR -> // Indian Currency Formatter (INR)
+  Line 39: INR -> currency: 'INR',
+  Line 886: IQR -> { label: 'IQR Fences', val: currencyFormatter.format(stats.iqr), meta: `Q1-Q3 (${currencyFormatter.f
+  Line 987: If -> // If transaction was flagged in anomalies, render outlier flag badge
+  Line 36: Indian -> // Indian Currency Formatter (INR)
+  Line 179: Indicator -> // MoM Growth Indicator Badge
+  Line 1120: Ingestion -> showToast(`?? Ingestion failed: ${err.error || 'Server rejected request'}`, true);
+  Line 1440: Initial -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 45: Inter -> Chart.defaults.font.family = "'Inter', sans-serif";
+  Line 6: JS -> console.error("Global JS Error Captured: ", message, " at ", source, ":", lineno);
+  Line 1189: JetBrains -> <span style="font-family:'JetBrains Mono';">${currencyFormatter.format(data.avg_monthly_revenue)}</s
+  Line 1193: JetBrains -> <span style="font-family:'JetBrains Mono'; color:var(--accent-violet);">${currencyFormatter.format(d
+  Line 1198: JetBrains -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${data.orders_needed} order
+  Line 1204: JetBrains -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${currencyFormatter.format(
+  Line 1350: JetBrains -> <td style="font-family: 'JetBrains Mono', monospace;">${item.recency_days.toFixed(0)}d ago</td>
+  Line 1351: JetBrains -> <td style="font-family: 'JetBrains Mono', monospace;">${item.frequency} orders</td>
+  Line 1354: JetBrains -> <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-violet);"
+  Line 409: K -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 504: K -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 619: K -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 863: K -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 884: K -> { label: 'Mode Class', val: `Rs. ${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density p
+  Line 889: K -> { label: 'Range Min/Max', val: `Rs. ${(stats.min / 1000).toFixed(0)}K - Rs. ${(stats.max / 1000).toF
+  Line 245: KPI -> // Populate top KPI cards
+  Line 331: KPI -> // KPI COUNT ANIMATION ENGINE
+  Line 173: KPIs -> // Render KPIs with count-up animations
+  Line 1330: Keychron -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 409: L -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 504: L -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 619: L -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 863: L -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 1310: LOOKUP -> // RFM COHORT MARKETING LOOKUP TABLES
+  Line 253: Left -> const skewType = stats.skewness > 0.5 ? 'Right-skewed (High sales)' : (stats.skewness < -0.5 ? 'Left
+  Line 21: Line -> errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${li
+  Line 1036: Live -> // Live search filters
+  Line 1227: Load -> // Load default template when opening the tab
+  Line 1330: Logitech -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 716: Lose -> 'Cannot Lose': '#ec4899',
+  Line 1334: Lose -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 717: Lost -> 'Lost': '#ef4444'
+  Line 1335: Lost -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 712: Loyal -> 'Loyal Customers': '#06b6d4',
+  Line 1330: Loyal -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 713: Loyalists -> 'Potential Loyalists': '#3b82f6',
+  Line 1331: Loyalists -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 105: MANAGEMENT -> // TAB ROUTING MANAGEMENT
+  Line 1128: MANAGER -> // TOAST NOTIFICATIONS MANAGER
+  Line 1310: MARKETING -> // RFM COHORT MARKETING LOOKUP TABLES
+  Line 907: MATRIX -> // VISUALS: CORRELATION MATRIX HEATMAP TABLE
+  Line 210: ML -> // CORE SERVICES: FETCH ANALYTICS DATA (DS/ML TAB)
+  Line 1068: MODAL -> // NEW SALE MODAL & FORM INGESTION
+  Line 1141: MODEL -> // POLYNOMIAL MODEL TUNING & DYNAMIC SWITCH
+  Line 1164: MODELING -> // GOAL SEEK PRESCRIPTIVE MODELING
+  Line 1329: MacBook -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1326: Map -> // Map cohorts to strategic prescriptions
+  Line 928: Matrix -> // Table Matrix cells
+  Line 889: Max -> { label: 'Range Min/Max', val: `Rs. ${(stats.min / 1000).toFixed(0)}K - Rs. ${(stats.max / 1000).toF
+  Line 882: Mean -> { label: 'Mean Revenue', val: currencyFormatter.format(stats.mean), meta: 'Standard arithmetic avera
+  Line 883: Median -> { label: 'Median Revenue', val: currencyFormatter.format(stats.median), meta: '50th percentile check
+  Line 889: Min -> { label: 'Range Min/Max', val: `Rs. ${(stats.min / 1000).toFixed(0)}K - Rs. ${(stats.max / 1000).toF
+  Line 1335: Minimize -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1188: Mo -> <span>Current Mo. Average:</span>
+  Line 179: MoM -> // MoM Growth Indicator Badge
+  Line 184: MoM -> trendBadge.innerHTML = `? +${summary.mom_growth}% MoM`;
+  Line 187: MoM -> trendBadge.innerHTML = `? ${summary.mom_growth}% MoM`;
+  Line 192: MoM -> trendBadge.innerHTML = `? 0.0% MoM`;
+  Line 781: MoM -> // Colors: green for positive, pink for negative MoM contraction
+  Line 1380: Modal -> // Modal overlay click listener
+  Line 884: Mode -> { label: 'Mode Class', val: `Rs. ${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density p
+  Line 1159: Model -> showToast('?? Model fitting failed.', true);
+  Line 1189: Mono -> <span style="font-family:'JetBrains Mono';">${currencyFormatter.format(data.avg_monthly_revenue)}</s
+  Line 1193: Mono -> <span style="font-family:'JetBrains Mono'; color:var(--accent-violet);">${currencyFormatter.format(d
+  Line 1198: Mono -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${data.orders_needed} order
+  Line 1204: Mono -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${currencyFormatter.format(
+  Line 1350: Mono -> <td style="font-family: 'JetBrains Mono', monospace;">${item.recency_days.toFixed(0)}d ago</td>
+  Line 1351: Mono -> <td style="font-family: 'JetBrains Mono', monospace;">${item.frequency} orders</td>
+  Line 1354: Mono -> <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-violet);"
+  Line 1197: Monthly -> <span>Monthly Sales Needed:</span>
+  Line 881: N -> { label: 'Sample Size (N)', val: stats.count, meta: 'Total sales generated' },
+  Line 990: N -> const badgeText = isAnomaly ? '?? Outlier' : (item.mobile_no || 'N/A');
+  Line 1348: N -> <td><span class="badge badge-mobile">${item.mobile_no || 'N/A'}</span></td>
+  Line 1068: NEW -> // NEW SALE MODAL & FORM INGESTION
+  Line 1128: NOTIFICATIONS -> // TOAST NOTIFICATIONS MANAGER
+  Line 1290: NULL -> td.textContent = val !== null ? val : 'NULL';
+  Line 1123: Network -> showToast('?? Network failure. Verify backend flask server is running.', true);
+  Line 1219: Network -> resultPanel.innerHTML = '<div style="color:var(--accent-pink); text-align:center;">Network request f
+  Line 1304: Network -> rHeader.innerHTML = '<th>Network Error</th>';
+  Line 714: New -> 'New Customers': '#8b5cf6',
+  Line 1332: New -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 288: No -> tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No association rules found in transaction
+  Line 289: No -> document.getElementById('top-rec-bundle').textContent = 'No associations found.';
+  Line 759: No -> title: { display: true, text: 'Frequency (No. of Orders)', color: 'var(--text-secondary)' },
+  Line 972: No -> tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><div class="icon">?</div>No matching tran
+  Line 1016: No -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 1251: No -> rHeader.innerHTML = '<th>No query run</th>';
+  Line 1340: No -> tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><div class="icon">?</div>No customers in 
+  Line 654: Normal -> label: 'Normal distribution overlay',
+  Line 720: Object -> const datasets = Object.keys(groups).map(segName => {
+  Line 1330: Offer -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1331: Offer -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 759: Orders -> title: { display: true, text: 'Frequency (No. of Orders)', color: 'var(--text-secondary)' },
+  Line 990: Outlier -> const badgeText = isAnomaly ? '?? Outlier' : (item.mobile_no || 'N/A');
+  Line 76: PING -> // SERVER WAKE-UP PING (Render free tier cold start fix)
+  Line 1141: POLYNOMIAL -> // POLYNOMIAL MODEL TUNING & DYNAMIC SWITCH
+  Line 1102: POST -> method: 'POST',
+  Line 1256: POST -> method: 'POST',
+  Line 1399: POST -> method: 'POST',
+  Line 1423: PREDICTION -> // AI CHURN PREDICTION ENGINE
+  Line 1164: PRESCRIPTIVE -> // GOAL SEEK PRESCRIPTIVE MODELING
+  Line 953: Pearson -> td.title = `Pearson Correlation (${lblY} ? ${lblX}): ${val}`;
+  Line 98: Please -> banner.querySelector('span').textContent = 'Server unreachable. Please refresh the page.';
+  Line 1171: Please -> showToast('?? Please enter a valid positive revenue target.', true);
+  Line 69: Polynomial -> let forecastDegree = 1; // Polynomial forecast model degree state
+  Line 245: Populate -> // Populate top KPI cards
+  Line 262: Populate -> renderRFMLookupTable(rfm); // Populate RFM lookup panel
+  Line 944: Positive -> // Alpha shading: Positive violet, negative pink
+  Line 713: Potential -> 'Potential Loyalists': '#3b82f6',
+  Line 1331: Potential -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1329: Prescription -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1330: Prescription -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1331: Prescription -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1332: Prescription -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1333: Prescription -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1334: Prescription -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1335: Prescription -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1334: Proactively -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1331: Promising -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1331: Push -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 886: Q1 -> { label: 'IQR Fences', val: currencyFormatter.format(stats.iqr), meta: `Q1-Q3 (${currencyFormatter.f
+  Line 886: Q3 -> { label: 'IQR Fences', val: currencyFormatter.format(stats.iqr), meta: `Q1-Q3 (${currencyFormatter.f
+  Line 1275: Query -> rBody.innerHTML = `<tr><td colspan="${data.columns.length}" class="empty-state">Query executed succe
+  Line 1297: Query -> rHeader.innerHTML = '<th>Query Error</th>';
+  Line 873: RENDER -> // VISUALS: DESCRIPTIVE STATISTICS GRID RENDER
+  Line 70: RFM -> let rfmCustomerList = []; // RFM cohort lookup data cache
+  Line 237: RFM -> // Cache RFM customer list data for lookup rendering
+  Line 262: RFM -> renderRFMLookupTable(rfm); // Populate RFM lookup panel
+  Line 695: RFM -> // Group bubble points by RFM Segments for discrete toggling legend
+  Line 1310: RFM -> // RFM COHORT MARKETING LOOKUP TABLES
+  Line 1234: ROUND -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: ROUND -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1237: ROUND -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: ROUND -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 105: ROUTING -> // TAB ROUTING MANAGEMENT
+  Line 889: Range -> { label: 'Range Min/Max', val: `Rs. ${(stats.min / 1000).toFixed(0)}K - Rs. ${(stats.max / 1000).toF
+  Line 1145: Re -> showToast(`? Re-fitting regression curve (Degree ${deg})...`);
+  Line 1151: Re -> // Re-render Forecast Chart
+  Line 1154: Re -> // Re-populate forecast R? metrics card
+  Line 1335: Re -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1394: Rebuilding -> showToast('? Rebuilding SQLite database and simulating sales...', false);
+  Line 763: Recency -> title: { display: true, text: 'Recency (Days since last purchase)', color: 'var(--text-secondary)' }
+  Line 293: Recommendation -> // Set Top Recommendation Banner
+  Line 1408: Refresh -> // Refresh active tab views
+  Line 562: Regression -> label: 'Fitted Regression',
+  Line 606: Regression -> filter: item => item.text !== 'Upper Bound' && item.text !== 'Fitted Regression'
+  Line 888: Relative -> { label: 'Coeff. of Variation', val: `${stats.coefficient_of_variation.toFixed(1)}%`, meta: 'Relativ
+  Line 1112: Reload -> // Reload whatever tab is currently active
+  Line 76: Render -> // SERVER WAKE-UP PING (Render free tier cold start fix)
+  Line 173: Render -> // Render KPIs with count-up animations
+  Line 195: Render -> // Render Charts
+  Line 200: Render -> // Render Table log
+  Line 256: Render -> // Render complex analytics visual modules
+  Line 1264: Render -> // Render table headers
+  Line 1272: Render -> // Render table rows
+  Line 1305: Request -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Che
+  Line 1210: Required -> <span>Required Growth:</span>
+  Line 1427: Retention -> showToast(`? Retention action "${action}" triggered for ${customer}!`);
+  Line 385: Revenue -> label: 'Revenue',
+  Line 552: Revenue -> label: 'Actual Revenue',
+  Line 882: Revenue -> { label: 'Mean Revenue', val: currencyFormatter.format(stats.mean), meta: 'Standard arithmetic avera
+  Line 883: Revenue -> { label: 'Median Revenue', val: currencyFormatter.format(stats.median), meta: '50th percentile check
+  Line 1192: Revenue -> <span>Target Revenue Goal:</span>
+  Line 253: Right -> const skewType = stats.skewness > 0.5 ? 'Right-skewed (High sales)' : (stats.skewness < -0.5 ? 'Left
+  Line 715: Risk -> 'At Risk': '#f59e0b',
+  Line 1333: Risk -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 409: Rs -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 504: Rs -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 619: Rs -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 863: Rs -> callback: val => val >= 100000 ? 'Rs. ' + (val / 100000).toFixed(1) + 'L' : 'Rs. ' + (val / 1000).to
+  Line 884: Rs -> { label: 'Mode Class', val: `Rs. ${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density p
+  Line 889: Rs -> { label: 'Range Min/Max', val: `Rs. ${(stats.min / 1000).toFixed(0)}K - Rs. ${(stats.max / 1000).toF
+  Line 1331: Rs -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1252: Running -> rBody.innerHTML = '<tr><td class="empty-state"><div class="spinner" style="width:20px; height:20px; 
+  Line 21: Runtime -> errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${li
+  Line 1068: SALE -> // NEW SALE MODAL & FORM INGESTION
+  Line 1224: SANDBOX -> // EXPLORATORY DATA ANALYSIS (SQL CONSOLE SANDBOX)
+  Line 1370: SANDBOX -> // DATA SIMULATION SANDBOX CONTROLS
+  Line 1164: SEEK -> // GOAL SEEK PRESCRIPTIVE MODELING
+  Line 1234: SELECT -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: SELECT -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1236: SELECT -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1237: SELECT -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: SELECT -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 76: SERVER -> // SERVER WAKE-UP PING (Render free tier cold start fix)
+  Line 1370: SIMULATION -> // DATA SIMULATION SANDBOX CONTROLS
+  Line 1224: SQL -> // EXPLORATORY DATA ANALYSIS (SQL CONSOLE SANDBOX)
+  Line 1303: SQL -> console.error('SQL Console execute error:', e);
+  Line 1298: SQLite -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 1394: SQLite -> showToast('? Rebuilding SQLite database and simulating sales...', false);
+  Line 1437: STARTUP -> // APP TRIGGER (STARTUP)
+  Line 873: STATISTICS -> // VISUALS: DESCRIPTIVE STATISTICS GRID RENDER
+  Line 1234: SUM -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: SUM -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1237: SUM -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: SUM -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 1141: SWITCH -> // POLYNOMIAL MODEL TUNING & DYNAMIC SWITCH
+  Line 1110: Sale -> showToast('? Sale added. Database rebuilt.');
+  Line 1197: Sales -> <span>Monthly Sales Needed:</span>
+  Line 881: Sample -> { label: 'Sample Size (N)', val: stats.count, meta: 'Total sales generated' },
+  Line 703: Scale -> r: Math.max(4, Math.min(22, item.monetary / 6000)), // Scale bubble size
+  Line 633: Scaled -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 116: Sections -> // Toggle Content Sections
+  Line 695: Segments -> // Group bubble points by RFM Segments for discrete toggling legend
+  Line 1328: Select -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 98: Server -> banner.querySelector('span').textContent = 'Server unreachable. Please refresh the page.';
+  Line 1120: Server -> showToast(`?? Ingestion failed: ${err.error || 'Server rejected request'}`, true);
+  Line 31: Set -> // Set Date in header
+  Line 67: Set -> let anomalySet = new Set(); // Stores anomaly IDs for table badges
+  Line 293: Set -> // Set Top Recommendation Banner
+  Line 976: Show -> // Show top 60 rows for browser scroll efficiency
+  Line 1006: Showing -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 1415: Simulation -> showToast('?? Simulation generation failed on server.', true);
+  Line 881: Size -> { label: 'Sample Size (N)', val: stats.count, meta: 'Total sales generated' },
+  Line 479: Spent -> label: 'Spent',
+  Line 887: Squared -> { label: 'Variance (S?)', val: stats.variance.toLocaleString('en-IN'), meta: 'Squared deviations sum
+  Line 882: Standard -> { label: 'Mean Revenue', val: currencyFormatter.format(stats.mean), meta: 'Standard arithmetic avera
+  Line 270: Statistical -> showToast('?? Statistical computation failed. Check python environment log.', true);
+  Line 885: Std -> { label: 'Std. Deviation', val: currencyFormatter.format(stats.std_dev), meta: 'Data dispersion spre
+  Line 167: Store -> // Store anomalies for quick lookup mapping
+  Line 67: Stores -> let anomalySet = new Set(); // Stores anomaly IDs for table badges
+  Line 43: Style -> // Chart.js Style Defaults
+  Line 134: Support -> // Support back/forward browser navigation using hash
+  Line 253: Symmetric -> const skewType = stats.skewness > 0.5 ? 'Right-skewed (High sales)' : (stats.skewness < -0.5 ? 'Left
+  Line 130: Sync -> // Sync hash
+  Line 105: TAB -> // TAB ROUTING MANAGEMENT
+  Line 210: TAB -> // CORE SERVICES: FETCH ANALYTICS DATA (DS/ML TAB)
+  Line 363: TAB -> // VISUALS: DASHBOARD TAB CHARTS
+  Line 514: TAB -> // VISUALS: ANALYTICS TAB CHARTS
+  Line 907: TABLE -> // VISUALS: CORRELATION MATRIX HEATMAP TABLE
+  Line 964: TABLES -> // VISUALS: DATA TABLES DRAW & FILTER
+  Line 1310: TABLES -> // RFM COHORT MARKETING LOOKUP TABLES
+  Line 1128: TOAST -> // TOAST NOTIFICATIONS MANAGER
+  Line 1437: TRIGGER -> // APP TRIGGER (STARTUP)
+  Line 1141: TUNING -> // POLYNOMIAL MODEL TUNING & DYNAMIC SWITCH
+  Line 200: Table -> // Render Table log
+  Line 928: Table -> // Table Matrix cells
+  Line 1192: Target -> <span>Target Revenue Goal:</span>
+  Line 1203: Target -> <span>Target AOV Needed:</span>
+  Line 1329: Target -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 112: Toggle -> // Toggle Buttons active classes
+  Line 116: Toggle -> // Toggle Content Sections
+  Line 293: Top -> // Set Top Recommendation Banner
+  Line 881: Total -> { label: 'Sample Size (N)', val: stats.count, meta: 'Total sales generated' },
+  Line 572: Trend -> label: 'Forecast Trend',
+  Line 120: Trigger -> // Trigger appropriate data fetches
+  Line 1332: Trigger -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1103: Type -> headers: { 'Content-Type': 'application/json' },
+  Line 1257: Type -> headers: { 'Content-Type': 'application/json' },
+  Line 1400: Type -> headers: { 'Content-Type': 'application/json' },
+  Line 76: UP -> // SERVER WAKE-UP PING (Render free tier cold start fix)
+  Line 998: UPI -> <td><span class="badge badge-payment" style="border-radius:4px;">${item.mode_of_payment || 'UPI'}</s
+  Line 32: US -> document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', {
+  Line 27: UTILITIES -> // INITIALIZATION & GLOBAL UTILITIES
+  Line 1300: Unknown -> errLog.textContent = data.error || "Unknown server response.";
+  Line 582: Upper -> label: 'Upper Bound',
+  Line 606: Upper -> filter: item => item.text !== 'Upper Bound' && item.text !== 'Fitted Regression'
+  Line 1329: VIP -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1334: VIP -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 887: Variance -> { label: 'Variance (S?)', val: stats.variance.toLocaleString('en-IN'), meta: 'Squared deviations sum
+  Line 888: Variation -> { label: 'Coeff. of Variation', val: `${stats.coefficient_of_variation.toFixed(1)}%`, meta: 'Relativ
+  Line 1123: Verify -> showToast('?? Network failure. Verify backend flask server is running.', true);
+  Line 76: WAKE -> // SERVER WAKE-UP PING (Render free tier cold start fix)
+  Line 1238: Y -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 170: a -> anomaliesData.anomalies.forEach(a => anomalySet.add(a.id));
+  Line 1020: a -> anomalies.forEach(a => {
+  Line 1022: a -> const dObj = new Date(a.sale_date + 'T00:00:00');
+  Line 1027: a -> <td>${a.customer_name}</td>
+  Line 1028: a -> <td class="product-cell">${a.product_name}</td>
+  Line 1029: a -> <td class="money-cell" style="color: var(--accent-pink);">${currencyFormatter.format(a.total_price)}
+  Line 1030: a -> <td class="zscore-cell high-z">+${a.z_score.toFixed(2)}?</td>
+  Line 1171: a -> showToast('?? Please enter a valid positive revenue target.', true);
+  Line 1328: a -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1332: a -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1333: a -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1334: a -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 450: a3adc2 -> color: '#a3adc2'
+  Line 744: a3adc2 -> color: '#a3adc2'
+  Line 422: a855f7 -> const colors = ['#8b5cf6', '#06b6d4', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#a855f
+  Line 1334: about -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1298: above -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 1318: acc -> const totalVal = data.reduce((acc, curr) => acc + curr.monetary, 0);
+  Line 1319: acc -> const totalOrders = data.reduce((acc, curr) => acc + curr.frequency, 0);
+  Line 308: accent -> <td><span style="font-weight:600; color:var(--accent-orange);">${r.lift}x</span></td>
+  Line 840: accent -> borderColor: 'var(--accent-violet)',
+  Line 1029: accent -> <td class="money-cell" style="color: var(--accent-pink);">${currencyFormatter.format(a.total_price)}
+  Line 1134: accent -> toast.style.borderColor = isError ? '#ef4444' : 'var(--accent-emerald)';
+  Line 1135: accent -> toast.style.color = isError ? '#ef4444' : 'var(--accent-emerald)';
+  Line 1184: accent -> const trendColor = isGrowth ? 'var(--accent-emerald)' : 'var(--accent-pink)';
+  Line 1193: accent -> <span style="font-family:'JetBrains Mono'; color:var(--accent-violet);">${currencyFormatter.format(d
+  Line 1215: accent -> resultPanel.innerHTML = `<div style="color:var(--accent-pink); text-align:center;">${data.error}</di
+  Line 1219: accent -> resultPanel.innerHTML = '<div style="color:var(--accent-pink); text-align:center;">Network request f
+  Line 1298: accent -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 1305: accent -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Che
+  Line 1349: accent -> <td><span class="badge" style="background: rgba(245, 158, 11, 0.08); color: var(--accent-amber);">${
+  Line 1354: accent -> <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-violet);"
+  Line 1329: access -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1330: accessories -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1332: accessories -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1331: accessory -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1322: accounts -> document.getElementById('cohort-size-txt').textContent = size.toLocaleString('en-IN') + ' accounts';
+  Line 1332: accounts -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1334: accounts -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1333: acquisition -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1426: action -> window.triggerRetentionAction = function(customer, action) {
+  Line 1427: action -> showToast(`? Retention action "${action}" triggered for ${customer}!`);
+  Line 112: active -> // Toggle Buttons active classes
+  Line 113: active -> document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  Line 114: active -> document.getElementById(`tab-${tabId}`).classList.add('active');
+  Line 117: active -> document.querySelectorAll('.tab-content').forEach(sect => sect.classList.remove('active'));
+  Line 118: active -> document.getElementById(`${tabId}-view`).classList.add('active');
+  Line 1072: active -> document.getElementById('addModal').classList.add('active');
+  Line 1077: active -> document.getElementById('addModal').classList.remove('active');
+  Line 1112: active -> // Reload whatever tab is currently active
+  Line 1373: active -> document.getElementById('simModal').classList.add('active');
+  Line 1377: active -> document.getElementById('simModal').classList.remove('active');
+  Line 1408: active -> // Refresh active tab views
+  Line 1088: addDataForm -> document.getElementById('addDataForm').addEventListener('submit', async e => {
+  Line 1109: addDataForm -> document.getElementById('addDataForm').reset();
+  Line 1072: addModal -> document.getElementById('addModal').classList.add('active');
+  Line 1077: addModal -> document.getElementById('addModal').classList.remove('active');
+  Line 1080: addModal -> document.getElementById('addModal').addEventListener('click', function(e) {
+  Line 1110: added -> showToast('? Sale added. Database rebuilt.');
+  Line 1335: advertising -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1350: ago -> <td style="font-family: 'JetBrains Mono', monospace;">${item.recency_days.toFixed(0)}d ago</td>
+  Line 537: aligning -> // Format data streams aligning the points properly
+  Line 633: alignment -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 297: also -> <strong>${top.lift}x</strong> more likely to also buy <strong>${top.item_b}</strong>.<br>
+  Line 1349: amber -> <td><span class="badge" style="background: rgba(245, 158, 11, 0.08); color: var(--accent-amber);">${
+  Line 121: analytics -> if (tabId === 'analytics') {
+  Line 137: analytics -> if (hash === 'analytics' || hash === 'dashboard' || hash === 'sql') {
+  Line 157: analytics -> fetch(API_BASE + '/api/analytics/anomalies')
+  Line 215: analytics -> const targetView = document.getElementById('analytics-view');
+  Line 217: analytics -> loader.className = 'analytics-loading';
+  Line 223: analytics -> fetch(API_BASE + `/api/analytics/forecast?degree=${forecastDegree}`),
+  Line 224: analytics -> fetch(API_BASE + '/api/analytics/stats'),
+  Line 225: analytics -> fetch(API_BASE + '/api/analytics/rfm'),
+  Line 226: analytics -> fetch(API_BASE + '/api/analytics/anomalies'),
+  Line 227: analytics -> fetch(API_BASE + '/api/analytics/correlation'),
+  Line 228: analytics -> fetch(API_BASE + '/api/analytics/distribution'),
+  Line 229: analytics -> fetch(API_BASE + '/api/analytics/growth'),
+  Line 230: analytics -> fetch(API_BASE + '/api/analytics/recommendations')
+  Line 256: analytics -> // Render complex analytics visual modules
+  Line 269: analytics -> console.error('Error fetching analytics calculations:', e);
+  Line 1148: analytics -> const res = await fetch(API_BASE + `/api/analytics/forecast?degree=${forecastDegree}`);
+  Line 1178: analytics -> const res = await fetch(API_BASE + `/api/analytics/goalseek?target=${inputVal}`);
+  Line 1444: analytics -> if (initialHash === 'analytics' || initialHash === 'sql') {
+  Line 595: and -> fill: 3, // Fill between dataset indices 4 (lower) and 3 (upper)
+  Line 1328: and -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1329: and -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1332: and -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1394: and -> showToast('? Rebuilding SQLite database and simulating sales...', false);
+  Line 173: animations -> // Render KPIs with count-up animations
+  Line 222: anomaliesRes -> const [forecastRes, statsRes, rfmRes, anomaliesRes, correlationRes, distributionRes, growthRes, recs
+  Line 239: anomaliesRes -> const anomalies = await anomaliesRes.json();
+  Line 1012: anomaliesTable -> const tbody = document.querySelector('#anomaliesTable tbody');
+  Line 67: anomaly -> let anomalySet = new Set(); // Stores anomaly IDs for table badges
+  Line 249: anomaly -> document.getElementById('kpi-anomaly-count').textContent = anomalies.anomaly_count;
+  Line 250: anomaly -> document.getElementById('kpi-anomaly-rate').textContent = `${anomalies.anomaly_rate}% of sales binne
+  Line 989: anomaly -> const badgeClass = isAnomaly ? 'badge badge-anomaly' : 'badge badge-mobile';
+  Line 1333: any -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1440: anyway -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 176: aov -> animateValue('kpi-aov', summary.avg_order_value, true);
+  Line 1324: aov -> document.getElementById('cohort-aov-txt').textContent = currencyFormatter.format(avgOrderVal);
+  Line 85: api -> const res = await fetch(API_BASE + '/api/summary', { signal: controller.signal });
+  Line 152: api -> fetch(API_BASE + '/api/summary'),
+  Line 153: api -> fetch(API_BASE + '/api/chart/monthly'),
+  Line 154: api -> fetch(API_BASE + '/api/chart/category'),
+  Line 155: api -> fetch(API_BASE + '/api/chart/customers'),
+  Line 156: api -> fetch(API_BASE + '/api/sales'),
+  Line 157: api -> fetch(API_BASE + '/api/analytics/anomalies')
+  Line 223: api -> fetch(API_BASE + `/api/analytics/forecast?degree=${forecastDegree}`),
+  Line 224: api -> fetch(API_BASE + '/api/analytics/stats'),
+  Line 225: api -> fetch(API_BASE + '/api/analytics/rfm'),
+  Line 226: api -> fetch(API_BASE + '/api/analytics/anomalies'),
+  Line 227: api -> fetch(API_BASE + '/api/analytics/correlation'),
+  Line 228: api -> fetch(API_BASE + '/api/analytics/distribution'),
+  Line 229: api -> fetch(API_BASE + '/api/analytics/growth'),
+  Line 230: api -> fetch(API_BASE + '/api/analytics/recommendations')
+  Line 1101: api -> const res = await fetch(API_BASE + '/api/sales/new', {
+  Line 1148: api -> const res = await fetch(API_BASE + `/api/analytics/forecast?degree=${forecastDegree}`);
+  Line 1178: api -> const res = await fetch(API_BASE + `/api/analytics/goalseek?target=${inputVal}`);
+  Line 1255: api -> const res = await fetch(API_BASE + '/api/query', {
+  Line 1398: api -> const res = await fetch(API_BASE + '/api/simulation/generate', {
+  Line 1103: application -> headers: { 'Content-Type': 'application/json' },
+  Line 1257: application -> headers: { 'Content-Type': 'application/json' },
+  Line 1400: application -> headers: { 'Content-Type': 'application/json' },
+  Line 120: appropriate -> // Trigger appropriate data fetches
+  Line 296: are -> Customers purchasing <strong>${top.item_a}</strong> are
+  Line 882: arithmetic -> { label: 'Mean Revenue', val: currencyFormatter.format(stats.mean), meta: 'Standard arithmetic avera
+  Line 1234: as -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: as -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1237: as -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: as -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 288: association -> tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No association rules found in transaction
+  Line 289: associations -> document.getElementById('top-rec-bundle').textContent = 'No associations found.';
+  Line 6: at -> console.error("Global JS Error Captured: ", message, " at ", source, ":", lineno);
+  Line 280: at -> showToast(`? Created bundle promotion: "${itemA} + ${itemB}" at 10% off!`);
+  Line 633: at -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 1333: attention -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1175: auto -> resultPanel.innerHTML = '<div class="spinner" style="width:20px; height:20px; margin: 10px auto;"></
+  Line 1252: auto -> rBody.innerHTML = '<tr><td class="empty-state"><div class="spinner" style="width:20px; height:20px; 
+  Line 882: average -> { label: 'Mean Revenue', val: currencyFormatter.format(stats.mean), meta: 'Standard arithmetic avera
+  Line 1206: average -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 1330: average -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1234: average_ticket -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 630: b -> const labels = data.bins.map(b => b.label);
+  Line 631: b -> const counts = data.bins.map(b => b.count);
+  Line 634: b -> const binCenters = data.bins.map(b => (b.bin_start + b.bin_end) / 2);
+  Line 134: back -> // Support back/forward browser navigation using hash
+  Line 73: backend -> : 'https://sales-backend-k5rw.onrender.com';
+  Line 1123: backend -> showToast('?? Network failure. Verify backend flask server is running.', true);
+  Line 1305: backend -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Che
+  Line 183: badge -> trendBadge.className = 'kpi-badge up';
+  Line 186: badge -> trendBadge.className = 'kpi-badge down';
+  Line 189: badge -> trendBadge.className = 'kpi-badge';
+  Line 987: badge -> // If transaction was flagged in anomalies, render outlier flag badge
+  Line 989: badge -> const badgeClass = isAnomaly ? 'badge badge-anomaly' : 'badge badge-mobile';
+  Line 995: badge -> <td><span class="badge badge-payment">${item.category}</span></td>
+  Line 998: badge -> <td><span class="badge badge-payment" style="border-radius:4px;">${item.mode_of_payment || 'UPI'}</s
+  Line 1348: badge -> <td><span class="badge badge-mobile">${item.mobile_no || 'N/A'}</span></td>
+  Line 1349: badge -> <td><span class="badge" style="background: rgba(245, 158, 11, 0.08); color: var(--accent-amber);">${
+  Line 67: badges -> let anomalySet = new Set(); // Stores anomaly IDs for table badges
+  Line 381: bar -> type: 'bar',
+  Line 475: bar -> type: 'bar',
+  Line 648: bar -> type: 'bar',
+  Line 663: bar -> type: 'bar',
+  Line 787: bar -> type: 'bar',
+  Line 1330: baseline -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1332: basic -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1333: before -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 316: beforeend -> tbody.insertAdjacentHTML('beforeend', row);
+  Line 1329: benefits -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 595: between -> fill: 3, // Fill between dataset indices 4 (lower) and 3 (upper)
+  Line 1187: between -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1191: between -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1196: between -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1202: between -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1209: between -> <div style="display:flex; justify-content:space-between; font-weight:700; color:${trendColor};">
+  Line 633: bin -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 250: binned -> document.getElementById('kpi-anomaly-rate').textContent = `${anomalies.anomaly_rate}% of sales binne
+  Line 1200: block -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming c
+  Line 1206: block -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 1299: block -> errLog.style.display = 'block';
+  Line 998: border -> <td><span class="badge badge-payment" style="border-radius:4px;">${item.mode_of_payment || 'UPI'}</s
+  Line 1195: border -> <div style="border-top:1px dashed var(--border); margin:6px 0;"></div>
+  Line 1208: border -> <div style="border-top:1px dashed var(--border); margin:6px 0;"></div>
+  Line 21: br -> errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${li
+  Line 297: br -> <strong>${top.lift}x</strong> more likely to also buy <strong>${top.item_b}</strong>.<br>
+  Line 1332: brand -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 134: browser -> // Support back/forward browser navigation using hash
+  Line 976: browser -> // Show top 60 rows for browser scroll efficiency
+  Line 113: btn -> document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  Line 310: btn -> <button class="btn btn-secondary" style="font-size:10px; padding: 4px 8px;" onclick="triggerBundlePr
+  Line 695: bubble -> // Group bubble points by RFM Segments for discrete toggling legend
+  Line 703: bubble -> r: Math.max(4, Math.min(22, item.monetary / 6000)), // Scale bubble size
+  Line 733: bubble -> type: 'bubble',
+  Line 1331: build -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 280: bundle -> showToast(`? Created bundle promotion: "${itemA} + ${itemB}" at 10% off!`);
+  Line 289: bundle -> document.getElementById('top-rec-bundle').textContent = 'No associations found.';
+  Line 295: bundle -> document.getElementById('top-rec-bundle').innerHTML = `
+  Line 1330: bundle -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1328: business -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1440: but -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 310: button -> <button class="btn btn-secondary" style="font-size:10px; padding: 4px 8px;" onclick="triggerBundlePr
+  Line 312: button -> </button>
+  Line 297: buy -> <strong>${top.lift}x</strong> more likely to also buy <strong>${top.item_b}</strong>.<br>
+  Line 1331: buyers -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 695: by -> // Group bubble points by RFM Segments for discrete toggling legend
+  Line 1016: by -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 1364: c -> const filtered = rfmCustomerList.filter(c => c.segment === cohort);
+  Line 70: cache -> let rfmCustomerList = []; // RFM cohort lookup data cache
+  Line 1329: campaigns -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1333: capture -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 434: card -> borderColor: 'var(--bg-card)',
+  Line 725: card -> borderColor: 'var(--bg-card)',
+  Line 1154: card -> // Re-populate forecast R? metrics card
+  Line 245: cards -> // Populate top KPI cards
+  Line 1335: catalogs -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 419: categoryChart -> const ctx = document.getElementById('categoryChart').getContext('2d');
+  Line 1234: category_revenue -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 941: cell -> td.className = 'heatmap-cell';
+  Line 994: cell -> <td class="product-cell">${item.product_name}</td>
+  Line 999: cell -> <td class="money-cell">${currencyFormatter.format(item.total_price)}</td>
+  Line 1028: cell -> <td class="product-cell">${a.product_name}</td>
+  Line 1029: cell -> <td class="money-cell" style="color: var(--accent-pink);">${currencyFormatter.format(a.total_price)}
+  Line 1030: cell -> <td class="zscore-cell high-z">+${a.z_score.toFixed(2)}?</td>
+  Line 1288: cell -> td.className = 'money-cell';
+  Line 1347: cell -> <td class="product-cell">${item.customer_name}</td>
+  Line 1352: cell -> <td class="money-cell">${currencyFormatter.format(item.monetary)}</td>
+  Line 1353: cell -> <td class="money-cell">${currencyFormatter.format(item.avg_order)}</td>
+  Line 928: cells -> // Table Matrix cells
+  Line 633: center -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 1006: center -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 1215: center -> resultPanel.innerHTML = `<div style="color:var(--accent-pink); text-align:center;">${data.error}</di
+  Line 1219: center -> resultPanel.innerHTML = '<div style="color:var(--accent-pink); text-align:center;">Network request f
+  Line 1065: change -> dateFilter.addEventListener('change', applyFilters);
+  Line 153: chart -> fetch(API_BASE + '/api/chart/monthly'),
+  Line 154: chart -> fetch(API_BASE + '/api/chart/category'),
+  Line 155: chart -> fetch(API_BASE + '/api/chart/customers'),
+  Line 883: checkpoint -> { label: 'Median Revenue', val: currencyFormatter.format(stats.median), meta: '50th percentile check
+  Line 1333: churn -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1334: churn -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 449: circle -> pointStyle: 'circle',
+  Line 112: classes -> // Toggle Buttons active classes
+  Line 1335: clearance -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1080: click -> document.getElementById('addModal').addEventListener('click', function(e) {
+  Line 1380: click -> // Modal overlay click listener
+  Line 1381: click -> document.getElementById('simModal').addEventListener('click', function(e) {
+  Line 1333: code -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 70: cohort -> let rfmCustomerList = []; // RFM cohort lookup data cache
+  Line 1316: cohort -> // Calculate cohort profiling statistics
+  Line 1322: cohort -> document.getElementById('cohort-size-txt').textContent = size.toLocaleString('en-IN') + ' accounts';
+  Line 1323: cohort -> document.getElementById('cohort-value-txt').textContent = currencyFormatter.format(totalVal);
+  Line 1324: cohort -> document.getElementById('cohort-aov-txt').textContent = currencyFormatter.format(avgOrderVal);
+  Line 1328: cohort -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1337: cohort -> document.getElementById('cohort-strategy-txt').innerHTML = strategies[segmentName] || strategies['AL
+  Line 1340: cohort -> tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><div class="icon">?</div>No customers in 
+  Line 1360: cohort -> function filterRFMTable(cohort) {
+  Line 1361: cohort -> if (cohort === 'ALL') {
+  Line 1364: cohort -> const filtered = rfmCustomerList.filter(c => c.segment === cohort);
+  Line 1365: cohort -> renderRFMLookupTable(filtered, cohort);
+  Line 1326: cohorts -> // Map cohorts to strategic prescriptions
+  Line 922: col -> th.className = 'heatmap-label col-lbl';
+  Line 1266: col -> data.columns.forEach(col => {
+  Line 1268: col -> th.textContent = col;
+  Line 1281: col -> data.columns.forEach(col => {
+  Line 1283: col -> const val = row[col];
+  Line 1286: col -> if (typeof val === 'number' && (col.includes('price') || col.includes('revenue') || col.includes('va
+  Line 76: cold -> // SERVER WAKE-UP PING (Render free tier cold start fix)
+  Line 5: colno -> window.onerror = function(message, source, lineno, colno, error) {
+  Line 21: colno -> errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${li
+  Line 288: colspan -> tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No association rules found in transaction
+  Line 972: colspan -> tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><div class="icon">?</div>No matching tran
+  Line 1006: colspan -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 1016: colspan -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 1275: colspan -> rBody.innerHTML = `<tr><td colspan="${data.columns.length}" class="empty-state">Query executed succe
+  Line 1340: colspan -> tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><div class="icon">?</div>No customers in 
+  Line 1285: column -> // Format currency values dynamically if column looks like revenue/price
+  Line 1333: competitor -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1298: compilation -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 256: complex -> // Render complex analytics visual modules
+  Line 1334: complimentary -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 270: computation -> showToast('?? Statistical computation failed. Check python environment log.', true);
+  Line 1218: computation -> console.error('Goal seek computation error:', e);
+  Line 892: conf -> statConfigs.forEach(conf => {
+  Line 897: conf -> <div class="stats-label">${conf.label}</div>
+  Line 898: conf -> <div class="stats-value">${conf.val}</div>
+  Line 900: conf -> <div class="stats-meta">${conf.meta}</div>
+  Line 1335: confirmed -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 205: connections -> showToast('?? Failed to load dashboard data. Check database connections.', true);
+  Line 117: content -> document.querySelectorAll('.tab-content').forEach(sect => sect.classList.remove('active'));
+  Line 400: context -> label: context => ` Revenue: ${currencyFormatter.format(context.raw)}`
+  Line 455: context -> label: context => ` ${context.label}: ${currencyFormatter.format(context.raw)}`
+  Line 495: context -> label: context => ` Spend: ${currencyFormatter.format(context.raw)}`
+  Line 611: context -> label: context => ` ${context.dataset.label}: ${currencyFormatter.format(context.raw)}`
+  Line 749: context -> label: context => {
+  Line 750: context -> const pt = context.raw;
+  Line 804: context -> label: context => ` Growth rate: ${context.raw}%`
+  Line 855: context -> label: context => ` Cumulative: ${currencyFormatter.format(context.raw)}`
+  Line 781: contraction -> // Colors: green for positive, pink for negative MoM contraction
+  Line 150: core -> // First fetch summaries & core charts in parallel
+  Line 919: corner -> header.appendChild(document.createElement('th')); // corner
+  Line 173: count -> // Render KPIs with count-up animations
+  Line 249: count -> document.getElementById('kpi-anomaly-count').textContent = anomalies.anomaly_count;
+  Line 820: cumulativeChart -> const ctx = document.getElementById('cumulativeChart').getContext('2d');
+  Line 1318: curr -> const totalVal = data.reduce((acc, curr) => acc + curr.monetary, 0);
+  Line 1319: curr -> const totalOrders = data.reduce((acc, curr) => acc + curr.frequency, 0);
+  Line 38: currency -> style: 'currency',
+  Line 1285: currency -> // Format currency values dynamically if column looks like revenue/price
+  Line 340: currentTime -> function update(currentTime) {
+  Line 341: currentTime -> const elapsed = currentTime - startTime;
+  Line 1016: currently -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 1112: currently -> // Reload whatever tab is currently active
+  Line 633: curve -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 1145: curve -> showToast(`? Re-fitting regression curve (Degree ${deg})...`);
+  Line 237: customer -> // Cache RFM customer list data for lookup rendering
+  Line 1334: customer -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1426: customer -> window.triggerRetentionAction = function(customer, action) {
+  Line 1427: customer -> showToast(`? Retention action "${action}" triggered for ${customer}!`);
+  Line 1092: customer_name -> customer_name: document.getElementById('customer_name').value,
+  Line 1236: customer_name -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1237: customer_name -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 464: customersChart -> const ctx = document.getElementById('customersChart').getContext('2d');
+  Line 68: dashboard -> let activeTab = 'dashboard';
+  Line 137: dashboard -> if (hash === 'analytics' || hash === 'dashboard' || hash === 'sql') {
+  Line 204: dashboard -> console.error('Error fetching dashboard datasets:', error);
+  Line 205: dashboard -> showToast('?? Failed to load dashboard data. Check database connections.', true);
+  Line 322: dashboard -> if (activeTab === 'dashboard') {
+  Line 1113: dashboard -> if (activeTab === 'dashboard') {
+  Line 1409: dashboard -> if (activeTab === 'dashboard') {
+  Line 1195: dashed -> <div style="border-top:1px dashed var(--border); margin:6px 0;"></div>
+  Line 1208: dashed -> <div style="border-top:1px dashed var(--border); margin:6px 0;"></div>
+  Line 205: database -> showToast('?? Failed to load dashboard data. Check database connections.', true);
+  Line 1394: database -> showToast('? Rebuilding SQLite database and simulating sales...', false);
+  Line 595: dataset -> fill: 3, // Fill between dataset indices 4 (lower) and 3 (upper)
+  Line 32: date -> document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', {
+  Line 1335: deep -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1143: deg -> async function updateForecastModel(deg) {
+  Line 1144: deg -> forecastDegree = parseInt(deg);
+  Line 1145: deg -> showToast(`? Re-fitting regression curve (Degree ${deg})...`);
+  Line 69: degree -> let forecastDegree = 1; // Polynomial forecast model degree state
+  Line 223: degree -> fetch(API_BASE + `/api/analytics/forecast?degree=${forecastDegree}`),
+  Line 1148: degree -> const res = await fetch(API_BASE + `/api/analytics/forecast?degree=${forecastDegree}`);
+  Line 253: density -> const skewType = stats.skewness > 0.5 ? 'Right-skewed (High sales)' : (stats.skewness < -0.5 ? 'Left
+  Line 884: density -> { label: 'Mode Class', val: `Rs. ${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density p
+  Line 254: desc -> document.getElementById('kpi-skewness-desc').textContent = skewType;
+  Line 1332: detailing -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 887: deviations -> { label: 'Variance (S?)', val: stats.variance.toLocaleString('en-IN'), meta: 'Squared deviations sum
+  Line 1298: diagnostic -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 370: digit -> return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 522: digit -> return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 526: digit -> return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 777: digit -> return new Date(y, mm - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 823: digit -> return new Date(y, mm - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 984: digit -> day: '2-digit', month: 'short', year: 'numeric'
+  Line 1023: digit -> const fDate = dObj.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
+  Line 1335: direct -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1329: discount -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1333: discount -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1335: discount -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 695: discrete -> // Group bubble points by RFM Segments for discrete toggling legend
+  Line 885: dispersion -> { label: 'Std. Deviation', val: currencyFormatter.format(stats.std_dev), meta: 'Data dispersion spre
+  Line 888: dispersion -> { label: 'Coeff. of Variation', val: `${stats.coefficient_of_variation.toFixed(1)}%`, meta: 'Relativ
+  Line 32: display -> document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', {
+  Line 629: distributionChart -> const ctx = document.getElementById('distributionChart').getContext('2d');
+  Line 7: div -> const errorDiv = document.createElement('div');
+  Line 216: div -> let loader = document.createElement('div');
+  Line 218: div -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 893: div -> const item = document.createElement('div');
+  Line 896: div -> <div>
+  Line 897: div -> <div class="stats-label">${conf.label}</div>
+  Line 898: div -> <div class="stats-value">${conf.val}</div>
+  Line 899: div -> </div>
+  Line 900: div -> <div class="stats-meta">${conf.meta}</div>
+  Line 972: div -> tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><div class="icon">?</div>No matching tran
+  Line 1016: div -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 1175: div -> resultPanel.innerHTML = '<div class="spinner" style="width:20px; height:20px; margin: 10px auto;"></
+  Line 1187: div -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1190: div -> </div>
+  Line 1191: div -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1194: div -> </div>
+  Line 1195: div -> <div style="border-top:1px dashed var(--border); margin:6px 0;"></div>
+  Line 1196: div -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1199: div -> </div>
+  Line 1202: div -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1205: div -> </div>
+  Line 1208: div -> <div style="border-top:1px dashed var(--border); margin:6px 0;"></div>
+  Line 1209: div -> <div style="display:flex; justify-content:space-between; font-weight:700; color:${trendColor};">
+  Line 1212: div -> </div>
+  Line 1215: div -> resultPanel.innerHTML = `<div style="color:var(--accent-pink); text-align:center;">${data.error}</di
+  Line 1219: div -> resultPanel.innerHTML = '<div style="color:var(--accent-pink); text-align:center;">Network request f
+  Line 1252: div -> rBody.innerHTML = '<tr><td class="empty-state"><div class="spinner" style="width:20px; height:20px; 
+  Line 1340: div -> tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><div class="icon">?</div>No customers in 
+  Line 427: doughnut -> type: 'doughnut',
+  Line 186: down -> trendBadge.className = 'kpi-badge down';
+  Line 1328: driven -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1328: dropdown -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1335: during -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1418: during -> showToast('?? Connection error during data generation sandbox.', true);
+  Line 1285: dynamically -> // Format currency values dynamically if column looks like revenue/price
+  Line 91: e -> } catch (e) { /* still sleeping */ }
+  Line 268: e -> } catch (e) {
+  Line 269: e -> console.error('Error fetching analytics calculations:', e);
+  Line 1080: e -> document.getElementById('addModal').addEventListener('click', function(e) {
+  Line 1081: e -> if (e.target === this) closeModal();
+  Line 1084: e -> document.addEventListener('keydown', e => {
+  Line 1085: e -> if (e.key === 'Escape') closeModal();
+  Line 1088: e -> document.getElementById('addDataForm').addEventListener('submit', async e => {
+  Line 1089: e -> e.preventDefault();
+  Line 1157: e -> } catch (e) {
+  Line 1158: e -> console.error('Failed to update forecast regression degree:', e);
+  Line 1217: e -> } catch (e) {
+  Line 1218: e -> console.error('Goal seek computation error:', e);
+  Line 1302: e -> } catch (e) {
+  Line 1303: e -> console.error('SQL Console execute error:', e);
+  Line 1331: e -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1333: e -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1381: e -> document.getElementById('simModal').addEventListener('click', function(e) {
+  Line 1382: e -> if (e.target === this) closeSimModal();
+  Line 1385: e -> document.getElementById('simDataForm').addEventListener('submit', async e => {
+  Line 1386: e -> e.preventDefault();
+  Line 1417: e -> } catch (e) {
+  Line 633: each -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 1329: early -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 343: easeOutCubic -> const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+  Line 422: ec4899 -> const colors = ['#8b5cf6', '#06b6d4', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#a855f
+  Line 656: ec4899 -> borderColor: '#ec4899',
+  Line 716: ec4899 -> 'Cannot Lose': '#ec4899',
+  Line 422: ef4444 -> const colors = ['#8b5cf6', '#06b6d4', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#a855f
+  Line 717: ef4444 -> 'Lost': '#ef4444'
+  Line 1134: ef4444 -> toast.style.borderColor = isError ? '#ef4444' : 'var(--accent-emerald)';
+  Line 1135: ef4444 -> toast.style.color = isError ? '#ef4444' : 'var(--accent-emerald)';
+  Line 976: efficiency -> // Show top 60 rows for browser scroll efficiency
+  Line 334: elementId -> function animateValue(elementId, finalValue, isCurrency) {
+  Line 335: elementId -> const el = document.getElementById(elementId);
+  Line 1332: email -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1334: email -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1134: emerald -> toast.style.borderColor = isError ? '#ef4444' : 'var(--accent-emerald)';
+  Line 1135: emerald -> toast.style.color = isError ? '#ef4444' : 'var(--accent-emerald)';
+  Line 1184: emerald -> const trendColor = isGrowth ? 'var(--accent-emerald)' : 'var(--accent-pink)';
+  Line 288: empty -> tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No association rules found in transaction
+  Line 972: empty -> tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><div class="icon">?</div>No matching tran
+  Line 1016: empty -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 1252: empty -> rBody.innerHTML = '<tr><td class="empty-state"><div class="spinner" style="width:20px; height:20px; 
+  Line 1275: empty -> rBody.innerHTML = `<tr><td colspan="${data.columns.length}" class="empty-state">Query executed succe
+  Line 1298: empty -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 1305: empty -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Che
+  Line 1340: empty -> tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><div class="icon">?</div>No customers in 
+  Line 32: en -> document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', {
+  Line 37: en -> const currencyFormatter = new Intl.NumberFormat('en-IN', {
+  Line 349: en -> el.textContent = current.toLocaleString('en-IN');
+  Line 355: en -> el.textContent = isCurrency ? currencyFormatter.format(finalValue) : finalValue.toLocaleString('en-I
+  Line 887: en -> { label: 'Variance (S?)', val: stats.variance.toLocaleString('en-IN'), meta: 'Squared deviations sum
+  Line 983: en -> const formattedDate = dateObj.toLocaleDateString('en-IN', {
+  Line 1023: en -> const fDate = dObj.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
+  Line 1322: en -> document.getElementById('cohort-size-txt').textContent = size.toLocaleString('en-IN') + ' accounts';
+  Line 1335: engage -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1171: enter -> showToast('?? Please enter a valid positive revenue target.', true);
+  Line 270: environment -> showToast('?? Statistical computation failed. Check python environment log.', true);
+  Line 5: error -> window.onerror = function(message, source, lineno, colno, error) {
+  Line 203: error -> } catch (error) {
+  Line 204: error -> console.error('Error fetching dashboard datasets:', error);
+  Line 1418: error -> showToast('?? Connection error during data generation sandbox.', true);
+  Line 1329: exclusive -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1303: execute -> console.error('SQL Console execute error:', e);
+  Line 1275: executed -> rBody.innerHTML = `<tr><td colspan="${data.columns.length}" class="empty-state">Query executed succe
+  Line 524: f -> const forecastLabels = data.forecast.map(f => {
+  Line 525: f -> const [y, m] = f.month.split('-');
+  Line 531: f -> const forecastPredicted = data.forecast.map(f => f.predicted);
+  Line 532: f -> const forecastLower = data.forecast.map(f => f.lower_bound);
+  Line 533: f -> const forecastUpper = data.forecast.map(f => f.upper_bound);
+  Line 920: f -> data.features.forEach(f => {
+  Line 923: f -> th.textContent = f;
+  Line 422: f59e0b -> const colors = ['#8b5cf6', '#06b6d4', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#a855f
+  Line 715: f59e0b -> 'At Risk': '#f59e0b',
+  Line 270: failed -> showToast('?? Statistical computation failed. Check python environment log.', true);
+  Line 1159: failed -> showToast('?? Model fitting failed.', true);
+  Line 1219: failed -> resultPanel.innerHTML = '<div style="color:var(--accent-pink); text-align:center;">Network request f
+  Line 1298: failed -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 1305: failed -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Che
+  Line 1415: failed -> showToast('?? Simulation generation failed on server.', true);
+  Line 1123: failure -> showToast('?? Network failure. Verify backend flask server is running.', true);
+  Line 120: fetches -> // Trigger appropriate data fetches
+  Line 204: fetching -> console.error('Error fetching dashboard datasets:', error);
+  Line 269: fetching -> console.error('Error fetching analytics calculations:', e);
+  Line 12: fff -> errorDiv.style.color = '#fff';
+  Line 952: ffffff -> td.style.color = Math.abs(val) > 0.4 ? '#ffffff' : 'var(--text-secondary)';
+  Line 1328: filter -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1036: filters -> // Live search filters
+  Line 334: finalValue -> function animateValue(elementId, finalValue, isCurrency) {
+  Line 344: finalValue -> const current = Math.floor(eased * finalValue);
+  Line 355: finalValue -> el.textContent = isCurrency ? currencyFormatter.format(finalValue) : finalValue.toLocaleString('en-I
+  Line 773: first -> // Filter out first month since growth is 0
+  Line 1440: first -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 1145: fitting -> showToast(`? Re-fitting regression curve (Degree ${deg})...`);
+  Line 1159: fitting -> showToast('?? Model fitting failed.', true);
+  Line 76: fix -> // SERVER WAKE-UP PING (Render free tier cold start fix)
+  Line 8: fixed -> errorDiv.style.position = 'fixed';
+  Line 987: flag -> // If transaction was flagged in anomalies, render outlier flag badge
+  Line 987: flagged -> // If transaction was flagged in anomalies, render outlier flag badge
+  Line 1016: flagged -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 1123: flask -> showToast('?? Network failure. Verify backend flask server is running.', true);
+  Line 181: flex -> trendBadge.style.display = 'inline-flex';
+  Line 1187: flex -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1191: flex -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1196: flex -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1202: flex -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1209: flex -> <div style="display:flex; justify-content:space-between; font-weight:700; color:${trendColor};">
+  Line 1329: focus -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 218: font -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 298: font -> <span style="color:var(--text-secondary); font-size:12px;">(Confidence: ${top.confidence_a_b}%)</spa
+  Line 308: font -> <td><span style="font-weight:600; color:var(--accent-orange);">${r.lift}x</span></td>
+  Line 310: font -> <button class="btn btn-secondary" style="font-size:10px; padding: 4px 8px;" onclick="triggerBundlePr
+  Line 1006: font -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 1187: font -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1189: font -> <span style="font-family:'JetBrains Mono';">${currencyFormatter.format(data.avg_monthly_revenue)}</s
+  Line 1191: font -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1193: font -> <span style="font-family:'JetBrains Mono'; color:var(--accent-violet);">${currencyFormatter.format(d
+  Line 1198: font -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${data.orders_needed} order
+  Line 1200: font -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming c
+  Line 1204: font -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${currencyFormatter.format(
+  Line 1206: font -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 1209: font -> <div style="display:flex; justify-content:space-between; font-weight:700; color:${trendColor};">
+  Line 1350: font -> <td style="font-family: 'JetBrains Mono', monospace;">${item.recency_days.toFixed(0)}d ago</td>
+  Line 1351: font -> <td style="font-family: 'JetBrains Mono', monospace;">${item.frequency} orders</td>
+  Line 1354: font -> <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-violet);"
+  Line 518: forecastChart -> const ctx = document.getElementById('forecastChart').getContext('2d');
+  Line 134: forward -> // Support back/forward browser navigation using hash
+  Line 288: found -> tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No association rules found in transaction
+  Line 289: found -> document.getElementById('top-rec-bundle').textContent = 'No associations found.';
+  Line 76: free -> // SERVER WAKE-UP PING (Render free tier cold start fix)
+  Line 1328: from -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1334: from -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 214: full -> // Create full overlay spinner
+  Line 1330: gaming -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1398: generate -> const res = await fetch(API_BASE + '/api/simulation/generate', {
+  Line 881: generated -> { label: 'Sample Size (N)', val: stats.count, meta: 'Total sales generated' },
+  Line 1415: generation -> showToast('?? Simulation generation failed on server.', true);
+  Line 1418: generation -> showToast('?? Connection error during data generation sandbox.', true);
+  Line 1168: goalSeekResults -> const resultPanel = document.getElementById('goalSeekResults');
+  Line 1167: goalSeekTarget -> const inputVal = parseFloat(document.getElementById('goalSeekTarget').value);
+  Line 1178: goalseek -> const res = await fetch(API_BASE + `/api/analytics/goalseek?target=${inputVal}`);
+  Line 781: green -> // Colors: green for positive, pink for negative MoM contraction
+  Line 772: growthChart -> const ctx = document.getElementById('growthChart').getContext('2d');
+  Line 1332: guides -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 520: h -> const historicalLabels = data.historical.map(h => {
+  Line 521: h -> const [y, m] = h.month.split('-');
+  Line 530: h -> const histActuals = data.historical.map(h => h.actual);
+  Line 539: h -> const fittedData = data.historical.map(h => h.fitted);
+  Line 135: hashchange -> window.addEventListener('hashchange', () => {
+  Line 917: headers -> // Columns headers
+  Line 1264: headers -> // Render table headers
+  Line 911: heatmap -> const container = document.getElementById('correlation-heatmap-container');
+  Line 915: heatmap -> table.className = 'heatmap-table';
+  Line 922: heatmap -> th.className = 'heatmap-label col-lbl';
+  Line 934: heatmap -> th.className = 'heatmap-label row-lbl';
+  Line 941: heatmap -> td.className = 'heatmap-cell';
+  Line 1030: high -> <td class="zscore-cell high-z">+${a.z_score.toFixed(2)}?</td>
+  Line 1330: high -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1334: historic -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1335: holiday -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 54: hot -> // Charts objects registry for hot replacement / refresh
+  Line 1329: iPhone -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 972: icon -> tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><div class="icon">?</div>No matching tran
+  Line 1016: icon -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 1340: icon -> tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><div class="icon">?</div>No customers in 
+  Line 1231: id -> function loadQueryTemplate(id) {
+  Line 1236: id -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1240: id -> queryText.value = templates[id] || "";
+  Line 1330: increase -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 327: indexed -> showToast('? Dataset re-indexed successfully.');
+  Line 595: indices -> fill: 3, // Fill between dataset indices 4 (lower) and 3 (upper)
+  Line 181: inline -> trendBadge.style.display = 'inline-flex';
+  Line 1061: input -> searchInput.addEventListener('input', () => {
+  Line 1328: intelligence -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 773: is -> // Filter out first month since growth is 0
+  Line 1112: is -> // Reload whatever tab is currently active
+  Line 1123: is -> showToast('?? Network failure. Verify backend flask server is running.', true);
+  Line 334: isCurrency -> function animateValue(elementId, finalValue, isCurrency) {
+  Line 346: isCurrency -> if (isCurrency) {
+  Line 355: isCurrency -> el.textContent = isCurrency ? currencyFormatter.format(finalValue) : finalValue.toLocaleString('en-I
+  Line 1131: isError -> function showToast(message, isError = false) {
+  Line 1134: isError -> toast.style.borderColor = isError ? '#ef4444' : 'var(--accent-emerald)';
+  Line 1135: isError -> toast.style.color = isError ? '#ef4444' : 'var(--accent-emerald)';
+  Line 1170: isNaN -> if (isNaN(inputVal) || inputVal <= 0) {
+  Line 279: itemA -> window.triggerBundlePromotion = function(itemA, itemB) {
+  Line 280: itemA -> showToast(`? Created bundle promotion: "${itemA} + ${itemB}" at 10% off!`);
+  Line 279: itemB -> window.triggerBundlePromotion = function(itemA, itemB) {
+  Line 280: itemB -> showToast(`? Created bundle promotion: "${itemA} + ${itemB}" at 10% off!`);
+  Line 1103: json -> headers: { 'Content-Type': 'application/json' },
+  Line 1257: json -> headers: { 'Content-Type': 'application/json' },
+  Line 1400: json -> headers: { 'Content-Type': 'application/json' },
+  Line 1187: justify -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1191: justify -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1196: justify -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1202: justify -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1209: justify -> <div style="display:flex; justify-content:space-between; font-weight:700; color:${trendColor};">
+  Line 73: k5rw -> : 'https://sales-backend-k5rw.onrender.com';
+  Line 1332: keeping -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1330: keyboards -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1084: keydown -> document.addEventListener('keydown', e => {
+  Line 174: kpi -> animateValue('kpi-revenue', summary.total_revenue, true);
+  Line 175: kpi -> animateValue('kpi-orders', summary.total_orders, false);
+  Line 176: kpi -> animateValue('kpi-aov', summary.avg_order_value, true);
+  Line 177: kpi -> document.getElementById('kpi-product').textContent = summary.top_product;
+  Line 180: kpi -> const trendBadge = document.getElementById('kpi-revenue-trend');
+  Line 183: kpi -> trendBadge.className = 'kpi-badge up';
+  Line 186: kpi -> trendBadge.className = 'kpi-badge down';
+  Line 189: kpi -> trendBadge.className = 'kpi-badge';
+  Line 246: kpi -> document.getElementById('kpi-r2').textContent = forecast.model.r_squared.toFixed(4);
+  Line 247: kpi -> document.getElementById('kpi-r2-sub').textContent = `Fit: ${forecast.model.equation}`;
+  Line 249: kpi -> document.getElementById('kpi-anomaly-count').textContent = anomalies.anomaly_count;
+  Line 250: kpi -> document.getElementById('kpi-anomaly-rate').textContent = `${anomalies.anomaly_rate}% of sales binne
+  Line 252: kpi -> document.getElementById('kpi-skewness').textContent = stats.skewness.toFixed(3);
+  Line 254: kpi -> document.getElementById('kpi-skewness-desc').textContent = skewType;
+  Line 1155: kpi -> document.getElementById('kpi-r2').textContent = forecast.model.r_squared.toFixed(4);
+  Line 1156: kpi -> document.getElementById('kpi-r2-sub').textContent = `Fit: ${forecast.model.equation}`;
+  Line 897: label -> <div class="stats-label">${conf.label}</div>
+  Line 922: label -> th.className = 'heatmap-label col-lbl';
+  Line 934: label -> th.className = 'heatmap-label row-lbl';
+  Line 763: last -> title: { display: true, text: 'Recency (Days since last purchase)', color: 'var(--text-secondary)' }
+  Line 922: lbl -> th.className = 'heatmap-label col-lbl';
+  Line 934: lbl -> th.className = 'heatmap-label row-lbl';
+  Line 938: lblX -> data.features.forEach((lblX, xIndex) => {
+  Line 953: lblX -> td.title = `Pearson Correlation (${lblY} ? ${lblX}): ${val}`;
+  Line 929: lblY -> data.features.forEach((lblY, yIndex) => {
+  Line 935: lblY -> th.textContent = lblY;
+  Line 953: lblY -> td.title = `Pearson Correlation (${lblY} ? ${lblX}): ${val}`;
+  Line 695: legend -> // Group bubble points by RFM Segments for discrete toggling legend
+  Line 1285: like -> // Format currency values dynamically if column looks like revenue/price
+  Line 297: likely -> <strong>${top.lift}x</strong> more likely to also buy <strong>${top.item_b}</strong>.<br>
+  Line 547: line -> type: 'line',
+  Line 653: line -> type: 'line',
+  Line 834: line -> type: 'line',
+  Line 5: lineno -> window.onerror = function(message, source, lineno, colno, error) {
+  Line 6: lineno -> console.error("Global JS Error Captured: ", message, " at ", source, ":", lineno);
+  Line 21: lineno -> errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${li
+  Line 237: list -> // Cache RFM customer list data for lookup rendering
+  Line 1380: listener -> // Modal overlay click listener
+  Line 205: load -> showToast('?? Failed to load dashboard data. Check database connections.', true);
+  Line 217: loading -> loader.className = 'analytics-loading';
+  Line 218: loading -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 71: localhost -> const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1
+  Line 200: log -> // Render Table log
+  Line 270: log -> showToast('?? Statistical computation failed. Check python environment log.', true);
+  Line 1298: log -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 972: logged -> tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><div class="icon">?</div>No matching tran
+  Line 288: logs -> tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No association rules found in transaction
+  Line 33: long -> weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  Line 1285: looks -> // Format currency values dynamically if column looks like revenue/price
+  Line 70: lookup -> let rfmCustomerList = []; // RFM cohort lookup data cache
+  Line 167: lookup -> // Store anomalies for quick lookup mapping
+  Line 237: lookup -> // Cache RFM customer list data for lookup rendering
+  Line 262: lookup -> renderRFMLookupTable(rfm); // Populate RFM lookup panel
+  Line 595: lower -> fill: 3, // Fill between dataset indices 4 (lower) and 3 (upper)
+  Line 1329: luxury -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 167: mapping -> // Store anomalies for quick lookup mapping
+  Line 1187: margin -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1191: margin -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1196: margin -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1200: margin -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming c
+  Line 1202: margin -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1206: margin -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 1328: marketing -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 972: matching -> tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><div class="icon">?</div>No matching tran
+  Line 1340: matching -> tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><div class="icon">?</div>No customers in 
+  Line 80: max -> const MAX_TRIES = 12; // 60 seconds max
+  Line 5: message -> window.onerror = function(message, source, lineno, colno, error) {
+  Line 6: message -> console.error("Global JS Error Captured: ", message, " at ", source, ":", lineno);
+  Line 21: message -> errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${li
+  Line 1131: message -> function showToast(message, isError = false) {
+  Line 1133: message -> toast.textContent = message;
+  Line 900: meta -> <div class="stats-meta">${conf.meta}</div>
+  Line 218: metrics -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 1154: metrics -> // Re-populate forecast R? metrics card
+  Line 1330: mice -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1332: mind -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 776: mm -> const [y, mm] = m.month.split('-');
+  Line 777: mm -> return new Date(y, mm - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 822: mm -> const [y, mm] = m.month.split('-');
+  Line 823: mm -> return new Date(y, mm - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 989: mobile -> const badgeClass = isAnomaly ? 'badge badge-anomaly' : 'badge badge-mobile';
+  Line 1333: mobile -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1348: mobile -> <td><span class="badge badge-mobile">${item.mobile_no || 'N/A'}</span></td>
+  Line 1093: mobile_no -> mobile_no: document.getElementById('mobile_no').value,
+  Line 1237: mobile_no -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1097: mode_of_payment -> mode_of_payment: document.getElementById('mode_of_payment').value
+  Line 1235: mode_of_payment -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 69: model -> let forecastDegree = 1; // Polynomial forecast model degree state
+  Line 1016: model -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 218: models -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 256: modules -> // Render complex analytics visual modules
+  Line 999: money -> <td class="money-cell">${currencyFormatter.format(item.total_price)}</td>
+  Line 1029: money -> <td class="money-cell" style="color: var(--accent-pink);">${currencyFormatter.format(a.total_price)}
+  Line 1288: money -> td.className = 'money-cell';
+  Line 1352: money -> <td class="money-cell">${currencyFormatter.format(item.monetary)}</td>
+  Line 1353: money -> <td class="money-cell">${currencyFormatter.format(item.avg_order)}</td>
+  Line 1331: monitor -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1330: monitors -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 16: monospace -> errorDiv.style.fontFamily = 'monospace';
+  Line 1350: monospace -> <td style="font-family: 'JetBrains Mono', monospace;">${item.recency_days.toFixed(0)}d ago</td>
+  Line 1351: monospace -> <td style="font-family: 'JetBrains Mono', monospace;">${item.frequency} orders</td>
+  Line 1354: monospace -> <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-violet);"
+  Line 773: month -> // Filter out first month since growth is 0
+  Line 367: monthlyChart -> const ctx = document.getElementById('monthlyChart').getContext('2d');
+  Line 771: monthlyData -> function renderMoMGrowthChart(monthlyData) {
+  Line 774: monthlyData -> const items = monthlyData.slice(1);
+  Line 819: monthlyData -> function renderCumulativeChart(monthlyData) {
+  Line 821: monthlyData -> const labels = monthlyData.map(m => {
+  Line 825: monthlyData -> const cumulativeSum = monthlyData.map(m => m.cumulative_revenue);
+  Line 1238: monthly_revenue -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 297: more -> <strong>${top.lift}x</strong> more likely to also buy <strong>${top.item_b}</strong>.<br>
+  Line 191: muted -> trendBadge.style.color = 'var(--text-muted)';
+  Line 1006: muted -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 1200: muted -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming c
+  Line 1206: muted -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 1234: nFROM -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: nFROM -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1236: nFROM -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1237: nFROM -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: nFROM -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 1234: nGROUP -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: nGROUP -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1237: nGROUP -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: nGROUP -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 1237: nLIMIT -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1234: nORDER -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: nORDER -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1236: nORDER -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1237: nORDER -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: nORDER -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 1236: nWHERE -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 134: navigation -> // Support back/forward browser navigation using hash
+  Line 781: negative -> // Colors: green for positive, pink for negative MoM contraction
+  Line 944: negative -> // Alpha shading: Positive violet, negative pink
+  Line 1331: next -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 88: none -> if (banner) banner.style.display = 'none';
+  Line 1241: none -> document.getElementById('sqlErrorLog').style.display = 'none';
+  Line 1250: none -> errLog.style.display = 'none';
+  Line 633: normal -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 1329: not -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1286: number -> if (typeof val === 'number' && (col.includes('price') || col.includes('revenue') || col.includes('va
+  Line 33: numeric -> weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  Line 984: numeric -> day: '2-digit', month: 'short', year: 'numeric'
+  Line 54: objects -> // Charts objects registry for hot replacement / refresh
+  Line 280: off -> showToast(`? Created bundle promotion: "${itemA} + ${itemB}" at 10% off!`);
+  Line 1331: off -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1333: off -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1329: offer -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1330: offer -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1334: offering -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1440: offline -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 1329: on -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1415: on -> showToast('?? Simulation generation failed on server.', true);
+  Line 1332: onboarding -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 310: onclick -> <button class="btn btn-secondary" style="font-size:10px; padding: 4px 8px;" onclick="triggerBundlePr
+  Line 1335: only -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1227: opening -> // Load default template when opening the tab
+  Line 1330: or -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1331: or -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1333: or -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1335: or -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 308: orange -> <td><span style="font-weight:600; color:var(--accent-orange);">${r.lift}x</span></td>
+  Line 175: orders -> animateValue('kpi-orders', summary.total_orders, false);
+  Line 1198: orders -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${data.orders_needed} order
+  Line 1206: orders -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 1331: orders -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1351: orders -> <td style="font-family: 'JetBrains Mono', monospace;">${item.frequency} orders</td>
+  Line 1238: orders_count -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 1332: our -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 773: out -> // Filter out first month since growth is 0
+  Line 987: outlier -> // If transaction was flagged in anomalies, render outlier flag badge
+  Line 1016: outliers -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 1334: outreach -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 214: overlay -> // Create full overlay spinner
+  Line 654: overlay -> label: 'Normal distribution overlay',
+  Line 1380: overlay -> // Modal overlay click listener
+  Line 218: p -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 1334: package -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 98: page -> banner.querySelector('span').textContent = 'Server unreachable. Please refresh the page.';
+  Line 262: panel -> renderRFMLookupTable(rfm); // Populate RFM lookup panel
+  Line 877: panel -> const grid = document.getElementById('stats-panel-grid');
+  Line 150: parallel -> // First fetch summaries & core charts in parallel
+  Line 1332: part -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 995: payment -> <td><span class="badge badge-payment">${item.category}</span></td>
+  Line 998: payment -> <td><span class="badge badge-payment" style="border-radius:4px;">${item.mode_of_payment || 'UPI'}</s
+  Line 883: percentile -> { label: 'Median Revenue', val: currencyFormatter.format(stats.median), meta: '50th percentile check
+  Line 1334: personalized -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 781: pink -> // Colors: green for positive, pink for negative MoM contraction
+  Line 944: pink -> // Alpha shading: Positive violet, negative pink
+  Line 1029: pink -> <td class="money-cell" style="color: var(--accent-pink);">${currencyFormatter.format(a.total_price)}
+  Line 1184: pink -> const trendColor = isGrowth ? 'var(--accent-emerald)' : 'var(--accent-pink)';
+  Line 1215: pink -> resultPanel.innerHTML = `<div style="color:var(--accent-pink); text-align:center;">${data.error}</di
+  Line 1219: pink -> resultPanel.innerHTML = '<div style="color:var(--accent-pink); text-align:center;">Network request f
+  Line 1298: pink -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 1305: pink -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Che
+  Line 537: points -> // Format data streams aligning the points properly
+  Line 695: points -> // Group bubble points by RFM Segments for discrete toggling legend
+  Line 1154: populate -> // Re-populate forecast R? metrics card
+  Line 781: positive -> // Colors: green for positive, pink for negative MoM contraction
+  Line 1171: positive -> showToast('?? Please enter a valid positive revenue target.', true);
+  Line 1329: premium -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1326: prescriptions -> // Map cohorts to strategic prescriptions
+  Line 1328: prescriptions -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 884: price -> { label: 'Mode Class', val: `Rs. ${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density p
+  Line 1285: price -> // Format currency values dynamically if column looks like revenue/price
+  Line 1286: price -> if (typeof val === 'number' && (col.includes('price') || col.includes('revenue') || col.includes('va
+  Line 1330: pricing -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1198: primary -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${data.orders_needed} order
+  Line 1204: primary -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${currencyFormatter.format(
+  Line 1333: probability -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1440: proceed -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 177: product -> document.getElementById('kpi-product').textContent = summary.top_product;
+  Line 994: product -> <td class="product-cell">${item.product_name}</td>
+  Line 1028: product -> <td class="product-cell">${a.product_name}</td>
+  Line 1331: product -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1347: product -> <td class="product-cell">${item.customer_name}</td>
+  Line 1094: product_name -> product_name: document.getElementById('product_name').value,
+  Line 1236: product_name -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1316: profiling -> // Calculate cohort profiling statistics
+  Line 1328: profiling -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 537: properly -> // Format data streams aligning the points properly
+  Line 763: purchase -> title: { display: true, text: 'Recency (Days since last purchase)', color: 'var(--text-secondary)' }
+  Line 1237: purchase_frequency -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 296: purchasing -> Customers purchasing <strong>${top.item_a}</strong> are
+  Line 270: python -> showToast('?? Statistical computation failed. Check python environment log.', true);
+  Line 167: quick -> // Store anomalies for quick lookup mapping
+  Line 93: r -> await new Promise(r => setTimeout(r, 5000));
+  Line 301: r -> recs.forEach(r => {
+  Line 304: r -> <td><strong>${r.item_a}</strong></td>
+  Line 305: r -> <td><strong>${r.item_b}</strong></td>
+  Line 306: r -> <td>${r.support}%</td>
+  Line 307: r -> <td>${r.confidence_a_b}%</td>
+  Line 308: r -> <td><span style="font-weight:600; color:var(--accent-orange);">${r.lift}x</span></td>
+  Line 310: r -> <button class="btn btn-secondary" style="font-size:10px; padding: 4px 8px;" onclick="triggerBundlePr
+  Line 782: r -> const colors = rates.map(r => r >= 0 ? 'rgba(16, 185, 129, 0.7)' : 'rgba(236, 72, 153, 0.7)');
+  Line 246: r2 -> document.getElementById('kpi-r2').textContent = forecast.model.r_squared.toFixed(4);
+  Line 247: r2 -> document.getElementById('kpi-r2-sub').textContent = `Fit: ${forecast.model.equation}`;
+  Line 1155: r2 -> document.getElementById('kpi-r2').textContent = forecast.model.r_squared.toFixed(4);
+  Line 1156: r2 -> document.getElementById('kpi-r2-sub').textContent = `Fit: ${forecast.model.equation}`;
+  Line 1279: rIdx -> data.rows.forEach((row, rIdx) => {
+  Line 884: range -> { label: 'Mode Class', val: `Rs. ${(stats.mode_range / 1000).toFixed(0)}K`, meta: 'Highest density p
+  Line 250: rate -> document.getElementById('kpi-anomaly-rate').textContent = `${anomalies.anomaly_rate}% of sales binne
+  Line 888: ratio -> { label: 'Coeff. of Variation', val: `${stats.coefficient_of_variation.toFixed(1)}%`, meta: 'Relativ
+  Line 327: re -> showToast('? Dataset re-indexed successfully.');
+  Line 1333: reactivation -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1110: rebuilt -> showToast('? Sale added. Database rebuilt.');
+  Line 289: rec -> document.getElementById('top-rec-bundle').textContent = 'No associations found.';
+  Line 295: rec -> document.getElementById('top-rec-bundle').innerHTML = `
+  Line 284: recTableBody -> const tbody = document.getElementById('recTableBody');
+  Line 230: recommendations -> fetch(API_BASE + '/api/analytics/recommendations')
+  Line 1331: recommendations -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1006: records -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 1275: records -> rBody.innerHTML = `<tr><td colspan="${data.columns.length}" class="empty-state">Query executed succe
+  Line 1406: records -> showToast(`? Database Rebuilt: simulated ${info.records_count} records!`);
+  Line 1006: refine -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 54: refresh -> // Charts objects registry for hot replacement / refresh
+  Line 98: refresh -> banner.querySelector('span').textContent = 'Server unreachable. Please refresh the page.';
+  Line 54: registry -> // Charts objects registry for hot replacement / refresh
+  Line 1145: regression -> showToast(`? Re-fitting regression curve (Degree ${deg})...`);
+  Line 1158: regression -> console.error('Failed to update forecast regression degree:', e);
+  Line 1120: rejected -> showToast(`?? Ingestion failed: ${err.error || 'Server rejected request'}`, true);
+  Line 1334: relations -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1329: releases -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 987: render -> // If transaction was flagged in anomalies, render outlier flag badge
+  Line 1151: render -> // Re-render Forecast Chart
+  Line 237: rendering -> // Cache RFM customer list data for lookup rendering
+  Line 54: replacement -> // Charts objects registry for hot replacement / refresh
+  Line 1120: request -> showToast(`?? Ingestion failed: ${err.error || 'Server rejected request'}`, true);
+  Line 1219: request -> resultPanel.innerHTML = '<div style="color:var(--accent-pink); text-align:center;">Network request f
+  Line 353: requestAnimationFrame -> requestAnimationFrame(update);
+  Line 359: requestAnimationFrame -> requestAnimationFrame(update);
+  Line 1300: response -> errLog.textContent = data.error || "Unknown server response.";
+  Line 1331: retention -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1328: retrieve -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1275: returned -> rBody.innerHTML = `<tr><td colspan="${data.columns.length}" class="empty-state">Query executed succe
+  Line 174: revenue -> animateValue('kpi-revenue', summary.total_revenue, true);
+  Line 180: revenue -> const trendBadge = document.getElementById('kpi-revenue-trend');
+  Line 1171: revenue -> showToast('?? Please enter a valid positive revenue target.', true);
+  Line 1285: revenue -> // Format currency values dynamically if column looks like revenue/price
+  Line 1286: revenue -> if (typeof val === 'number' && (col.includes('price') || col.includes('revenue') || col.includes('va
+  Line 1329: rewards -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 693: rfmChart -> const ctx = document.getElementById('rfmChart').getContext('2d');
+  Line 1313: rfmLookupTable -> const tbody = document.querySelector('#rfmLookupTable tbody');
+  Line 11: rgba -> errorDiv.style.background = 'rgba(239, 68, 68, 0.95)';
+  Line 19: rgba -> errorDiv.style.boxShadow = '0 4px 16px rgba(0,0,0,0.3)';
+  Line 47: rgba -> Chart.defaults.borderColor = 'rgba(139, 92, 246, 0.05)';
+  Line 50: rgba -> Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(20, 24, 41, 0.95)';
+  Line 51: rgba -> Chart.defaults.plugins.tooltip.borderColor = 'rgba(139, 92, 246, 0.2)';
+  Line 96: rgba -> banner.style.background = 'rgba(239,68,68,0.15)';
+  Line 97: rgba -> banner.style.borderColor = 'rgba(239,68,68,0.4)';
+  Line 190: rgba -> trendBadge.style.background = 'rgba(255,255,255,0.05)';
+  Line 375: rgba -> gradient.addColorStop(0, 'rgba(139, 92, 246, 0.85)');
+  Line 376: rgba -> gradient.addColorStop(1, 'rgba(6, 182, 212, 0.3)');
+  Line 407: rgba -> grid: { color: 'rgba(255,255,255,0.03)' },
+  Line 469: rgba -> gradient.addColorStop(0, 'rgba(236, 72, 153, 0.7)');
+  Line 470: rgba -> gradient.addColorStop(1, 'rgba(139, 92, 246, 0.75)');
+  Line 502: rgba -> grid: { color: 'rgba(255,255,255,0.03)' },
+  Line 555: rgba -> backgroundColor: 'rgba(139, 92, 246, 0.1)',
+  Line 564: rgba -> borderColor: 'rgba(139, 92, 246, 0.3)',
+  Line 596: rgba -> backgroundColor: 'rgba(6, 182, 212, 0.08)'
+  Line 617: rgba -> grid: { color: 'rgba(255,255,255,0.03)' },
+  Line 666: rgba -> backgroundColor: 'rgba(139, 92, 246, 0.4)',
+  Line 667: rgba -> borderColor: 'rgba(139, 92, 246, 0.8)',
+  Line 684: rgba -> grid: { color: 'rgba(255,255,255,0.03)' }
+  Line 724: rgba -> backgroundColor: segmentColors[segName] || 'rgba(255,255,255,0.25)',
+  Line 760: rgba -> grid: { color: 'rgba(255,255,255,0.03)' }
+  Line 782: rgba -> const colors = rates.map(r => r >= 0 ? 'rgba(16, 185, 129, 0.7)' : 'rgba(236, 72, 153, 0.7)');
+  Line 810: rgba -> grid: { color: 'rgba(255,255,255,0.03)' },
+  Line 828: rgba -> gradient.addColorStop(0, 'rgba(139, 92, 246, 0.3)');
+  Line 829: rgba -> gradient.addColorStop(1, 'rgba(139, 92, 246, 0.0)');
+  Line 861: rgba -> grid: { color: 'rgba(255,255,255,0.03)' },
+  Line 947: rgba -> bg = `rgba(139, 92, 246, ${val * 0.8 + 0.08})`;
+  Line 949: rgba -> bg = `rgba(236, 72, 153, ${Math.abs(val) * 0.8 + 0.08})`;
+  Line 1349: rgba -> <td><span class="badge" style="background: rgba(245, 158, 11, 0.08); color: var(--accent-amber);">${
+  Line 445: right -> position: 'right',
+  Line 740: right -> position: 'right',
+  Line 1440: routing -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 976: rows -> // Show top 60 rows for browser scroll efficiency
+  Line 1272: rows -> // Render table rows
+  Line 288: rules -> tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No association rules found in transaction
+  Line 1251: run -> rHeader.innerHTML = '<th>No query run</th>';
+  Line 1123: running -> showToast('?? Network failure. Verify backend flask server is running.', true);
+  Line 1073: sale_date -> document.getElementById('sale_date').valueAsDate = new Date();
+  Line 1096: sale_date -> sale_date: document.getElementById('sale_date').value,
+  Line 1236: sale_date -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1238: sale_date -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 73: sales -> : 'https://sales-backend-k5rw.onrender.com';
+  Line 156: sales -> fetch(API_BASE + '/api/sales'),
+  Line 250: sales -> document.getElementById('kpi-anomaly-rate').textContent = `${anomalies.anomaly_rate}% of sales binne
+  Line 253: sales -> const skewType = stats.skewness > 0.5 ? 'Right-skewed (High sales)' : (stats.skewness < -0.5 ? 'Left
+  Line 881: sales -> { label: 'Sample Size (N)', val: stats.count, meta: 'Total sales generated' },
+  Line 1101: sales -> const res = await fetch(API_BASE + '/api/sales/new', {
+  Line 1234: sales -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: sales -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1236: sales -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1237: sales -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: sales -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 1335: sales -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1394: sales -> showToast('? Rebuilding SQLite database and simulating sales...', false);
+  Line 968: salesTable -> const tbody = document.querySelector('#salesTable tbody');
+  Line 1234: sales_count -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1238: sales_month -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 633: sample -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 1418: sandbox -> showToast('?? Connection error during data generation sandbox.', true);
+  Line 45: sans -> Chart.defaults.font.family = "'Inter', sans-serif";
+  Line 976: scroll -> // Show top 60 rows for browser scroll efficiency
+  Line 1036: search -> // Live search filters
+  Line 1335: seasonal -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1331: second -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 218: secondary -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 298: secondary -> <span style="color:var(--text-secondary); font-size:12px;">(Confidence: ${top.confidence_a_b}%)</spa
+  Line 310: secondary -> <button class="btn btn-secondary" style="font-size:10px; padding: 4px 8px;" onclick="triggerBundlePr
+  Line 759: secondary -> title: { display: true, text: 'Frequency (No. of Orders)', color: 'var(--text-secondary)' },
+  Line 763: secondary -> title: { display: true, text: 'Recency (Days since last purchase)', color: 'var(--text-secondary)' }
+  Line 952: secondary -> td.style.color = Math.abs(val) > 0.4 ? '#ffffff' : 'var(--text-secondary)';
+  Line 1196: secondary -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1202: secondary -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 80: seconds -> const MAX_TRIES = 12; // 60 seconds max
+  Line 117: sect -> document.querySelectorAll('.tab-content').forEach(sect => sect.classList.remove('active'));
+  Line 1218: seek -> console.error('Goal seek computation error:', e);
+  Line 720: segName -> const datasets = Object.keys(groups).map(segName => {
+  Line 722: segName -> label: segName,
+  Line 723: segName -> data: groups[segName],
+  Line 724: segName -> backgroundColor: segmentColors[segName] || 'rgba(255,255,255,0.25)',
+  Line 1328: segment -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1312: segmentName -> function renderRFMLookupTable(data, segmentName = 'ALL') {
+  Line 1337: segmentName -> document.getElementById('cohort-strategy-txt').innerHTML = strategies[segmentName] || strategies['AL
+  Line 1334: send -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 45: serif -> Chart.defaults.font.family = "'Inter', sans-serif";
+  Line 79: server -> const banner = document.getElementById('server-wake-banner');
+  Line 92: server -> if (banner) banner.querySelector('span').textContent = `Connecting to server... (${i+1}/12)`;
+  Line 1123: server -> showToast('?? Network failure. Verify backend flask server is running.', true);
+  Line 1300: server -> errLog.textContent = data.error || "Unknown server response.";
+  Line 1415: server -> showToast('?? Simulation generation failed on server.', true);
+  Line 1440: server -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 1329: service -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1334: service -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1332: setup -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1440: setup -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 370: short -> return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 522: short -> return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 526: short -> return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 777: short -> return new Date(y, mm - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 823: short -> return new Date(y, mm - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 984: short -> day: '2-digit', month: 'short', year: 'numeric'
+  Line 1023: short -> const fDate = dObj.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
+  Line 1331: short -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1136: show -> toast.classList.add('show');
+  Line 1137: show -> setTimeout(() => toast.classList.remove('show'), 3000);
+  Line 1385: simDataForm -> document.getElementById('simDataForm').addEventListener('submit', async e => {
+  Line 1373: simModal -> document.getElementById('simModal').classList.add('active');
+  Line 1377: simModal -> document.getElementById('simModal').classList.remove('active');
+  Line 1381: simModal -> document.getElementById('simModal').addEventListener('click', function(e) {
+  Line 1391: sim_anomaly -> anomaly_rate: parseFloat(document.getElementById('sim_anomaly').value) / 100
+  Line 1389: sim_records -> n_records: parseInt(document.getElementById('sim_records').value),
+  Line 1390: sim_trend -> trend: document.getElementById('sim_trend').value,
+  Line 1406: simulated -> showToast(`? Database Rebuilt: simulated ${info.records_count} records!`);
+  Line 1394: simulating -> showToast('? Rebuilding SQLite database and simulating sales...', false);
+  Line 1398: simulation -> const res = await fetch(API_BASE + '/api/simulation/generate', {
+  Line 763: since -> title: { display: true, text: 'Recency (Days since last purchase)', color: 'var(--text-secondary)' }
+  Line 773: since -> // Filter out first month since growth is 0
+  Line 1330: sizes -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 253: skewed -> const skewType = stats.skewness > 0.5 ? 'Right-skewed (High sales)' : (stats.skewness < -0.5 ? 'Left
+  Line 252: skewness -> document.getElementById('kpi-skewness').textContent = stats.skewness.toFixed(3);
+  Line 254: skewness -> document.getElementById('kpi-skewness-desc').textContent = skewType;
+  Line 91: sleeping -> } catch (e) { /* still sleeping */ }
+  Line 21: small -> errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${li
+  Line 20: solid -> errorDiv.style.borderLeft = '5px solid #7f1d1d';
+  Line 5: source -> window.onerror = function(message, source, lineno, colno, error) {
+  Line 6: source -> console.error("Global JS Error Captured: ", message, " at ", source, ":", lineno);
+  Line 21: source -> errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${li
+  Line 1187: space -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1191: space -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1196: space -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1202: space -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1209: space -> <div style="display:flex; justify-content:space-between; font-weight:700; color:${trendColor};">
+  Line 92: span -> if (banner) banner.querySelector('span').textContent = `Connecting to server... (${i+1}/12)`;
+  Line 98: span -> banner.querySelector('span').textContent = 'Server unreachable. Please refresh the page.';
+  Line 298: span -> <span style="color:var(--text-secondary); font-size:12px;">(Confidence: ${top.confidence_a_b}%)</spa
+  Line 308: span -> <td><span style="font-weight:600; color:var(--accent-orange);">${r.lift}x</span></td>
+  Line 995: span -> <td><span class="badge badge-payment">${item.category}</span></td>
+  Line 997: span -> <td><span class="${badgeClass}">${badgeText}</span></td>
+  Line 998: span -> <td><span class="badge badge-payment" style="border-radius:4px;">${item.mode_of_payment || 'UPI'}</s
+  Line 1188: span -> <span>Current Mo. Average:</span>
+  Line 1189: span -> <span style="font-family:'JetBrains Mono';">${currencyFormatter.format(data.avg_monthly_revenue)}</s
+  Line 1192: span -> <span>Target Revenue Goal:</span>
+  Line 1193: span -> <span style="font-family:'JetBrains Mono'; color:var(--accent-violet);">${currencyFormatter.format(d
+  Line 1197: span -> <span>Monthly Sales Needed:</span>
+  Line 1200: span -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming c
+  Line 1203: span -> <span>Target AOV Needed:</span>
+  Line 1206: span -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 1210: span -> <span>Required Growth:</span>
+  Line 1211: span -> <span>${trendIcon} ${isGrowth ? '+' : ''}${data.percent_change_needed}%</span>
+  Line 1348: span -> <td><span class="badge badge-mobile">${item.mobile_no || 'N/A'}</span></td>
+  Line 1349: span -> <td><span class="badge" style="background: rgba(245, 158, 11, 0.08); color: var(--accent-amber);">${
+  Line 1328: specific -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1335: spend -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 1334: spending -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 214: spinner -> // Create full overlay spinner
+  Line 218: spinner -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 1175: spinner -> resultPanel.innerHTML = '<div class="spinner" style="width:20px; height:20px; margin: 10px auto;"></
+  Line 1252: spinner -> rBody.innerHTML = '<tr><td class="empty-state"><div class="spinner" style="width:20px; height:20px; 
+  Line 885: spread -> { label: 'Std. Deviation', val: currencyFormatter.format(stats.std_dev), meta: 'Data dispersion spre
+  Line 123: sql -> } else if (tabId === 'sql') {
+  Line 137: sql -> if (hash === 'analytics' || hash === 'dashboard' || hash === 'sql') {
+  Line 1444: sql -> if (initialHash === 'analytics' || initialHash === 'sql') {
+  Line 1241: sqlErrorLog -> document.getElementById('sqlErrorLog').style.display = 'none';
+  Line 1246: sqlErrorLog -> const errLog = document.getElementById('sqlErrorLog');
+  Line 1232: sqlQueryText -> const queryText = document.getElementById('sqlQueryText');
+  Line 1245: sqlQueryText -> const query = document.getElementById('sqlQueryText').value;
+  Line 1248: sqlResultBody -> const rBody = document.getElementById('sqlResultBody');
+  Line 1247: sqlResultHeader -> const rHeader = document.getElementById('sqlResultHeader');
+  Line 76: start -> // SERVER WAKE-UP PING (Render free tier cold start fix)
+  Line 69: state -> let forecastDegree = 1; // Polynomial forecast model degree state
+  Line 288: state -> tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No association rules found in transaction
+  Line 972: state -> tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><div class="icon">?</div>No matching tran
+  Line 1016: state -> tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><div class="icon">?</div>No outliers curr
+  Line 1252: state -> rBody.innerHTML = '<tr><td class="empty-state"><div class="spinner" style="width:20px; height:20px; 
+  Line 1275: state -> rBody.innerHTML = `<tr><td colspan="${data.columns.length}" class="empty-state">Query executed succe
+  Line 1298: state -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 1305: state -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Che
+  Line 1340: state -> tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><div class="icon">?</div>No customers in 
+  Line 1316: statistics -> // Calculate cohort profiling statistics
+  Line 1329: status -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 91: still -> } catch (e) { /* still sleeping */ }
+  Line 1326: strategic -> // Map cohorts to strategic prescriptions
+  Line 1328: strategy -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1337: strategy -> document.getElementById('cohort-strategy-txt').innerHTML = strategies[segmentName] || strategies['AL
+  Line 537: streams -> // Format data streams aligning the points properly
+  Line 1238: strftime -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 21: strong -> errorDiv.innerHTML = `<strong>Frontend Runtime Error:</strong><br>${message}<br><br><small>Line ${li
+  Line 296: strong -> Customers purchasing <strong>${top.item_a}</strong> are
+  Line 297: strong -> <strong>${top.lift}x</strong> more likely to also buy <strong>${top.item_b}</strong>.<br>
+  Line 304: strong -> <td><strong>${r.item_a}</strong></td>
+  Line 305: strong -> <td><strong>${r.item_b}</strong></td>
+  Line 1198: strong -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${data.orders_needed} order
+  Line 1204: strong -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${currencyFormatter.format(
+  Line 1329: strong -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1330: strong -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1331: strong -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1332: strong -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 1333: strong -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1334: strong -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1335: strong -> 'Lost': "? <strong>Prescription</strong>: Churn confirmed. Minimize direct advertising spend. Re-eng
+  Line 218: style -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 298: style -> <span style="color:var(--text-secondary); font-size:12px;">(Confidence: ${top.confidence_a_b}%)</spa
+  Line 308: style -> <td><span style="font-weight:600; color:var(--accent-orange);">${r.lift}x</span></td>
+  Line 310: style -> <button class="btn btn-secondary" style="font-size:10px; padding: 4px 8px;" onclick="triggerBundlePr
+  Line 998: style -> <td><span class="badge badge-payment" style="border-radius:4px;">${item.mode_of_payment || 'UPI'}</s
+  Line 1006: style -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 1029: style -> <td class="money-cell" style="color: var(--accent-pink);">${currencyFormatter.format(a.total_price)}
+  Line 1175: style -> resultPanel.innerHTML = '<div class="spinner" style="width:20px; height:20px; margin: 10px auto;"></
+  Line 1187: style -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1189: style -> <span style="font-family:'JetBrains Mono';">${currencyFormatter.format(data.avg_monthly_revenue)}</s
+  Line 1191: style -> <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-weight:500;">
+  Line 1193: style -> <span style="font-family:'JetBrains Mono'; color:var(--accent-violet);">${currencyFormatter.format(d
+  Line 1195: style -> <div style="border-top:1px dashed var(--border); margin:6px 0;"></div>
+  Line 1196: style -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1198: style -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${data.orders_needed} order
+  Line 1200: style -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming c
+  Line 1202: style -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1204: style -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${currencyFormatter.format(
+  Line 1206: style -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 1208: style -> <div style="border-top:1px dashed var(--border); margin:6px 0;"></div>
+  Line 1209: style -> <div style="display:flex; justify-content:space-between; font-weight:700; color:${trendColor};">
+  Line 1215: style -> resultPanel.innerHTML = `<div style="color:var(--accent-pink); text-align:center;">${data.error}</di
+  Line 1219: style -> resultPanel.innerHTML = '<div style="color:var(--accent-pink); text-align:center;">Network request f
+  Line 1252: style -> rBody.innerHTML = '<tr><td class="empty-state"><div class="spinner" style="width:20px; height:20px; 
+  Line 1298: style -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">SQLite compilation 
+  Line 1305: style -> rBody.innerHTML = '<tr><td class="empty-state" style="color:var(--accent-pink);">Request failed. Che
+  Line 1349: style -> <td><span class="badge" style="background: rgba(245, 158, 11, 0.08); color: var(--accent-amber);">${
+  Line 1350: style -> <td style="font-family: 'JetBrains Mono', monospace;">${item.recency_days.toFixed(0)}d ago</td>
+  Line 1351: style -> <td style="font-family: 'JetBrains Mono', monospace;">${item.frequency} orders</td>
+  Line 1354: style -> <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-violet);"
+  Line 247: sub -> document.getElementById('kpi-r2-sub').textContent = `Fit: ${forecast.model.equation}`;
+  Line 1156: sub -> document.getElementById('kpi-r2-sub').textContent = `Fit: ${forecast.model.equation}`;
+  Line 1088: submit -> document.getElementById('addDataForm').addEventListener('submit', async e => {
+  Line 1385: submit -> document.getElementById('simDataForm').addEventListener('submit', async e => {
+  Line 327: successfully -> showToast('? Dataset re-indexed successfully.');
+  Line 1275: successfully -> rBody.innerHTML = `<tr><td colspan="${data.columns.length}" class="empty-state">Query executed succe
+  Line 887: sum -> { label: 'Variance (S?)', val: stats.variance.toLocaleString('en-IN'), meta: 'Squared deviations sum
+  Line 150: summaries -> // First fetch summaries & core charts in parallel
+  Line 151: summaryRes -> const [summaryRes, monthlyRes, categoryRes, customersRes, salesRes, anomalyRes] = await Promise.all(
+  Line 160: summaryRes -> const summary = await summaryRes.json();
+  Line 114: tab -> document.getElementById(`tab-${tabId}`).classList.add('active');
+  Line 1112: tab -> // Reload whatever tab is currently active
+  Line 1227: tab -> // Load default template when opening the tab
+  Line 1408: tab -> // Refresh active tab views
+  Line 108: tabId -> function switchTab(tabId) {
+  Line 109: tabId -> if (tabId === activeTab) return;
+  Line 110: tabId -> activeTab = tabId;
+  Line 114: tabId -> document.getElementById(`tab-${tabId}`).classList.add('active');
+  Line 118: tabId -> document.getElementById(`${tabId}-view`).classList.add('active');
+  Line 121: tabId -> if (tabId === 'analytics') {
+  Line 123: tabId -> } else if (tabId === 'sql') {
+  Line 131: tabId -> window.location.hash = tabId;
+  Line 1333: tablet -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1171: target -> showToast('?? Please enter a valid positive revenue target.', true);
+  Line 1178: target -> const res = await fetch(API_BASE + `/api/analytics/goalseek?target=${inputVal}`);
+  Line 1227: template -> // Load default template when opening the tab
+  Line 1331: term -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 191: text -> trendBadge.style.color = 'var(--text-muted)';
+  Line 218: text -> loader.innerHTML = '<div class="spinner"></div><p style="color: var(--text-secondary); font-weight:6
+  Line 298: text -> <span style="color:var(--text-secondary); font-size:12px;">(Confidence: ${top.confidence_a_b}%)</spa
+  Line 759: text -> title: { display: true, text: 'Frequency (No. of Orders)', color: 'var(--text-secondary)' },
+  Line 763: text -> title: { display: true, text: 'Recency (Days since last purchase)', color: 'var(--text-secondary)' }
+  Line 952: text -> td.style.color = Math.abs(val) > 0.4 ? '#ffffff' : 'var(--text-secondary)';
+  Line 1006: text -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 1196: text -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1198: text -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${data.orders_needed} order
+  Line 1200: text -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming c
+  Line 1202: text -> <div style="display:flex; justify-content:space-between; margin-bottom:2px; color:var(--text-seconda
+  Line 1204: text -> <strong style="font-family:'JetBrains Mono'; color:var(--text-primary);">${currencyFormatter.format(
+  Line 1206: text -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 1215: text -> resultPanel.innerHTML = `<div style="color:var(--accent-pink); text-align:center;">${data.error}</di
+  Line 1219: text -> resultPanel.innerHTML = '<div style="color:var(--accent-pink); text-align:center;">Network request f
+  Line 98: the -> banner.querySelector('span').textContent = 'Server unreachable. Please refresh the page.';
+  Line 537: the -> // Format data streams aligning the points properly
+  Line 1227: the -> // Load default template when opening the tab
+  Line 1328: the -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1331: their -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1331: third -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1286: ticket -> if (typeof val === 'number' && (col.includes('price') || col.includes('revenue') || col.includes('va
+  Line 76: tier -> // SERVER WAKE-UP PING (Render free tier cold start fix)
+  Line 932: title -> // row title header
+  Line 92: to -> if (banner) banner.querySelector('span').textContent = `Connecting to server... (${i+1}/12)`;
+  Line 205: to -> showToast('?? Failed to load dashboard data. Check database connections.', true);
+  Line 297: to -> <strong>${top.lift}x</strong> more likely to also buy <strong>${top.item_b}</strong>.<br>
+  Line 633: to -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 1006: to -> extra.innerHTML = `<td colspan="7" style="text-align:center; color: var(--text-muted); font-size: 12
+  Line 1158: to -> console.error('Failed to update forecast regression degree:', e);
+  Line 1326: to -> // Map cohorts to strategic prescriptions
+  Line 1328: to -> 'ALL': "Select a specific cohort segment from the dropdown filter to retrieve business intelligence 
+  Line 1329: to -> 'Champions': "? <strong>Prescription</strong>: Best customers. Target with VIP rewards, exclusive ea
+  Line 1330: to -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 1331: to -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1333: to -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 1334: to -> 'Cannot Lose': "? <strong>Prescription</strong>: High-spending historic accounts about to churn. Pro
+  Line 1440: to -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 695: toggling -> // Group bubble points by RFM Segments for discrete toggling legend
+  Line 1237: total_lifetime_value -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1095: total_price -> total_price: parseFloat(document.getElementById('total_price').value),
+  Line 1234: total_price -> 1: "SELECT category, COUNT(*) as sales_count, ROUND(SUM(total_price), 2) as category_revenue, ROUND(
+  Line 1235: total_price -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1236: total_price -> 3: "SELECT id, sale_date, product_name, customer_name, total_price\nFROM sales\nWHERE total_price >=
+  Line 1237: total_price -> 4: "SELECT customer_name, mobile_no, COUNT(*) as purchase_frequency, ROUND(SUM(total_price), 2) as t
+  Line 1238: total_price -> 5: "SELECT strftime('%Y-%m', sale_date) as sales_month, COUNT(*) as orders_count, ROUND(SUM(total_pr
+  Line 1235: total_volume -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 288: transaction -> tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No association rules found in transaction
+  Line 987: transaction -> // If transaction was flagged in anomalies, render outlier flag badge
+  Line 1330: transaction -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 972: transactions -> tbody.innerHTML = '<tr><td colspan="7" class="empty-state"><div class="icon">?</div>No matching tran
+  Line 577: transparent -> backgroundColor: 'transparent',
+  Line 584: transparent -> borderColor: 'transparent',
+  Line 592: transparent -> borderColor: 'transparent',
+  Line 180: trend -> const trendBadge = document.getElementById('kpi-revenue-trend');
+  Line 1333: trigger -> 'At Risk': "?? <strong>Prescription</strong>: High churn probability! Automatically trigger a reacti
+  Line 310: triggerBundlePromotion -> <button class="btn btn-secondary" style="font-size:10px; padding: 4px 8px;" onclick="triggerBundlePr
+  Line 1427: triggered -> showToast(`? Retention action "${action}" triggered for ${customer}!`);
+  Line 1235: txn_count -> 2: "SELECT mode_of_payment, COUNT(*) as txn_count, ROUND(SUM(total_price), 2) as total_volume\nFROM 
+  Line 1322: txt -> document.getElementById('cohort-size-txt').textContent = size.toLocaleString('en-IN') + ' accounts';
+  Line 1323: txt -> document.getElementById('cohort-value-txt').textContent = currencyFormatter.format(totalVal);
+  Line 1324: txt -> document.getElementById('cohort-aov-txt').textContent = currencyFormatter.format(avgOrderVal);
+  Line 1337: txt -> document.getElementById('cohort-strategy-txt').innerHTML = strategies[segmentName] || strategies['AL
+  Line 98: unreachable -> banner.querySelector('span').textContent = 'Server unreachable. Please refresh the page.';
+  Line 173: up -> // Render KPIs with count-up animations
+  Line 183: up -> trendBadge.className = 'kpi-badge up';
+  Line 1440: up -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 595: upper -> fill: 3, // Fill between dataset indices 4 (lower) and 3 (upper)
+  Line 134: using -> // Support back/forward browser navigation using hash
+  Line 1171: valid -> showToast('?? Please enter a valid positive revenue target.', true);
+  Line 898: value -> <div class="stats-value">${conf.val}</div>
+  Line 1286: value -> if (typeof val === 'number' && (col.includes('price') || col.includes('revenue') || col.includes('va
+  Line 1323: value -> document.getElementById('cohort-value-txt').textContent = currencyFormatter.format(totalVal);
+  Line 1330: value -> 'Loyal Customers': "? <strong>Prescription</strong>: High-value baseline. Offer bundle accessories (
+  Line 633: values -> // Compute normal curve values alignment at each bin center (Scaled to sample size)
+  Line 1285: values -> // Format currency values dynamically if column looks like revenue/price
+  Line 118: view -> document.getElementById(`${tabId}-view`).classList.add('active');
+  Line 215: view -> const targetView = document.getElementById('analytics-view');
+  Line 1408: views -> // Refresh active tab views
+  Line 840: violet -> borderColor: 'var(--accent-violet)',
+  Line 944: violet -> // Alpha shading: Positive violet, negative pink
+  Line 1193: violet -> <span style="font-family:'JetBrains Mono'; color:var(--accent-violet);">${currencyFormatter.format(d
+  Line 1354: violet -> <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-violet);"
+  Line 256: visual -> // Render complex analytics visual modules
+  Line 1206: volume -> <span style="font-size:10px; color:var(--text-muted); margin-bottom:6px; display:block;">(Assuming a
+  Line 1331: vouchers -> 'Potential Loyalists': "? <strong>Prescription</strong>: Promising buyers. Push recommendations for 
+  Line 1440: wait -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 79: wake -> const banner = document.getElementById('server-wake-banner');
+  Line 1440: wake -> // Initial routing setup ? wait for server to wake up first, but proceed anyway if offline
+  Line 1332: warranties -> 'New Customers': "? <strong>Prescription</strong>: Fresh accounts. Trigger a 3-part onboarding email
+  Line 987: was -> // If transaction was flagged in anomalies, render outlier flag badge
+  Line 1112: whatever -> // Reload whatever tab is currently active
+  Line 1227: when -> // Load default template when opening the tab
+  Line 297: x -> <strong>${top.lift}x</strong> more likely to also buy <strong>${top.item_b}</strong>.<br>
+  Line 308: x -> <td><span style="font-weight:600; color:var(--accent-orange);">${r.lift}x</span></td>
+  Line 635: x -> const normValues = binCenters.map(x => {
+  Line 640: x -> const exp = -0.5 * Math.pow((x - m) / s, 2);
+  Line 938: xIndex -> data.features.forEach((lblX, xIndex) => {
+  Line 939: xIndex -> const val = data.matrix[yIndex][xIndex];
+  Line 369: y -> const [y, m] = d.month.split('-');
+  Line 370: y -> return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 488: y -> indexAxis: 'y',
+  Line 521: y -> const [y, m] = h.month.split('-');
+  Line 522: y -> return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 525: y -> const [y, m] = f.month.split('-');
+  Line 526: y -> return new Date(y, m - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 776: y -> const [y, mm] = m.month.split('-');
+  Line 777: y -> return new Date(y, mm - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 822: y -> const [y, mm] = m.month.split('-');
+  Line 823: y -> return new Date(y, mm - 1).toLocaleString('default', { month: 'short', year: '2-digit' });
+  Line 929: yIndex -> data.features.forEach((lblY, yIndex) => {
+  Line 939: yIndex -> const val = data.matrix[yIndex][xIndex];
+  Line 1030: z -> <td class="zscore-cell high-z">+${a.z_score.toFixed(2)}?</td>
+  Line 1030: zscore -> <td class="zscore-cell high-z">+${a.z_score.toFixed(2)}?</td>

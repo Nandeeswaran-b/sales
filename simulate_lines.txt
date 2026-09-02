@@ -1,0 +1,3 @@
+973:             <button class="btn btn-secondary" onclick="openSimModal()" id="btn-sim-sandbox">⚙️ Simulate Data</button>
+1731:             <button type="submit" class="btn-submit">⚡ Generate Simulated Dataset</button>
+3100:                 showToast(`✅ Database Rebuilt: simulated ${info.records_count} records!`);
