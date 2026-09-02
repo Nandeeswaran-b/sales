@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // State
     const state = {
         theme: localStorage.getItem('theme') || 'light',
-        dateRange: '30',
+        dateRange: 'all',
         searchQuery: '',
         searchDate: '',
         customers: [],
