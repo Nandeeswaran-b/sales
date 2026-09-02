@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales Intelligence & Analytics | Data Science Portfolio</title>
+    <title>Sales Intelligence | Daily Ledger</title>
     <meta name="description" content="Advanced sales analytics platform with regression forecasting, RFM customer segmentation, anomaly detection, and statistical distribution analysis.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -16,35 +16,35 @@
            DESIGN SYSTEM — Modern Dark Theme
            ═══════════════════════════════════════════════════════ */
         :root {
-            --bg-primary: #080a10;
-            --bg-secondary: #0f121d;
-            --bg-card: #141829;
-            --bg-card-hover: #1a1f35;
-            --bg-input: #0b0d16;
+            --bg-primary: #171a18;
+            --bg-secondary: #202420;
+            --bg-card: #292e2a;
+            --bg-card-hover: #333a34;
+            --bg-input: #1d211e;
 
-            --text-primary: #f1f3f9;
-            --text-secondary: #a3adc2;
-            --text-muted: #626b82;
+            --text-primary: #eee8dc;
+            --text-secondary: #b7b2a7;
+            --text-muted: #7e857b;
 
-            --accent-violet: #8b5cf6;
-            --accent-cyan: #06b6d4;
-            --accent-pink: #ec4899;
-            --accent-amber: #f59e0b;
-            --accent-emerald: #10b981;
-            --accent-blue: #3b82f6;
+            --accent-violet: #bf7652;
+            --accent-cyan: #8fa69a;
+            --accent-pink: #c87968;
+            --accent-amber: #c49a5a;
+            --accent-emerald: #789778;
+            --accent-blue: #8ca5ad;
 
-            --border: rgba(139, 92, 246, 0.1);
-            --border-hover: rgba(139, 92, 246, 0.25);
+            --border: rgba(238, 232, 220, 0.11);
+            --border-hover: rgba(191, 118, 82, 0.45);
 
-            --gradient-primary: linear-gradient(135deg, #8b5cf6, #06b6d4);
-            --gradient-warm: linear-gradient(135deg, #ec4899, #8b5cf6);
-            --gradient-cool: linear-gradient(135deg, #06b6d4, #3b82f6);
-            --gradient-emerald: linear-gradient(135deg, #10b981, #06b6d4);
+            --gradient-primary: linear-gradient(135deg, #bf7652, #8f5742);
+            --gradient-warm: linear-gradient(135deg, #c87968, #9b5f54);
+            --gradient-cool: linear-gradient(135deg, #8fa69a, #657d73);
+            --gradient-emerald: linear-gradient(135deg, #789778, #58745e);
 
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
             --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.35);
             --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
-            --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.12);
+            --shadow-glow: 0 0 20px rgba(191, 118, 82, 0.08);
 
             --radius-sm: 8px;
             --radius-md: 14px;
@@ -58,7 +58,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             background-color: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
@@ -74,8 +74,8 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 45%),
-                        radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.04) 0%, transparent 45%);
+            background-image: radial-gradient(rgba(238, 232, 220, 0.045) 0.7px, transparent 0.7px);
+            background-size: 14px 14px;
             pointer-events: none;
             z-index: 0;
         }
@@ -112,10 +112,8 @@
             font-size: 26px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent-violet);
+            font-family: 'Fraunces', Georgia, serif;
         }
 
         #date-display {
@@ -1592,7 +1590,7 @@
 
     // Chart.js Style Defaults
     Chart.defaults.color = '#7d869e';
-    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.font.family = "'DM Sans', sans-serif";
     Chart.defaults.font.size = 11;
     Chart.defaults.borderColor = 'rgba(139, 92, 246, 0.05)';
     Chart.defaults.plugins.tooltip.padding = 10;
@@ -1969,7 +1967,7 @@
         const ctx = document.getElementById('categoryChart').getContext('2d');
         const labels = data.map(d => d.category);
         const revenues = data.map(d => d.revenue);
-        const colors = ['#8b5cf6', '#06b6d4', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#a855f7'];
+        const colors = ['#bf7652', '#8fa69a', '#c87968', '#c49a5a', '#789778', '#8ca5ad', '#bd675d', '#9b8069'];
 
         if (charts.category) charts.category.destroy();
 
@@ -2101,7 +2099,7 @@
                     {
                         label: 'Actual Revenue',
                         data: actualData,
-                        borderColor: '#8b5cf6',
+                        borderColor: '#bf7652',
                         backgroundColor: 'rgba(139, 92, 246, 0.1)',
                         borderWidth: 3,
                         pointRadius: 4,
@@ -2121,7 +2119,7 @@
                     {
                         label: 'Forecast Trend',
                         data: forecastData,
-                        borderColor: '#06b6d4',
+                        borderColor: '#8fa69a',
                         borderWidth: 3,
                         borderDash: [6, 4],
                         backgroundColor: 'transparent',
@@ -2203,7 +2201,7 @@
                         type: 'line',
                         label: 'Normal distribution overlay',
                         data: normValues,
-                        borderColor: '#ec4899',
+                        borderColor: '#c87968',
                         borderWidth: 2,
                         pointRadius: 0,
                         tension: 0.45,
@@ -2258,12 +2256,12 @@
         });
 
         const segmentColors = {
-            'Champions': '#10b981',
-            'Loyal Customers': '#06b6d4',
-            'Potential Loyalists': '#3b82f6',
-            'New Customers': '#8b5cf6',
+            'Champions': '#789778',
+            'Loyal Customers': '#8fa69a',
+            'Potential Loyalists': '#8ca5ad',
+            'New Customers': '#bf7652',
             'At Risk': '#f59e0b',
-            'Cannot Lose': '#ec4899',
+            'Cannot Lose': '#c87968',
             'Lost': '#ef4444'
         };
 
