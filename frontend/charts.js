@@ -43,8 +43,8 @@ function initCharts() {
             datasets: [{
                 label: 'Revenue',
                 data: [],
-                backgroundColor: 'rgba(99, 102, 241, 0.8)',
-                borderRadius: 8,
+                backgroundColor: '#d95d39',
+                borderRadius: 4,
             }]
         },
         options: commonOptions
@@ -58,8 +58,8 @@ function initCharts() {
             datasets: [{
                 label: 'Orders',
                 data: [],
-                borderColor: '#8b5cf6',
-                tension: 0.4,
+                borderColor: '#4f8061',
+                tension: 0.28,
                 fill: false
             }]
         },
@@ -74,7 +74,7 @@ function initCharts() {
             datasets: [{
                 data: [0, 0, 0, 0, 0],
                 backgroundColor: [
-                    '#6366f1', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444'
+                    '#d95d39', '#4f8061', '#c58a35', '#6f8ca3', '#bd5146'
                 ],
                 borderWidth: 0
             }]
@@ -98,10 +98,10 @@ function initCharts() {
             datasets: [{
                 label: 'Cumulative Revenue',
                 data: [],
-                borderColor: '#10b981',
-                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                borderColor: '#4f8061',
+                backgroundColor: 'rgba(79, 128, 97, 0.14)',
                 fill: true,
-                tension: 0.4
+                tension: 0.28
             }]
         },
         options: commonOptions

@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // DOM Elements
     const themeToggle = document.getElementById('theme-toggle');
+    const refreshDataBtn = document.getElementById('refresh-data');
     const clockEl = document.getElementById('clock');
     const openModalBtn = document.getElementById('open-modal');
     const closeModalBtn = document.getElementById('close-modal');
@@ -547,6 +548,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         themeToggle.addEventListener('click', toggleTheme);
+
+        refreshDataBtn.addEventListener('click', async () => {
+            refreshDataBtn.disabled = true;
+            refreshDataBtn.querySelector('i').classList.add('fa-spin');
+            await fetchData();
+            refreshDataBtn.querySelector('i').classList.remove('fa-spin');
+            refreshDataBtn.disabled = false;
+            showToast('Dashboard refreshed');
+        });
         
         openModalBtn.addEventListener('click', () => {
             modalOverlay.style.display = 'flex';

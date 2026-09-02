@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales Dashboard | Analytics</title>
+    <title>Sales Dashboard | Daily Ledger</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Chart.js -->
@@ -20,7 +20,8 @@
     <!-- Login Screen -->
     <div id="login-container" class="login-wrapper">
         <div class="login-box glass">
-            <h1 style="text-align:center; margin-bottom: 2rem; background: linear-gradient(to right, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size:1.5rem;">Sales Dashboard</h1>
+            <p class="eyebrow">The daily ledger</p>
+            <h1 class="login-title">Sales Dashboard</h1>
             <h2>Admin Login</h2>
             <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Please sign in to securely access the dashboard.</p>
             <form id="login-form">
@@ -41,9 +42,18 @@
     <div id="app-content" style="display: none;">
         <!-- Navbar -->
         <nav class="glass">
-            <h1>Sales Dashboard</h1>
+            <div class="brand-lockup">
+                <span class="brand-mark"><i class="fa-solid fa-chart-line"></i></span>
+                <div>
+                    <p class="eyebrow">Operations / 2026</p>
+                    <h1>Sales Dashboard</h1>
+                </div>
+            </div>
         <div id="clock">Loading time...</div>
         <div class="nav-actions">
+            <button class="customer-trigger glass" id="refresh-data" title="Refresh dashboard data">
+                <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
             <button id="theme-toggle" title="Toggle Theme">
                 <i class="fa-solid fa-moon"></i>
             </button>
